@@ -30,7 +30,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/scripts/bui
 // Add Stylesheets
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/build/style.css');
 
- ?>
+?>
 
 
 <!DOCTYPE html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="template">
+	<name>Manonet - Chameleon</name>
+	<creationDate>2015-11-15</creationDate>
+	<author>Szilágyi Balázs</author>
+	<authorEmail>zyxneo@gmail.com.com</authorEmail>
+	<authorUrl>http://www.manonet.org</authorUrl>
+	<copyright></copyright>
+	<license>GNU/GPL</license>
+	<version>0.0.0</version>
+	<description>Template for Manonet typing site</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>fonts</folder>
+		<folder>imgs</folder>
+		<folder>scripts</folder>
+		<folder>styles</folder>
+	</files>
+	<positions>
+		<position>breadcrumb</position>
+		<position>left</position>
+		<position>right</position>
+		<position>top</position>
+		<position>user1</position>
+		<position>user2</position>
+		<position>user3</position>
+		<position>user4</position>
+		<position>footer</position>
+	</positions>
+</extension>

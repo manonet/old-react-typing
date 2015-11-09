@@ -1,0 +1,142 @@
+
+/*
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+}
+*/
+
+
+.letter {
+	display: inline;
+}
+.letter.done {
+	color: #ccc;
+}
+.letter.error {
+	color: #f00;
+	background: #fcc;
+}
+
+#textBoard {
+    background: #ffeebb;
+    padding: 10px;
+	color: #000;
+	font-family: 'Inconsolata', monospace;
+	font-size: 18px;
+}
+
+#keyBoard {
+	background: grey;
+	overflow: hidden;
+}
+
+#A,#B,#C,#D,#E {
+	overflow: hidden;
+	clear: both;
+	position: relative;
+}
+#E {
+
+}
+#D {
+	left: 10%;
+}
+#C {
+	left: 12%;
+}
+#B {
+	left: 8.5%;
+}
+#A {
+	left: 27%;
+}
+
+.key {
+	display: block;
+	position: relative;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	width: 6.9%;
+	padding-bottom: 6.9%;
+	background: white;
+	float: left;
+}
+.key.correct {
+	background: green;
+}
+.key.error {
+	background: red;
+}
+.key.toHit {
+	background: yellow;
+}
+
+.key .sign {
+	display: block;
+	color: #333;
+	position: absolute;
+	font-size: 2vw;
+}
+/*
+.key .sign_0 {
+	left: 0;
+	top: 0;
+}
+.key .sign_1 {
+	left: 50%;
+	top: 0;
+}
+.key .sign_2 {
+	left: 0;
+	top: 50%;
+}
+.key .sign_3 {
+	left: 50%;
+	top: 50%;
+}
+.key .sign_4 {
+	left: 50%;
+	top: 50%;
+}
+*/
+#E  .sign_0 {
+	bottom: 0;
+	left: 15%;
+	font-size: 3vw;
+}
+#E  .sign_1 {
+	top: 0;
+	left: 15%;
+}
+#E  .sign_4 {
+	bottom: 0;
+	right: 15%;
+}
+
+
+#B .sign_0,
+#C .sign_0,
+#D .sign_0 {
+	bottom: 0;
+	left: 6%;
+}
+
+#B .sign_1,
+#C .sign_1,
+#D .sign_1 {
+	left: 17%;
+	top: 0;
+	font-size: 3.5vw;
+}
+
+#B .sign_4,
+#C .sign_4,
+#D .sign_4 {
+	bottom: 0;
+	right: 6%;
+}
+
+#A03 {
+	width: 40%;
+}

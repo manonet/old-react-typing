@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `#__typing_statistics` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created` date NOT NULL DEFAULT '0000-00-00',
+  `updated` date NOT NULL DEFAULT '0000-00-00',
   `correct_hits` int(10) NOT NULL,
   `miswrite_hits` int(10) NOT NULL,
   `endurance` int(10) NOT NULL,
@@ -55,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `#__typing_statistics` (
 
 ALTER TABLE `#__typing_statistics`
   ADD PRIMARY KEY (`id`);
-  ADD UNIQUE KEY `created_on_by` (`user_id`,`created`);
-
+  ADD UNIQUE KEY `created_by` (`user_id`);
+  
 ALTER TABLE `#__typing_statistics`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;

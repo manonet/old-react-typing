@@ -28,9 +28,10 @@ class TypingModelSavestat extends JModelItem {
 		$speed = $correct_hits / round(($endurance / 1000) % 60); // seconds
 		
 		$db->setQuery(
-			'INSERT INTO #__typing_statistics ( user_id, created, correct_hits, miswrite_hits, endurance, accuracy, speed )' .
+			'INSERT INTO #__typing_statistics ( user_id, created, updated, correct_hits, miswrite_hits, endurance, accuracy, speed )' .
 				' VALUES ( ' .
 				$userId . ', ' .
+				$db->quote($now) . ', ' .
 				$db->quote($now) . ', ' .
 				$correct_hits . ', ' .
 				$miswrite_hits . ', ' .
@@ -38,9 +39,10 @@ class TypingModelSavestat extends JModelItem {
 				$accuracy . ', ' .
 				$speed . ' )' .
 			'ON DUPLICATE KEY UPDATE ' .
+				'updated=' . $db->quote($now) . ', ' .
 				'correct_hits=correct_hits+' . $correct_hits . ', ' .
 				'miswrite_hits=miswrite_hits+' . $miswrite_hits . ', ' .
-				'endurance=endurance+' . $miswrite_hits . ', ' .
+				'endurance=endurance+' . $endurance . ', ' .
 				'accuracy=(correct_hits / (correct_hits + miswrite_hits)), ' .
 				'speed=correct_hits / ROUND( MOD(endurance, 1000), 60);'
 		);

@@ -15,10 +15,8 @@ var displayHint = function() {
 	params.hintBox.html(hint);
 };
 
-document.onkeypress = function(evt) {
-	evt = evt || window.event;
-	var charCode = evt.which || evt.keyCode;
-	var charTyped = String.fromCharCode(charCode);
+
+var typing = function(charTyped) {
 	
 	params.signToWrite = params.sample.substring(params.userText.length, params.userText.length+1);
 	params.writtenSign = charTyped;
@@ -44,6 +42,20 @@ document.onkeypress = function(evt) {
 	displayHint();
 	
 	params.userText += charTyped;
+}
+
+window.onkeydown = function(e) {
+	// prevent site from scrolling when hitting spacebar
+	if (e.keyCode == 32 && e.target == document.body) {
+		e.preventDefault();
+		typing(" ");
+	}
+};
+document.onkeypress = function(evt) {
+	evt = evt || window.event;
+	var charCode = evt.which || evt.keyCode;
+	var charTyped = String.fromCharCode(charCode);
+	typing(charTyped);
 };
 
 var correction = function() {

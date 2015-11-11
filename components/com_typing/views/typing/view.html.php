@@ -34,14 +34,6 @@ class TypingViewTyping extends JViewLegacy
 			return false;
 		}
 		
-		$document	= JFactory::getDocument();
-		$document->addStyleSheet(JURI::root() . "components/com_typing/views/typing/typing.css");
-		$document->addScript("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js");
-		$document->addScript(JURI::root() . "components/com_typing/views/typing/keyboard.js");
-		$document->addScript(JURI::root() . "components/com_typing/views/typing/lesson.js");
-		$document->addScript(JURI::root() . "components/com_typing/views/typing/statistic.js");
-		$document->addScript(JURI::root() . "components/com_typing/views/typing/typing.js");
-		
 		// Display the view
 		parent::display($tpl);
 	}

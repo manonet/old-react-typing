@@ -30,5 +30,45 @@ JHTML::_('behavior.modal');
 	<div id="messagebox"></div>
 </div>
 
-<a class="modal" href="<?php echo JUri::base(); ?>index.php?option=com_typing&view=lessons&layout=modal&tmpl=component" title="lessons" rel="{handler: 'iframe', size: {x: 600, y: 450}}"><?php echo JText::_('TYPING_PROGRAM_SELECT_LESSON'); ?></a>    
-<a class="modal" id="selectKeyboard" href="<?php echo JUri::base(); ?>index.php?option=com_typing&view=keyboard&tmpl=component" title="keyboards" rel="{handler: 'iframe', size: {x: 600, y: 450}}"><?php echo JText::_('TYPING_PROGRAM_SELECT_KEYBOARD'); ?></a>    
+<a data-toggle="modal" data-target="#lessons-modal" href="<?php echo JUri::base(); ?>index.php?option=com_typing&view=lessons&layout=modal&tmpl=component" data-title="<?php echo JText::_('TYPING_PROGRAM_SELECT_LESSON'); ?>"><?php echo JText::_('TYPING_PROGRAM_SELECT_LESSON'); ?></a>    
+<a data-toggle="modal" data-target="#keyboard-modal" href="<?php echo JUri::base(); ?>index.php?option=com_typing&view=keyboard&tmpl=component" data-title="<?php echo JText::_('TYPING_PROGRAM_SELECT_KEYBOARD'); ?>"><?php echo JText::_('TYPING_PROGRAM_SELECT_KEYBOARD'); ?></a>
+
+<div class="modal fade" id="keyboard-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title">keyboard</h4>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="lessons-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title">lessons</h4>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>

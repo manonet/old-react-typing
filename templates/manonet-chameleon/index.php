@@ -116,7 +116,11 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/
 			</p>
 		</div>
 	</footer>
+	
+
 	<jdoc:include type="modules" name="debug" style="none" />
+	
+	<script src="//localhost:35729/livereload.js"></script>
 </body>
 
 </html>

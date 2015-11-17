@@ -16,6 +16,7 @@ KeyBoard.prototype.createKeyBoard = function(xml) {
 	this.params.D.empty();
 	this.params.E.empty();
 	
+	this.params.locale = $(xml).find('keyboard').attr('locale');
 	
 	$(xml).find('keyMap').each(function(){
 			
@@ -101,7 +102,7 @@ KeyBoard.prototype.markKeyboard = function() {
 	if (this.params.keyBoardSigns[this.params.nextChar]) {
 		this.params.keyBoardSigns[this.params.nextChar][1].addClass('toHit');
 	}
-	if(this.params.userText.length > 0) {
+	if(this.params.userText.length > 0 && this.params.writtenSign != undefined) {
 		if (this.params.correct) {
 			this.params.keyBoardSigns[this.params.writtenSign][1].addClass('correct');
 		} else {

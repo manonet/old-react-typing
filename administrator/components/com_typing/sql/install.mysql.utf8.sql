@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS `#__typing_statistics` (
   `correct_hits` int(10) NOT NULL,
   `miswrite_hits` int(10) NOT NULL,
   `endurance` int(10) NOT NULL,
-  `accuracy` double(4,4) NOT NULL,
-  `speed` double(5,4) NOT NULL,
+  `accuracy` decimal(8,4) NOT NULL,
+  `speed` decimal(10,4) NOT NULL,
   `details` varchar(100) NOT NULL DEFAULT '[]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

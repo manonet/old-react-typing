@@ -190,7 +190,7 @@
             options: { livereload: true },
             scripts: {
                 files: ['<%= settings.jsSourceDir %>**/*.js'],
-                tasks: ['jshint', 'uglify']
+                tasks: ['jshint', 'uglify:dev']
             },
             sass: {
                 files: ['<%= settings.sassDir %>**/*.scss'],

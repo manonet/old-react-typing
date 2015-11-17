@@ -9,12 +9,21 @@ function Statistic(params){
 
 Statistic.prototype.save = function() {
 	var self = this;
-	var statUrl = this.params.savestatURL +
-	'&correct_hits=' + this.params.correct_hits +
-	'&miswrite_hits=' + this.params.miswrite_hits +
-	'&endurance=' + this.endurance;
+	var statUrl = this.params.savestatURL;
+	var data = {
+		'locale' : this.params.locale,
+		'correct_hits' : this.params.correct_hits,
+		'miswrite_hits' : this.params.miswrite_hits,
+		'endurance' : this.endurance,
+		'correct_hits_array' : JSON.stringify(this.params.correct_hits_array),
+		'miswrite_hits_array' : JSON.stringify(this.params.miswrite_hits_array),
+		'misspell_hits_array' : JSON.stringify(this.params.misspell_hits_array)
+	};
+	//console.log(this.params.locale);
 	$.ajax({
+		type: "POST",
 		url: statUrl,
+		data: data,
 		success: function(data){
 			self.data = data;
 			self.dataLoadDeferred.resolveWith(self);

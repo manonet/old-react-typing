@@ -65,6 +65,11 @@ var correction = function() {
 		// written correctly
 		params.correct = true;
 		params.correct_hits++;
+		if(params.correct_hits_array[params.writtenSign]) {
+			params.correct_hits_array[params.writtenSign]++;
+		} else {
+			params.correct_hits_array[params.writtenSign] = 1;
+		}
 		params.message += "that's correct."
 		params.letters[params.cursorAt].addClass('done');
 		
@@ -72,6 +77,16 @@ var correction = function() {
 		// mistake
 		params.correct = false;
 		params.miswrite_hits++;
+		if(params.miswrite_hits_array[params.writtenSign]) {
+			params.miswrite_hits_array[params.writtenSign]++;
+		} else {
+			params.miswrite_hits_array[params.writtenSign] = 1;
+		}
+		if(params.misspell_hits_array[params.signToWrite]) {
+			params.misspell_hits_array[params.signToWrite]++;
+		} else {
+			params.misspell_hits_array[params.signToWrite] = 1;
+		}
 		params.message += "that's wrong."
 		params.letters[params.cursorAt].addClass('error');
 	}
@@ -149,6 +164,7 @@ $( document ).ready(function() {
 		messagebox: $("#messagebox"),
 		textBoard: $('#textBoard'),
 		keyBoardContainer: $("#keyBoard"),
+		locale: "",
 		A: $("#A"),
 		B: $("#B"),
 		C: $("#C"),
@@ -170,7 +186,10 @@ $( document ).ready(function() {
 		
 		// statistic
 		correct_hits: 0,
+		correct_hits_array: {},
 		miswrite_hits: 0,
+		miswrite_hits_array: {},
+		misspell_hits_array: {},
 		endurance: 0,
 	}
 	

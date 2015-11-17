@@ -22,6 +22,7 @@ $layout   = $app->input->getCmd('layout', '');
 $task     = $app->input->getCmd('task', '');
 $itemid   = $app->input->getCmd('Itemid', '');
 $sitename = $app->get('sitename');
+$testmode = $app->get('testmode');
 
 // Add JavaScript Frameworks
 $doc->addScript($this->baseurl . '/templates/' . $this->template . '/scripts/build/lib.js');
@@ -120,7 +121,10 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/
 
 	<jdoc:include type="modules" name="debug" style="none" />
 	
+	<?php if ($testmode) { ?>
 	<script src="//localhost:35729/livereload.js"></script>
+	<?php } ?>
+	
 </body>
 
 </html>

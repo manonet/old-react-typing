@@ -32,7 +32,7 @@ defined('_JEXEC') or die('Restricted access');
 <script type="text/javascript">
 $( document ).ready(function() {
 	var os = "";
-	var kbdJSON = "//webroot/m5/public_html/typing/keyboards.json";
+	var kbdJSON = baseURL + "typing/keyboards.json";
 		$.getJSON( kbdJSON, {
 		format: "json"
 	})
@@ -55,7 +55,6 @@ $( document ).ready(function() {
 			os = $(this).val();
 			$.each(data.keyboards, function(index, element) {
 				if (index === os) {
-					console.log(index);
 					$.each(element, function(i, item) {
 						// lang node
 						$('#lang').append($('<option>', {

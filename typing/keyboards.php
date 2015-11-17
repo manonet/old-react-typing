@@ -1,4 +1,5 @@
 <?php
+// use valid directory
 $currentWD = "C:\\webroot\\Dropbox\\www\\m5\\public_html";
 $currentURL = "//webroot/m5/public_html";
 $path = dirname(__FILE__);

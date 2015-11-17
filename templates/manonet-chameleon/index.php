@@ -45,6 +45,10 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/
 	<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/general.css" type="text/css" />
 	-->
+	<script type="text/javascript">
+		var baseURL = '<?php echo JURI::base(); ?>';
+		var userID = '<?php echo $user->id; ?>';
+	</script>
 </head>
 
 <body>

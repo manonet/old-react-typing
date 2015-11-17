@@ -107,10 +107,7 @@
                         '<%= settings.jsSourceDir %>bootstrap/tab.js',
                         '<%= settings.jsSourceDir %>bootstrap/tooltip.js',
                         '<%= settings.jsSourceDir %>bootstrap/popover.js',
-                        '<%= settings.jsSourceDir %>typing/keyboard.js',
-                        '<%= settings.jsSourceDir %>typing/lesson.js',
-                        '<%= settings.jsSourceDir %>typing/statistic.js',
-                        '<%= settings.jsSourceDir %>typing/typing.js',
+                        '<%= settings.jsSourceDir %>typing/*.js',
                         '<%= settings.jsSourceDir %>*.js'
                     ]
                 }
@@ -137,10 +134,7 @@
                         '<%= settings.jsSourceDir %>bootstrap/tab.js',
                         '<%= settings.jsSourceDir %>bootstrap/tooltip.js',
                         '<%= settings.jsSourceDir %>bootstrap/popover.js',
-                        '<%= settings.jsSourceDir %>typing/keyboard.js',
-                        '<%= settings.jsSourceDir %>typing/lesson.js',
-                        '<%= settings.jsSourceDir %>typing/statistic.js',
-                        '<%= settings.jsSourceDir %>typing/typing.js',
+                        '<%= settings.jsSourceDir %>typing/*.js',
                         '<%= settings.jsSourceDir %>*.js'
                     ]
                 }

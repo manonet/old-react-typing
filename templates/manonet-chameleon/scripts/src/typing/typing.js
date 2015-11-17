@@ -1,5 +1,5 @@
 var params = {};
-var lesson, kbd, stat;
+var lesson, kbd, stat, statDetails;
 
 var displayHint = function() {
 	
@@ -155,11 +155,13 @@ var getStat = function() {
 $( document ).ready(function() {
 	// Create an instance
 	params = {
-		baseURL: "//webroot/m5/public_html",
+		baseURL: baseURL, // variable taken from template index, JURI::base();
+		userID: userID, // variable taken from template index
 		lessonId: 1,
 		lessonURL: this.baseURL + "/index.php?option=com_typing&task=lesson&id=2&format=json",
 		keyboardURL: this.baseURL + "/components/com_typing/views/typing/hu-t-k0-windows.xml",
 		savestatURL: this.baseURL + "/index.php?option=com_typing&task=savestat",
+		userJsonURL: this.baseURL + "/../../typing/userdata/statistic/user-" + userID + ".json",
 		hintBox: $("#hintBox"),
 		messagebox: $("#messagebox"),
 		textBoard: $('#textBoard'),
@@ -199,4 +201,8 @@ $( document ).ready(function() {
 		getStat();
 	}();
 	
+	$('#get-detailed-stat').click(function(){
+		statDetails = new StatisticDetails(params);
+		statDetails.get();
+	});
 });

@@ -19,13 +19,7 @@ JHTML::_('behavior.modal');
 	<div id="textBoard"></div>
 	<div id="hintBox"></div>
 	
-	<div id="keyBoard">
-		<div id="E"></div>
-		<div id="D"></div>
-		<div id="C"></div>
-		<div id="B"></div>
-		<div id="A"></div>
-	</div>
+	<div id="keyBoard"></div>
 	
 	<div id="messagebox"></div>
 </div>

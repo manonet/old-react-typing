@@ -25,7 +25,9 @@ if (!$this->item->id) {
 	<p>accuracy: <?php echo $this->item->accuracy; ?></p>
 	<p>speed: <?php echo $this->item->speed; ?></p>
 	<button id="get-detailed-stat" class="btn btn-primary">detailed-stat</button>
-	<div id="statistic-details"></div>
+	<div id="statistic-details">
+		<div class="stat-keyboard"></div>
+	</div>
 <?php
 }
 ?>

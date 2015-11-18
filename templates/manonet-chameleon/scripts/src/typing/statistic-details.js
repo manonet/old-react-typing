@@ -4,16 +4,19 @@ function StatisticDetails(params){
 };
 
 StatisticDetails.prototype.get = function() {
-	
-	console.log('StatisticDetails');
+	var myarray = {};
 	var self = this;
 	var statUrl = this.params.userJsonURL;
 	$.getJSON( statUrl, function( data ) {
-		$( "<p/>", {
-			"class": "my-new-list",
-			html: JSON.stringify(data)
-		}).appendTo( "#statistic-details" );
+		$.each(data['en-t-k0-windows']['2015-11-17']['correct'], function (name, value) {
+		myarray[name] = value;
+			//console.log('name: ' + name + ', value:' + value );
+		});
 	});
+	//console.log(myarray);
+	
+	var statkbd = new KeyBoard(params, params.locale, $('.stat-keyboard'), myarray, 'correct');
+	statkbd.getKeyBoard();
 };
 
 StatisticDetails.prototype.accessData = function() {

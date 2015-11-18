@@ -67,67 +67,78 @@
 	background: yellow;
 }
 
-.key .sign {
+.key i {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 0;
+}
+
+.key .s {
 	display: block;
 	color: #333;
 	position: absolute;
 	font-size: 2vw;
+	font-weight: normal;
 }
 /*
-.key .sign_0 {
+.key .s_0 {
 	left: 0;
 	top: 0;
 }
-.key .sign_1 {
+.key .s_1 {
 	left: 50%;
 	top: 0;
 }
-.key .sign_2 {
+.key .s_2 {
 	left: 0;
 	top: 50%;
 }
-.key .sign_3 {
+.key .s_3 {
 	left: 50%;
 	top: 50%;
 }
-.key .sign_4 {
+.key .s_4 {
 	left: 50%;
 	top: 50%;
 }
 */
-#E  .sign_0 {
+#E  .s_0 {
 	bottom: 0;
 	left: 15%;
 	font-size: 3vw;
 }
-#E  .sign_1 {
+#E  .s_1 {
 	top: 0;
 	left: 15%;
 }
-#E  .sign_4 {
+#E  .s_4 {
 	bottom: 0;
 	right: 15%;
 }
 
 
-#B .sign_0,
-#C .sign_0,
-#D .sign_0 {
+#B .s_0,
+#C .s_0,
+#D .s_0 {
 	bottom: 0;
 	left: 6%;
 }
 
-#B .sign_1,
-#C .sign_1,
-#D .sign_1 {
+#B .s_1,
+#C .s_1,
+#D .s_1 {
 	left: 17%;
 	top: 0;
 	font-size: 3.5vw;
 }
 
-#B .sign_4,
-#C .sign_4,
-#D .sign_4 {
+#B .s_4,
+#C .s_4,
+#D .s_4 {
 	bottom: 0;
 	right: 6%;
 }

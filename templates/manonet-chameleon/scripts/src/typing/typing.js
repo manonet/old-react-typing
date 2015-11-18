@@ -134,7 +134,7 @@ var detectLang = function() {
 var getKeyboard = function() {
 	params.keyboardURL = params.baseURL + "/typing/keyboards/" + detectOS() + "/" + detectLang().substring(0, 2) + "-t-k0-" + detectOS() + ".xml";
 	
-	kbd = new KeyBoard(params);
+	kbd = new KeyBoard(params, params.locale, params.keyBoardContainer);
 	kbd.getKeyBoard();
 }
 
@@ -153,13 +153,16 @@ var getStat = function() {
 
 
 $( document ).ready(function() {
+	// prevent caching json files
+	$.ajaxSetup({ cache: false });
+	
 	// Create an instance
 	params = {
 		baseURL: baseURL, // variable taken from template index, JURI::base();
 		userID: userID, // variable taken from template index
 		lessonId: 1,
 		lessonURL: this.baseURL + "/index.php?option=com_typing&task=lesson&id=2&format=json",
-		keyboardURL: this.baseURL + "/components/com_typing/views/typing/hu-t-k0-windows.xml",
+		keyboardURL: this.baseURL + "/../../typing/keyboards/windows/hu-t-k0-windows.xml",
 		savestatURL: this.baseURL + "/index.php?option=com_typing&task=savestat",
 		userJsonURL: this.baseURL + "/../../typing/userdata/statistic/user-" + userID + ".json",
 		hintBox: $("#hintBox"),
@@ -167,11 +170,6 @@ $( document ).ready(function() {
 		textBoard: $('#textBoard'),
 		keyBoardContainer: $("#keyBoard"),
 		locale: "",
-		A: $("#A"),
-		B: $("#B"),
-		C: $("#C"),
-		D: $("#D"),
-		E: $("#E"),
 		
 		sample: "",
 		signToWrite: "",
@@ -195,11 +193,13 @@ $( document ).ready(function() {
 		endurance: 0,
 	}
 	
-	var init = function() {
-		getLesson(params.lessonId++);
-		getKeyboard();
-		getStat();
-	}();
+	if ($('#typing')[0]) {
+		var init = function() {
+			getLesson(params.lessonId++);
+			getKeyboard();
+			getStat();
+		}();
+	}
 	
 	$('#get-detailed-stat').click(function(){
 		statDetails = new StatisticDetails(params);

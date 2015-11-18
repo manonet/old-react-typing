@@ -132,8 +132,6 @@ var detectLang = function() {
 }
 
 var getKeyboard = function() {
-	params.keyboardURL = params.baseURL + "/typing/keyboards/" + detectOS() + "/" + detectLang().substring(0, 2) + "-t-k0-" + detectOS() + ".xml";
-	
 	kbd = new KeyBoard(params, params.locale, params.keyBoardContainer);
 	kbd.getKeyBoard();
 }
@@ -151,7 +149,7 @@ var getStat = function() {
 	stat = new Statistic(params);
 }
 
-
+var locale = detectLang().substring(0, 2) + "-t-k0-" + detectOS();
 $( document ).ready(function() {
 	// prevent caching json files
 	$.ajaxSetup({ cache: false });
@@ -162,14 +160,14 @@ $( document ).ready(function() {
 		userID: userID, // variable taken from template index
 		lessonId: 1,
 		lessonURL: this.baseURL + "/index.php?option=com_typing&task=lesson&id=2&format=json",
-		keyboardURL: this.baseURL + "/../../typing/keyboards/windows/hu-t-k0-windows.xml",
+		locale: locale,
+		keyboardURL: this.baseURL + "/../../typing/keyboards/" + detectOS() + "/" + locale + ".xml",
 		savestatURL: this.baseURL + "/index.php?option=com_typing&task=savestat",
 		userJsonURL: this.baseURL + "/../../typing/userdata/statistic/user-" + userID + ".json",
 		hintBox: $("#hintBox"),
 		messagebox: $("#messagebox"),
 		textBoard: $('#textBoard'),
 		keyBoardContainer: $("#keyBoard"),
-		locale: "",
 		
 		sample: "",
 		signToWrite: "",

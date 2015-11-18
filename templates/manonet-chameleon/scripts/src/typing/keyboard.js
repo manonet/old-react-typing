@@ -1,35 +1,26 @@
 
-function KeyBoard(params, layout, selector, signarray, variant){
+function KeyBoard(params, layout, selector){
 	this.xmlLoadDeferred = $.Deferred();
 	this.params = params;
 	this.selector = selector;
-	this.signarray = signarray;
-	this.variant = variant;
 }
 
 KeyBoard.prototype.createKeyBoard = function(xml) {
 	var self = this;
 	var keyMap = 0;
-	var signarray = this.signarray;
 	
 	this.params.keyBoardSigns = {};
 	this.params.keyBoardKeys = {};
 	
+	// creating rows
+	$(this.selector).empty();
 	var A = $('<div/>', {id: 'A'});
 	var B = $('<div/>', {id: 'B'});
 	var C = $('<div/>', {id: 'C'});
 	var D = $('<div/>', {id: 'D'});
 	var E = $('<div/>', {id: 'E'});
-	E.appendTo(this.selector);
-	D.appendTo(this.selector);
-	C.appendTo(this.selector);
-	B.appendTo(this.selector);
-	A.appendTo(this.selector);
-	$(A).empty();
-	$(B).empty();
-	$(C).empty();
-	$(D).empty();
-	$(E).empty();
+	var rows = [E,D,C,B,A];
+	this.selector.append(rows);
 	
 	this.params.locale = $(xml).find('keyboard').attr('locale');
 	
@@ -38,24 +29,16 @@ KeyBoard.prototype.createKeyBoard = function(xml) {
 			var strg = $(this).attr('to');
 			var iso = $(this).attr('iso');
 			var key, sign;
-			var mark = false;
 			
 			// unescape unicode
 			if (strg.indexOf('\\u{') > -1) {
 				strg = strg.replace("\\u{", "&#x");
 				strg = strg.replace("}", ";");
 			}
-			if (signarray) {
-				$.each(signarray, function(index, elem){
-					if (index.toLowerCase() === strg.toLowerCase()) {
-						mark = true;
-					}
-				});
-			}
 			
 			if (keyMap == 0) {
 			// create key
-				key = self.createKey(iso,strg,mark);
+				key = self.createKey(iso,strg);
 			}
 			
 			// display only unique signs
@@ -72,16 +55,12 @@ KeyBoard.prototype.createKeyBoard = function(xml) {
 	//console.log(this.params.keyBoardSigns);
 };
 
-KeyBoard.prototype.createKey = function(iso,strg,mark) {
-	var classname = 'key';
-	if (mark) {
-		classname = 'key ' + this.variant;
-	}
+KeyBoard.prototype.createKey = function(iso,strg) {
 	
 	// create key
 	var key = $('<b/>', {
 		id: iso,
-		class: classname
+		class: 'key'
 	});
 	
 	// create color layer
@@ -144,7 +123,34 @@ KeyBoard.prototype.markKeyboard = function() {
 	}
 };
 
-KeyBoard.prototype.getKeyBoard = function() {
+KeyBoard.prototype.cteateHotmap = function(data) {
+	var signarray = {};
+	var locale = this.params.locale;
+	var date = today;
+	var classname = 'correct';
+	
+	if (!data[locale]) {
+		// if locale not exist, take it from user.json
+		locale = Object.getOwnPropertyNames(data)[0];
+	}
+	console.log(locale);
+	$.each(data[locale][date][classname], function (name, value) {
+		signarray[name] = value;
+		console.log('name: ' + name + ', value:' + value );
+	});
+	$.each(this.params.keyBoardSigns, function(i,e) {
+		$.each(signarray, function(index, elem){
+			if(e[1].text().toLowerCase().indexOf(index.toLowerCase()) > -1) {
+				e[1].addClass(classname);
+			}
+		});
+	});
+};
+
+
+KeyBoard.prototype.getKeyBoard = function(purpose, data) {
+	// purpose is type of keyboard, eg.: 'statistic'
+	// data is a json, contains unicode characters with number values
 	var self = this;
 	var kbdUrl = this.params.keyboardURL;
 	$.ajax({
@@ -154,6 +160,10 @@ KeyBoard.prototype.getKeyBoard = function() {
 			self.xmlLoadDeferred.resolveWith(self);
 			
 			self.createKeyBoard(xml);
+			
+			if (purpose === 'statistic') {
+				self.cteateHotmap(data);
+			}
 		},
 		error: function (textStatus, errorThrown) {
 			console.log('getting keyboard failed');

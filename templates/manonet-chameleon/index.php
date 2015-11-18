@@ -48,6 +48,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/
 	<script type="text/javascript">
 		var baseURL = '<?php echo JURI::base(); ?>';
 		var userID = '<?php echo $user->id; ?>';
+		var today = '<?php echo date("Y-m-d"); ?>';
 	</script>
 </head>
 

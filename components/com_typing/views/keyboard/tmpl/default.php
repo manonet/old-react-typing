@@ -30,63 +30,63 @@ defined('_JEXEC') or die('Restricted access');
 </form>
 
 <script type="text/javascript">
-$( document ).ready(function() {
+jQuery( document ).ready(function() {
 	var os = "";
 	var kbdJSON = baseURL + "typing/keyboards.json";
-		$.getJSON( kbdJSON, {
+		jQuery.getJSON( kbdJSON, {
 		format: "json"
 	})
 	.done(function( data ) {
-		$.each(data, function(index, element) {
+		jQuery.each(data, function(index, element) {
 			// keyboards node
-			$.each(element, function(i, item) {
+			jQuery.each(element, function(i, item) {
 				// os node
-				$('#os').append($('<option>', {
+				jQuery('#os').append(jQuery('<option>', {
 					'value': i,
 					'text': i
 				}));
 			});
 		});
 		
-		$('#os').change(function() {
-			$('#lang').empty().append($('<option>'));
-			$('#locale').empty().append($('<option>'));
+		jQuery('#os').change(function() {
+			jQuery('#lang').empty().append(jQuery('<option>'));
+			jQuery('#locale').empty().append(jQuery('<option>'));
 			
-			os = $(this).val();
-			$.each(data.keyboards, function(index, element) {
+			os = jQuery(this).val();
+			jQuery.each(data.keyboards, function(index, element) {
 				if (index === os) {
-					$.each(element, function(i, item) {
+					jQuery.each(element, function(i, item) {
 						// lang node
-						$('#lang').append($('<option>', {
+						jQuery('#lang').append(jQuery('<option>', {
 							'value': i,
 							'text': i
 						}));
-						$('#lang').prop("disabled", false);
+						jQuery('#lang').prop("disabled", false);
 					});
 				}
 			});
 		});
 		
-		$('#lang').change(function() {
-			$('#locale').empty().append($('<option>'));
+		jQuery('#lang').change(function() {
+			jQuery('#locale').empty().append(jQuery('<option>'));
 			
-			lang = $(this).val();
-			$.each(data.keyboards[os], function(index, element) {
+			lang = jQuery(this).val();
+			jQuery.each(data.keyboards[os], function(index, element) {
 				if (index === lang) {
-					$.each(element, function(i, item) {
+					jQuery.each(element, function(i, item) {
 						// locale node
-						$('#locale').append($('<option>', {
+						jQuery('#locale').append(jQuery('<option>', {
 							'value': item.url,
 							'text': item.name
 						}));
-						$('#locale').prop("disabled", false);
+						jQuery('#locale').prop("disabled", false);
 					});
 				}
 			});
 			
 		});
-		$('#locale').change(function() {
-			window.parent.params.keyboardURL = $(this).val();
+		jQuery('#locale').change(function() {
+			window.parent.params.keyboardURL = jQuery(this).val();
 			window.parent.kbd.getKeyBoard();
 		});
 	});

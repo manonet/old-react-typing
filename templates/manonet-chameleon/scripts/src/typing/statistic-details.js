@@ -1,13 +1,13 @@
 function StatisticDetails(params){
-	this.dataLoadDeferred = $.Deferred();
+	this.dataLoadDeferred = jQuery.Deferred();
 	this.params = params;
 };
 
 StatisticDetails.prototype.get = function() {
 	var self = this;
 	var statUrl = this.params.userJsonURL;
-	$.getJSON( statUrl, function( data ) {
-		var statkbd = new KeyBoard(params, params.locale, $('.stat-keyboard'));
+	jQuery.getJSON( statUrl, function( data ) {
+		var statkbd = new KeyBoard(params, params.locale, jQuery('.stat-keyboard'));
 		statkbd.getKeyBoard('statistic', data);
 	});
 	

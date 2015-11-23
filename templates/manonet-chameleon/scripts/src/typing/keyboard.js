@@ -1,6 +1,6 @@
 
 function KeyBoard(params, layout, selector){
-	this.xmlLoadDeferred = $.Deferred();
+	this.xmlLoadDeferred = jQuery.Deferred();
 	this.params = params;
 	this.selector = selector;
 }
@@ -13,21 +13,21 @@ KeyBoard.prototype.createKeyBoard = function(xml) {
 	this.params.keyBoardKeys = {};
 	
 	// creating rows
-	$(this.selector).empty();
-	var A = $('<div/>', {id: 'A'});
-	var B = $('<div/>', {id: 'B'});
-	var C = $('<div/>', {id: 'C'});
-	var D = $('<div/>', {id: 'D'});
-	var E = $('<div/>', {id: 'E'});
+	jQuery(this.selector).empty();
+	var A = jQuery('<div/>', {id: 'A'});
+	var B = jQuery('<div/>', {id: 'B'});
+	var C = jQuery('<div/>', {id: 'C'});
+	var D = jQuery('<div/>', {id: 'D'});
+	var E = jQuery('<div/>', {id: 'E'});
 	var rows = [E,D,C,B,A];
 	this.selector.append(rows);
 	
-	this.params.locale = $(xml).find('keyboard').attr('locale');
+	this.params.locale = jQuery(xml).find('keyboard').attr('locale');
 	
-	$(xml).find('keyMap').each(function(){
-		$(this).find("map").each(function(){
-			var strg = $(this).attr('to');
-			var iso = $(this).attr('iso');
+	jQuery(xml).find('keyMap').each(function(){
+		jQuery(this).find("map").each(function(){
+			var strg = jQuery(this).attr('to');
+			var iso = jQuery(this).attr('iso');
 			var key, sign;
 			
 			// unescape unicode
@@ -58,13 +58,13 @@ KeyBoard.prototype.createKeyBoard = function(xml) {
 KeyBoard.prototype.createKey = function(iso,strg) {
 	
 	// create key
-	var key = $('<b/>', {
+	var key = jQuery('<b/>', {
 		id: iso,
 		class: 'key'
 	});
 	
 	// create color layer
-	var background = $('<i/>');
+	var background = jQuery('<i/>');
 	background.appendTo(key);
 	
 	
@@ -95,7 +95,7 @@ KeyBoard.prototype.createKey = function(iso,strg) {
 KeyBoard.prototype.createsign = function(id,iso,strg) {
 	
 	// create sign
-	var sign = $('<b/>', {
+	var sign = jQuery('<b/>', {
 		class: 's s_' + id,
 		html: strg
 	});
@@ -134,12 +134,12 @@ KeyBoard.prototype.cteateHotmap = function(data) {
 		locale = Object.getOwnPropertyNames(data)[0];
 	}
 	console.log(locale);
-	$.each(data[locale][date][classname], function (name, value) {
+	jQuery.each(data[locale][date][classname], function (name, value) {
 		signarray[name] = value;
 		console.log('name: ' + name + ', value:' + value );
 	});
-	$.each(this.params.keyBoardSigns, function(i,e) {
-		$.each(signarray, function(index, elem){
+	jQuery.each(this.params.keyBoardSigns, function(i,e) {
+		jQuery.each(signarray, function(index, elem){
 			if(e[1].text().toLowerCase().indexOf(index.toLowerCase()) > -1) {
 				e[1].addClass(classname);
 			}
@@ -153,7 +153,7 @@ KeyBoard.prototype.getKeyBoard = function(purpose, data) {
 	// data is a json, contains unicode characters with number values
 	var self = this;
 	var kbdUrl = this.params.keyboardURL;
-	$.ajax({
+	jQuery.ajax({
 		url: kbdUrl,
 		success: function(xml){
 			self.xml = xml;

@@ -25,12 +25,12 @@ $sitename = $app->get('sitename');
 $testmode = $app->get('testmode');
 
 // Add JavaScript Frameworks
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/scripts/build/lib.js');
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/scripts/build/script.js');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/scripts/build/lib.js');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/scripts/build/script.js');
 
 // Add Stylesheets
+// $doc->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.css');
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/build/style.css');
-
 ?>
 
 
@@ -41,6 +41,8 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<jdoc:include type="head" />
+	
+  <script src="/m5/public_html/templates/manonet-chameleon/scripts/build/script.js" type="text/javascript"></script>
 	<!--
 	<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/general.css" type="text/css" />
@@ -49,6 +51,14 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/styles/
 		var baseURL = '<?php echo JURI::base(); ?>';
 		var userID = '<?php echo $user->id; ?>';
 		var today = '<?php echo date("Y-m-d"); ?>';
+		
+		jQuery(document).ready(function() {
+			jQuery('.hasPopover').popover({
+				"html": true,
+				//"trigger": "hover focus",
+				"container": "body"
+			});
+		});
 	</script>
 </head>
 

@@ -1,13 +1,13 @@
 
 function Lesson(params){
-	this.dataLoadDeferred = $.Deferred();	
+	this.dataLoadDeferred = jQuery.Deferred();	
 	this.params = params;
 }
 
 Lesson.prototype.loadLesson = function() {
 	var self = this;
 	var lsUrl = this.params.lessonURL;
-	$.ajax({
+	jQuery.ajax({
 		url: lsUrl,
 		success: function(data){
 			self.data = data;

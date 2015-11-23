@@ -96,7 +96,7 @@
 						'<%= settings.jsSourceDir %>lib/**/*.js'
 					],
                     '<%= settings.jsDir %>script.js': [
-                        '<%= settings.jsSourceDir %>bootstrap/util.js',
+                        /*'<%= settings.jsSourceDir %>bootstrap/util.js',
                         '<%= settings.jsSourceDir %>bootstrap/alert.js',
                         '<%= settings.jsSourceDir %>bootstrap/button.js',
                         '<%= settings.jsSourceDir %>bootstrap/carousel.js',
@@ -106,7 +106,7 @@
                         '<%= settings.jsSourceDir %>bootstrap/scrollspy.js',
                         '<%= settings.jsSourceDir %>bootstrap/tab.js',
                         '<%= settings.jsSourceDir %>bootstrap/tooltip.js',
-                        '<%= settings.jsSourceDir %>bootstrap/popover.js',
+                        '<%= settings.jsSourceDir %>bootstrap/popover.js',*/
                         '<%= settings.jsSourceDir %>typing/*.js',
                         '<%= settings.jsSourceDir %>*.js'
                     ]
@@ -123,7 +123,7 @@
 						'<%= settings.jsSourceDir %>lib/**/*.js'
 					],
                     '<%= settings.jsDir %>script.js': [
-                        '<%= settings.jsSourceDir %>bootstrap/util.js',
+                        /*'<%= settings.jsSourceDir %>bootstrap/util.js',
                         '<%= settings.jsSourceDir %>bootstrap/alert.js',
                         '<%= settings.jsSourceDir %>bootstrap/button.js',
                         '<%= settings.jsSourceDir %>bootstrap/carousel.js',
@@ -133,7 +133,7 @@
                         '<%= settings.jsSourceDir %>bootstrap/scrollspy.js',
                         '<%= settings.jsSourceDir %>bootstrap/tab.js',
                         '<%= settings.jsSourceDir %>bootstrap/tooltip.js',
-                        '<%= settings.jsSourceDir %>bootstrap/popover.js',
+                        '<%= settings.jsSourceDir %>bootstrap/popover.js',*/
                         '<%= settings.jsSourceDir %>typing/*.js',
                         '<%= settings.jsSourceDir %>*.js'
                     ]

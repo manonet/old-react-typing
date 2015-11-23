@@ -150,9 +150,9 @@ var getStat = function() {
 }
 
 var locale = detectLang().substring(0, 2) + "-t-k0-" + detectOS();
-$( document ).ready(function() {
+jQuery( document ).ready(function() {
 	// prevent caching json files
-	$.ajaxSetup({ cache: false });
+	jQuery.ajaxSetup({ cache: false });
 	
 	// Create an instance
 	params = {
@@ -164,10 +164,10 @@ $( document ).ready(function() {
 		keyboardURL: this.baseURL + "/../../typing/keyboards/" + detectOS() + "/" + locale + ".xml",
 		savestatURL: this.baseURL + "/index.php?option=com_typing&task=savestat",
 		userJsonURL: this.baseURL + "/../../typing/userdata/statistic/user-" + userID + ".json",
-		hintBox: $("#hintBox"),
-		messagebox: $("#messagebox"),
-		textBoard: $('#textBoard'),
-		keyBoardContainer: $("#keyBoard"),
+		hintBox: jQuery("#hintBox"),
+		messagebox: jQuery("#messagebox"),
+		textBoard: jQuery('#textBoard'),
+		keyBoardContainer: jQuery("#keyBoard"),
 		
 		sample: "",
 		signToWrite: "",
@@ -191,7 +191,7 @@ $( document ).ready(function() {
 		endurance: 0,
 	}
 	
-	if ($('#typing')[0]) {
+	if (jQuery('#typing')[0]) {
 		var init = function() {
 			getLesson(params.lessonId++);
 			getKeyboard();
@@ -199,7 +199,7 @@ $( document ).ready(function() {
 		}();
 	}
 	
-	$('#get-detailed-stat').click(function(){
+	jQuery('#get-detailed-stat').click(function(){
 		statDetails = new StatisticDetails(params);
 		statDetails.get();
 	});

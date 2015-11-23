@@ -1,6 +1,6 @@
 
 function Statistic(params){
-	this.dataLoadDeferred = $.Deferred();	
+	this.dataLoadDeferred = jQuery.Deferred();	
 	this.params = params;
 	this.startTime = 0;
 	this.endTime = 0;
@@ -20,7 +20,7 @@ Statistic.prototype.save = function() {
 		'misspell_hits_array' : JSON.stringify(this.params.misspell_hits_array)
 	};
 	//console.log(this.params.locale);
-	$.ajax({
+	jQuery.ajax({
 		type: "POST",
 		url: statUrl,
 		data: data,

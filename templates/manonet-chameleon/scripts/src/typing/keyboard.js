@@ -14,13 +14,20 @@ KeyBoard.prototype.createKeyBoard = function(xml) {
 	
 	// creating rows
 	jQuery(this.selector).empty();
-	var A = jQuery('<div/>', {id: 'A'});
-	var B = jQuery('<div/>', {id: 'B'});
-	var C = jQuery('<div/>', {id: 'C'});
-	var D = jQuery('<div/>', {id: 'D'});
-	var E = jQuery('<div/>', {id: 'E'});
+	var wrapper = jQuery('<div/>', {'class': 'keyboard-wrapper'});
+	var A = jQuery('<div/>', {'class': 'A clearfix'});
+	var B = jQuery('<div/>', {'class': 'B'});
+	var C = jQuery('<div/>', {'class': 'C'});
+	var D = jQuery('<div/>', {'class': 'D'});
+	var E = jQuery('<div/>', {'class': 'E'});
 	var rows = [E,D,C,B,A];
-	this.selector.append(rows);
+	this.E = E;
+	this.D = D;
+	this.C = C;
+	this.B = B;
+	this.A = A;
+	wrapper.append(rows);
+	this.selector.append(wrapper);
 	
 	this.params.locale = jQuery(xml).find('keyboard').attr('locale');
 	
@@ -51,6 +58,9 @@ KeyBoard.prototype.createKeyBoard = function(xml) {
 		keyMap ++;
 	});
 	
+	//$(document).ready(function () {
+	jQuery("[data-toggle=tooltip]").tooltip();
+	//});
 	//console.log(this.params.keyBoardKeys);
 	//console.log(this.params.keyBoardSigns);
 };
@@ -59,8 +69,9 @@ KeyBoard.prototype.createKey = function(iso,strg) {
 	
 	// create key
 	var key = jQuery('<b/>', {
-		id: iso,
-		class: 'key'
+		'class': 'key ' + iso,
+		'data-toggle': "tooltip",
+		'title': iso
 	});
 	
 	// create color layer
@@ -74,19 +85,19 @@ KeyBoard.prototype.createKey = function(iso,strg) {
 	// append key to correct keyboard "row"
 	switch(iso.substring(0,1)) {
 		case 'A':
-			key.appendTo(A);
+			key.appendTo(this.A);
 			break;
 		case 'B':
-			key.appendTo(B);
+			key.appendTo(this.B);
 			break;
 		case 'C':
-			key.appendTo(C);
+			key.appendTo(this.C);
 			break;
 		case 'D':
-			key.appendTo(D);
+			key.appendTo(this.D);
 			break;
 		case 'E':
-			key.appendTo(E);
+			key.appendTo(this.E);
 			break;
 	}
 	return key;

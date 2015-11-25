@@ -9,6 +9,8 @@ StatisticDetails.prototype.get = function() {
 	jQuery.getJSON( statUrl, function( data ) {
 		var statkbd = new KeyBoard(params, params.locale, jQuery('.stat-keyboard'));
 		statkbd.getKeyBoard('statistic', data);
+		var statkbd = new KeyBoard(params, params.locale, jQuery('.stat-keyboard2'));
+		statkbd.getKeyBoard('statistic', data);
 	});
 	
 };

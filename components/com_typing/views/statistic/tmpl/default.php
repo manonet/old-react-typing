@@ -27,6 +27,7 @@ if (!$this->item->id) {
 	<button id="get-detailed-stat" class="btn btn-primary">detailed-stat</button>
 	<div id="statistic-details">
 		<div class="stat-keyboard"></div>
+		<div class="stat-keyboard2"></div>
 	</div>
 
 <button type="button" class="btn btn-secondary hasPopover" title="Header" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">

@@ -21,29 +21,27 @@
 	font-size: 18px;
 }
 
-#keyBoard {
+.keyboard-wrapper {
 	background: grey;
-	overflow: hidden;
 }
 
-#A,#B,#C,#D,#E {
-	overflow: hidden;
+.A,.B,.C,.D,.E {
 	clear: both;
 	position: relative;
 }
-#E {
+.E {
 
 }
-#D {
+.D {
 	left: 10%;
 }
-#C {
+.C {
 	left: 12%;
 }
-#B {
+.B {
 	left: 8.5%;
 }
-#A {
+.A {
 	left: 27%;
 }
 
@@ -56,6 +54,7 @@
 	padding-bottom: 6.9%;
 	background: white;
 	float: left;
+	cursor: default;
 }
 .key.correct {
 	background: green;
@@ -106,43 +105,43 @@
 	top: 50%;
 }
 */
-#E  .s_0 {
+.E  .s_0 {
 	bottom: 0;
 	left: 15%;
 	font-size: 3vw;
 }
-#E  .s_1 {
+.E  .s_1 {
 	top: 0;
 	left: 15%;
 }
-#E  .s_4 {
+.E  .s_4 {
 	bottom: 0;
 	right: 15%;
 }
 
 
-#B .s_0,
-#C .s_0,
-#D .s_0 {
+.B .s_0,
+.C .s_0,
+.D .s_0 {
 	bottom: 0;
 	left: 6%;
 }
 
-#B .s_1,
-#C .s_1,
-#D .s_1 {
+.B .s_1,
+.C .s_1,
+.D .s_1 {
 	left: 17%;
 	top: 0;
 	font-size: 3.5vw;
 }
 
-#B .s_4,
-#C .s_4,
-#D .s_4 {
+.B .s_4,
+.C .s_4,
+.D .s_4 {
 	bottom: 0;
 	right: 6%;
 }
 
-#A03 {
+.A03 {
 	width: 40%;
 }

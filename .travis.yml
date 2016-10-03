@@ -43,4 +43,4 @@ W2s67CF9KWCH9CgFggz4Yal6II0YLSivB4UD+b9hL1D1ZGDgwgYpWJj0uyzsDTFi+ViNPtBgrhrywjGV
 ag1EGqEb7uLC3i/m8Z1JUIZmkHg7Mhl0/IgsCJHPJ5dD030WBg3xww="
 
 after_success:
-    "curl --ftp-create-dirs -T "{bundle.js,index.html}" -u $FTP_USER:$FTP_PASSWORD ftp://FTP_SERVER"
+    curl --ftp-create-dirs -T "-" -u $FTP_USER:$FTP_PASSWORD ftp://FTP_SERVER

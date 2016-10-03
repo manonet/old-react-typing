@@ -13,6 +13,7 @@ script: npm run build
 
 env:
   global:
+    - NODE_ENV=production
     - secure: "Xjd/sdw0tv5UYBHjs/7CBRW87H9IywNijO0elnZxIJQb6R1XSfiFdfk3+U+0M5z5VR1pc
 HI9ZiubJNZMgRtEhM/sw8jFwsHXZQaBz1qjbKPWlybOVMLNdD+iB+CucMwtQ3jlfzOzRcl+hYy1eilZ9
 tpM2iSmfFYkoRlW/ZL1tRAadB/9wgcVk+SrsfnAZOmBGNIF1ZwjyTHR3zgo6s8lu0ohjKMRbrgrndJAr

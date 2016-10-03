@@ -1,24 +1,53 @@
 
 /* Typing */
 
+body {
+  background: greenyellow;
+}
 
-.letter {
+.typewriterApp {
+  position: relative;
+  background: thistle;
+}
+
+.userText {
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  opacity: .01;
+}
+.char {
 	display: inline;
+  font-style: normal;
 }
-.letter.done {
-	color: #ccc;
+.char.done {
+	color: gray;
 }
-.letter.error {
+.char.active {
+	color: black;
+}
+.char.error {
 	color: #f00;
 	background: #fcc;
 }
 
-#textBoard {
-    background: #ffeebb;
-    padding: 10px;
-	color: #000;
+.sampleBoard {
+  display: block;
+  background: white;
+  border:  2px solid gray;
+  padding: 10px;
+	color: lightgrey;
 	font-family: 'Inconsolata', monospace;
 	font-size: 18px;
+
+  &.focus {
+    border:  2px solid purple;
+  }
+}
+
+.sampleBoardHint {
+  margin: 0;
 }
 
 .keyboard-wrapper {

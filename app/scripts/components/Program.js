@@ -1,7 +1,8 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import SampleBoard from "./SampleBoard";
 
-export default class UserInput extends React.Component {
+export default class Program extends React.Component {
 
   constructor() {
     super();
@@ -12,6 +13,19 @@ export default class UserInput extends React.Component {
     this.props.userWrite(userText);
   }
 
+  onFocus (e) {
+    this.props.onWriting(true);
+  }
+
+  onBlur (e) {
+    this.props.onWriting(false);
+  }
+
+  // set focus on input
+  componentDidMount () {
+    ReactDOM.findDOMNode(this.refs.userText).focus();
+  }
+
   render() {
     return (
       <div class="typewriterApp">
@@ -19,6 +33,9 @@ export default class UserInput extends React.Component {
           class="userText"
           value={this.props.userText}
           onChange={this.handleChange.bind(this)}
+          onFocus={this.onFocus.bind(this)}
+          onBlur={this.onBlur.bind(this)}
+          ref="userText"
         ></textarea>
 
         <SampleBoard
@@ -27,6 +44,8 @@ export default class UserInput extends React.Component {
           cursorAt={this.props.cursorAt}
           signToWrite={this.props.signToWrite}
           writtenSign={this.props.writtenSign}
+          writtenSign={this.props.writtenSign}
+          writing={this.props.writing}
         />
 
       </div>

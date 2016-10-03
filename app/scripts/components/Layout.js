@@ -1,18 +1,18 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import UserInput from "./UserInput";
+import Program from "./Program";
 
 export default class Layout extends React.Component {
   constructor() {
     super();
     this.state = {
-      sampleText: "íme egy hosszú mondat őű...",
+      sampleText: "Let's type something...",
       userText: "",
       cursorAt: 0,
       signToWrite: "",
       writtenSign: "",
-      focus: false
+      writing: false // whenever the user types (or not)
     };
   }
 
@@ -22,7 +22,11 @@ export default class Layout extends React.Component {
       cursorAt: userText.length,
       signToWrite: this.state.sampleText.substring(this.state.userText.length, this.state.userText.length+1),
       writtenSign: userText.charAt(this.state.cursorAt)
-    }); // Thanks to ES6 it is equal with this.setState({title: title})
+    });
+  }
+
+  onWriting (writing) {
+    this.setState({writing}); // Thanks to ES6 it is equal with this.setState({title: title})
   }
 
   correction () {
@@ -64,13 +68,16 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Header/>
-        <UserInput
+        <Program
           sampleText={this.state.sampleText}
           userText={this.state.userText}
           cursorAt={this.state.cursorAt}
           signToWrite={this.state.signToWrite}
           writtenSign={this.state.writtenSign}
-          userWrite={this.userWrite.bind(this)}/>
+          userWrite={this.userWrite.bind(this)}
+          onWriting={this.onWriting.bind(this)}
+          writing={this.state.writing}
+        />
         <Footer />
       </div>
     )

@@ -13,11 +13,12 @@ export default class SampleBoard extends React.Component {
     const cursorAt = this.props.cursorAt;
     const writtenSign = this.props.writtenSign;
     const userText = this.props.userText;
+    const focus = this.props.writing ? "focus" : "";
 
     return (
       <div>
         <SampleBoardHint signToWrite={this.props.signToWrite} writtenSign={this.props.writtenSign} />
-        <kbd className={"sampleBoard "} >
+        <kbd className={"sampleBoard " + focus} >
           {sampleArray.map(function(char, id) {
             return (<SampleBoardChar
               key={id}

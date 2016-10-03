@@ -27,6 +27,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress",
     "dev": "webpack-dev-server --content-base app --inline --hot",
+    "build": "webpack -p",
     "babel": "babel",
     "webpack": "webpack"
   },

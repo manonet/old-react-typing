@@ -19,4 +19,4 @@ env:
     - secure: "iVHnDIMviW/IV+CSb01gDVtRggtTlO5IVh2xWOkZgpkwdM9GIF+TNXtm5nlpRvPNBiSlUVR7xrAEeTKyOgDyIOYElcXjHWKUiMP7Jy3h981hI7SeA8sIcDDrUfs0SlaT7NUcUssZB47onPw05668rf+JkQBHfmUSbCLAu/aUs0OpBGoaFcLpWgHoiBaCZsyWKdXT3NOdwPcUPyj6c5mwz2cuvHNIqpRsFJyv6gXZMU9RQGIMcjYcFvdojOazz7EGTejltwCxph0HlQ5dUUyI11mse6wbeH0d3c03/BEMMsJb7lWpz/+qqQIpabyysQ6qxusmg89DXkwD1vdJOomQ7muNd5N13PYKsxNBJ9QDaU3NZeqJ4d2iowitaC6xpf93diUhOQng81iztOmxoYvaQnBOAe8euMETcY+4R7mau2114bIYWjb6pxumntPoIYKvChvQbij6O1UaCX84Oh6YRosYC6Iy/tMbqcwQ0QBna81i/JwjZc8qRAlcWmhuq1WHn28dwWRITz5tjBW0KCsO27DkatR7Olw8ldCxIW2s67CF9KWCH9CgFggz4Yal6II0YLSivB4UD+b9hL1D1ZGDgwgYpWJj0uyzsDTFi+ViNPtBgrhrywjGVag1EGqEb7uLC3i/m8Z1JUIZmkHg7Mhl0/IgsCJHPJ5dD030WBg3xww="
 
 after_success:
-    - 'curl -v --ftp-pasv -T "{app/bundle.js}" ftp://FTP_SERVER/ -u FTP_USER:FTP_PASSWORD'
+    - 'curl -v --ftp-pasv -T "{app/bundle.js}" ftp://79.172.252.61/ -u FTP_USER:FTP_PASSWORD'

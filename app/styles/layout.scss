@@ -1,0 +1,19 @@
+header,
+footer,
+main,
+.layout,
+.container {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container {
+  flex-basis: 960px;
+  justify-content: space-between;
+}
+
+.typewriterApp {
+  flex: 1;
+}

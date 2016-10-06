@@ -5,7 +5,9 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <h1>Typing</h1>
+        <div class="container">
+          <h1>Typing</h1>
+        </div>
       </header>
     )
   }

@@ -66,18 +66,22 @@ export default class Layout extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="layout">
         <Header/>
-        <Program
-          sampleText={this.state.sampleText}
-          userText={this.state.userText}
-          cursorAt={this.state.cursorAt}
-          signToWrite={this.state.signToWrite}
-          writtenSign={this.state.writtenSign}
-          userWrite={this.userWrite.bind(this)}
-          onWriting={this.onWriting.bind(this)}
-          writing={this.state.writing}
-        />
+        <main>
+          <div class="container">
+            <Program
+              sampleText={this.state.sampleText}
+              userText={this.state.userText}
+              cursorAt={this.state.cursorAt}
+              signToWrite={this.state.signToWrite}
+              writtenSign={this.state.writtenSign}
+              userWrite={this.userWrite.bind(this)}
+              onWriting={this.onWriting.bind(this)}
+              writing={this.state.writing}
+            />
+          </div>
+        </main>
         <Footer />
       </div>
     )

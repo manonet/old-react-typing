@@ -43,4 +43,4 @@ Bg0xujUfvlMnSD0pG1vRivY5UD3LxAkV9e7VjU0XiRgage/63J4Y8WMKieii1Uril7q7CySESqUu8l70
 HCGb0GlawwfcCo1hgXX4lJooBCfUvPpTfi9LIDDLMPirw5ffHvwHYo="
 
 after_success:
-    - 'curl -v --ftp-pasv -T "{app/bundle.js}" ftp://FTP_SERVER/ -u FTP_USER:FTP_PASSWORD'
+    - 'curl -v -T "{app/bundle.js}" ftp://79.172.252.61/ -u FTP_USER:FTP_PASSWORD'

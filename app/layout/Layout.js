@@ -1,7 +1,9 @@
+require("./layout.scss");
+
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Program from "./Program";
+import Program from "../program/Program";
 
 export default class Layout extends React.Component {
   constructor() {

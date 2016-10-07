@@ -3,13 +3,17 @@ node_js:
   - "4"
 
 install:
-    - npm install
+  - npm install
 
 cache:
   directories:
-  - node_modules
+    - node_modules
 
 script: npm run build
+
+branches:
+  only:
+    - master
 
 env:
   global:
@@ -43,4 +47,4 @@ uxHwcIYj9ZrVKEYfAs3A24J0LM35UMbrV9l5AY/6mRFCJYFR4LguUi518AbQLATWi3trCd+YKZl+Sn9l
 ObhLePm7M2/M+p48KhadNdzuXVGl+PzXiMKk3buM//ixQ1MW38CRW8="
 
 after_success:
-    - 'curl -T "{app/bundle.js}" ftp://$FTP_SERVER/ -u $FTP_USER:$FTP_PASSWORD'
+    - 'curl --ftp-create-dirs -T "{app/bundle.js}" ftp://$FTP_SERVER/ -u $FTP_USER:$FTP_PASSWORD'

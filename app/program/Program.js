@@ -1,6 +1,9 @@
+require("./program.scss");
+
 import React from "react";
 import ReactDOM from "react-dom";
 import SampleBoard from "./SampleBoard";
+import Keyboard from "../keyboard/Keyboard";
 
 export default class Program extends React.Component {
 
@@ -47,7 +50,7 @@ export default class Program extends React.Component {
           writtenSign={this.props.writtenSign}
           writing={this.props.writing}
         />
-
+        <Keyboard/>
       </div>
     )
   }

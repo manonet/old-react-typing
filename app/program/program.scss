@@ -1,0 +1,45 @@
+
+.typewriterApp {
+  position: relative;
+  background: thistle;
+}
+
+.userText {
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  opacity: .01;
+}
+.char {
+	display: inline;
+  font-style: normal;
+}
+.char.done {
+	color: gray;
+}
+.char.active {
+	color: black;
+}
+.char.error {
+	color: #f00;
+	background: #fcc;
+}
+
+.sampleBoard {
+  display: block;
+  background: white;
+  border:  2px solid lightgray;
+  padding: 10px;
+	color: lightgrey;
+	font-family: 'Inconsolata', monospace;
+	font-size: 18px;
+
+  &.focus {
+    border:  2px solid blue;
+  }
+}
+
+.sampleBoardHint {
+  margin: 0;
+}

@@ -5,7 +5,7 @@ var debug = process.env.NODE_ENV !== "production";
 module.exports = {
   context: path.resolve(__dirname + "/app"),
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./scripts/entry.js",
+  entry: "./entry.js",
   output: {
     path: path.resolve(__dirname + "/app"),
     filename: "bundle.js"

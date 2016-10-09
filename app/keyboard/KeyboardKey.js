@@ -6,7 +6,7 @@ export default class KeyboardKey extends React.Component {
 
   render() {
     return (
-      <b class="key">K</b>
+      <b className={"key " + this.props.iso }>{this.props.to}</b>
     )
   }
 }

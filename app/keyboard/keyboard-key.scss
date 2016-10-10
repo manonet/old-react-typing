@@ -1,14 +1,25 @@
+$layot-container-width: 960px;
+
 .key {
 	display: block;
+  flex-basis: 6.9%;
 	position: relative;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	width: 6.9%;
+	border: .1em solid #ccc;
+	border-radius: .3em;
+	//width: 6.9%;
 	padding-bottom: 6.9%;
 	background: white;
-	float: left;
+	//float: left;
 	cursor: default;
+	font-size: 2vw;
 }
+
+@media screen and (min-width: $layot-container-width) {
+  .key {
+    font-size: 20px;
+  }
+}
+
 .key.correct {
 	background: green;
 }
@@ -22,39 +33,40 @@
 .key i {
 	display: block;
 	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
 	z-index: 0;
 }
 
-.key .s {
-	display: block;
-	color: #333;
-	position: absolute;
-	font-size: 2vw;
-	font-weight: normal;
+.key .to {
+	left: 10%;
+	bottom: 10%;
 }
-/*
-.key .s_0 {
-	left: 0;
-	top: 0;
+
+.key .shift {
+	left: 10%;
+	top: 10%;
 }
-.key .s_1 {
+
+.key .caps {
+  display: none;
+	left: 68%;
+	top: 28%;
+}
+.key .cs {
+  display: none;
 	left: 50%;
 	top: 0;
 }
-.key .s_2 {
-	left: 0;
-	top: 50%;
+.key .altgr {
+	right: 20%;
+	bottom: 10%;
 }
-.key .s_3 {
+.key .cc {
 	left: 50%;
 	top: 50%;
 }
-.key .s_4 {
-	left: 50%;
-	top: 50%;
+
+// space
+.A03def {
+  flex-basis: calc((6.9% + .3em) * 4);
+  margin-left: calc((6.9% + .3em) * 4);
 }
-*/

@@ -8,11 +8,6 @@ import KeyboardKey from "./KeyboardKey";
 export default class Keyboard extends React.Component {
   constructor() {
     super();
-    this.state = {
-      keyboardName: "",
-      keyboardKeys: []
-    };
-
   }
 
   componentDidMount() {
@@ -76,8 +71,7 @@ export default class Keyboard extends React.Component {
             }
           }
         }
-
-        this.setState({
+        this.props.onKeyboardLoaded({
           keyboardName,
           keyboardKeys
         });
@@ -91,10 +85,10 @@ export default class Keyboard extends React.Component {
   render() {
     return (
       <div>
-        <h3 class="keyboard__title">{this.state.keyboardName}</h3>
+        <h3 class="keyboard__title">{this.props.keyboardName}</h3>
         <div class="keyboard__wrapper">
         {
-          this.state.keyboardKeys.map(function(item) {
+          this.props.keyboardKeys.map(function(item) {
             return <KeyboardKey
               key={item.iso}
               iso={item.iso}

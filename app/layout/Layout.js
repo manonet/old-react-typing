@@ -14,21 +14,59 @@ export default class Layout extends React.Component {
       cursorAt: 0,
       signToWrite: "",
       writtenSign: "",
-      writing: false // whenever the user types (or not)
+      nextSign: "",
+      writing: false, // whenever the user types (or not)
+      keyboardName: "",
+      keyboardKeys: []
     };
   }
 
   userWrite (userText) {
+    var signToWrite = (userText.length >= 1) ? this.state.sampleText.substring(userText.length-1, userText.length) : "";
+    var cursorAt = userText.length;
+    var writtenSign = (cursorAt > 0) ? userText.charAt(cursorAt-1) : "";
+    var nextSign = this.state.sampleText.charAt(cursorAt);
+
     this.setState({
-      userText: userText,
-      cursorAt: userText.length,
-      signToWrite: this.state.sampleText.substring(this.state.userText.length, this.state.userText.length+1),
-      writtenSign: userText.charAt(this.state.cursorAt)
+      userText,
+      cursorAt,
+      signToWrite,
+      writtenSign,
+      nextSign
     });
+
+    this.markKeyboardForType (signToWrite,writtenSign,nextSign);
   }
 
   onWriting (writing) {
-    this.setState({writing}); // Thanks to ES6 it is equal with this.setState({title: title})
+    this.setState({writing});
+  }
+
+  onKeyboardLoaded (data) {
+    this.setState(data);
+    this.markKeyboardForType(this.state.signToWrite,this.state.writtenSign,this.state.nextSign);
+  }
+
+  markKeyboardForType (signToWrite,writtenSign,nextSign) {
+    console.log("signToWrite: " + signToWrite, "writtenSign: " + writtenSign, "nextSign: " + nextSign);
+    this.state.keyboardKeys.map(function(item) {
+      if (item.to == nextSign || item.shift == nextSign) {
+        item.state = "toWrite";
+      } else if (item.to == writtenSign || item.shift == writtenSign ) {
+        item.state = "error";
+        if (signToWrite == writtenSign) {
+          item.state = "correct";
+        }
+      } else {
+        item.state = "def";
+      }
+    });
+
+  }
+
+  componentDidMount () {
+    // Todo ?
+    this.userWrite("");
   }
 
   correction () {
@@ -81,6 +119,9 @@ export default class Layout extends React.Component {
               userWrite={this.userWrite.bind(this)}
               onWriting={this.onWriting.bind(this)}
               writing={this.state.writing}
+              keyboardName={this.state.keyboardName}
+              keyboardKeys={this.state.keyboardKeys}
+              onKeyboardLoaded={this.onKeyboardLoaded.bind(this)}
             />
           </div>
         </main>

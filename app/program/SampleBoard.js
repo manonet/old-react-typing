@@ -9,11 +9,11 @@ export default class SampleBoard extends React.Component {
   }
 
   render() {
-    const sampleArray = this.props.sampleText.split("");
-    const cursorAt = this.props.cursorAt;
-    const writtenSign = this.props.writtenSign;
-    const userText = this.props.userText;
-    const focus = this.props.writing ? "focus" : "";
+    var sampleArray = this.props.sampleText.split("");
+    var cursorAt = this.props.cursorAt;
+    var writtenSign = this.props.writtenSign;
+    var userText = this.props.userText;
+    var focus = this.props.writing ? "focus" : "";
 
     return (
       <div>

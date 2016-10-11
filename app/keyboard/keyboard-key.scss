@@ -21,12 +21,12 @@ $layot-container-width: 960px;
 }
 
 .key.correct {
-	background: green;
+	border-color: green;
 }
 .key.error {
-	background: red;
+	border-color: red;
 }
-.key.toHit {
+.key.toWrite {
 	background: yellow;
 }
 
@@ -66,7 +66,7 @@ $layot-container-width: 960px;
 }
 
 // space
-.A03def {
+.A03 {
   flex-basis: calc((6.9% + .3em) * 4);
   margin-left: calc((6.9% + .3em) * 4);
 }

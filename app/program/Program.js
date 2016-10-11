@@ -12,7 +12,7 @@ export default class Program extends React.Component {
   }
 
   handleChange (e) {
-    const userText = e.target.value;
+    var userText = e.target.value;
     this.props.userWrite(userText);
   }
 
@@ -50,7 +50,11 @@ export default class Program extends React.Component {
           writtenSign={this.props.writtenSign}
           writing={this.props.writing}
         />
-        <Keyboard/>
+        <Keyboard
+          keyboardName={this.props.keyboardName}
+          keyboardKeys={this.props.keyboardKeys}
+          onKeyboardLoaded={this.props.onKeyboardLoaded}
+        />
       </div>
     )
   }

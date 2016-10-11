@@ -1,8 +1,9 @@
+@import "../layout/variables";
 
 .keyboard {
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
-	  background: grey;
+	  background: $gray-dark;
   }
 }

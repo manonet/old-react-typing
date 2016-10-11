@@ -1,17 +1,25 @@
+@import "../layout/variables";
+
 $layot-container-width: 960px;
+$keyWidth: 6%;
 
 .key {
 	display: block;
-  flex-basis: 6.9%;
+  margin: .2em;
+  margin-bottom: .5em;
+  flex-basis: $keyWidth;
 	position: relative;
-	border: .1em solid #ccc;
+	border: .2em solid #ccc;
 	border-radius: .3em;
 	//width: 6.9%;
-	padding-bottom: 6.9%;
+	//padding-bottom: 6.9%;
+	padding-bottom: 5%;
 	background: white;
 	//float: left;
 	cursor: default;
 	font-size: 2vw;
+  box-shadow: 0 .3em 0 $gray;
+
 }
 
 @media screen and (min-width: $layot-container-width) {
@@ -43,7 +51,8 @@ $layot-container-width: 960px;
 
 .key .shift {
 	left: 10%;
-	top: 10%;
+	top: 2%;
+  color: $gray-light;
 }
 
 .key .caps {
@@ -65,8 +74,44 @@ $layot-container-width: 960px;
 	top: 50%;
 }
 
+
+// backspace
+.E14 {
+  flex-grow: 1;
+}
+
+// tab
+.D00 {
+  flex-basis: $keyWidth * 1.4;
+}
+
+// enter
+.D13,
+.C13 {
+  flex-grow: 1;
+}
+
+// capsLock
+.C00 {
+  flex-basis: $keyWidth * 1.7;
+}
+
+// Shift
+.B99 {
+  flex-basis: $keyWidth * 1.2;
+}
+.B13 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 12%;
+}
+
+// Ctrl
+.A99 {
+  flex-basis: $keyWidth * 1.2;
+}
+
 // space
 .A03 {
-  flex-basis: calc((6.9% + .3em) * 4);
-  margin-left: calc((6.9% + .3em) * 4);
+  flex-grow: 1;
 }

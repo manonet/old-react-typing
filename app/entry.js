@@ -1,6 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Layout from "./layout/Layout"
+import {render} from "react-dom";
+import {Router, Route, browserHistory, IndexRoute} from "react-router";
+import routes from "./routes";
+
 
 const APP = document.getElementById('app');
-ReactDOM.render(<Layout />, APP);
+
+render((
+  <Router history={browserHistory} routes={routes} />
+), APP)

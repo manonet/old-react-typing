@@ -1,11 +1,21 @@
-body {
-  background: paleturquoise;
+@import "variables";
+@import "hover";
+@import "tab-focus";
+@import "normalize";
+@import "reboot";
+@import "type";
+
+* {
+   box-sizing: border-box;
 }
 
-header,
-footer,
-main,
-.layout,
+body {
+  text-rendering: optimizeLegibility;
+}
+
+.header,
+.main,
+.footer,
 .container {
   display: flex;
   flex-basis: 100%;
@@ -18,6 +28,11 @@ main,
   justify-content: space-between;
 }
 
+.header {
+  background: $gray-dark;
+}
+
 .typewriterApp {
   flex: 1;
 }
+

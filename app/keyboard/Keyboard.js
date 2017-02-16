@@ -199,7 +199,7 @@ export default class Keyboard extends React.Component {
           keyboardName,
           keyboardKeys
         });
-console.log(keyboardKeys);
+
       }.bind(this));
     }.bind(this), function(error) {
       alert(error.message);

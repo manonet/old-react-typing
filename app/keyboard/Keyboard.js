@@ -11,7 +11,7 @@ export default class Keyboard extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://www.manonet.hu/typing/keyboards/windows/hu-t-k0-windows.xml")
+    fetch("http://127.0.0.1:3000/keyboards/windows/hu-t-k0-windows.xml")
     .then(response => response.text())
     .then(function(response) {
       var xml = response;

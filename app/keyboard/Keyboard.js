@@ -210,7 +210,7 @@ export default class Keyboard extends React.Component {
     return (
       <div class="keyboard">
         <h3 class="keyboard__title">{this.props.keyboardName}</h3>
-        <div class="keyboard__wrapper">
+        <svg className="keyboard__wrapper" version="1.1" viewBox="0 0 1500 500">
         {
           this.props.keyboardKeys.map(function(item) {
             return <KeyboardKey
@@ -226,7 +226,7 @@ export default class Keyboard extends React.Component {
             />
           })
         }
-        </div>
+        </svg>
       </div>
     )
   }

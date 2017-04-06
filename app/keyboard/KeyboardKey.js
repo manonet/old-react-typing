@@ -1,21 +1,34 @@
 require("./keyboard-key.scss");
 
-import React from "react";
+import React, {PropTypes} from 'react';
 
 export default class KeyboardKey extends React.Component {
-
-  render() {
-    var rowClass = "key--" + this.props.iso.substring(0, 1)
+  render () {
+    let rowClass = "key--" + this.props.iso.substring(0, 1);
 
     return (
-      <b className={"key " + rowClass + " " + this.props.iso + " " + this.props.state }>
-        <i class="to">{this.props.to}</i>
-        <i class="shift" dangerouslySetInnerHTML={{__html: this.props.shift}}/>
-        <i class="caps" dangerouslySetInnerHTML={{__html: this.props.caps}}/>
-        <i class="cs" dangerouslySetInnerHTML={{__html: this.props.cs}}/>
-        <i class="altgr" dangerouslySetInnerHTML={{__html: this.props.altgr}}/>
-        <i class="cc" dangerouslySetInnerHTML={{__html: this.props.cc}}/>
-      </b>
-    )
+      <g className={"key " + rowClass + " " + this.props.iso + " " + this.props.state}>
+        <rect className="key__bg"/>
+        <g className="key__labels" textAnchor="middle">
+          <text className="key__shift" x="30" y="40" dangerouslySetInnerHTML={{__html: this.props.shift}}/>
+          <text className="key__caps" x="50" y="50" dangerouslySetInnerHTML={{__html: this.props.caps}}/>
+          <text className="key__cs" x="50" y="50" dangerouslySetInnerHTML={{__html: this.props.cs}}/>
+          <text className="key__altgr" x="80" y="80" dangerouslySetInnerHTML={{__html: this.props.altgr}}/>
+          <text className="key__cc" x="50" y="50" dangerouslySetInnerHTML={{__html: this.props.cc}}/>
+          <text className="key__to" x="30" y="80">{this.props.to}</text>
+        </g>
+      </g>
+    );
   }
 }
+
+KeyboardKey.propTypes = {
+  iso: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  shift: PropTypes.string.isRequired,
+  caps: PropTypes.string.isRequired,
+  cs: PropTypes.string.isRequired,
+  altgr: PropTypes.string.isRequired,
+  cc: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired
+};

@@ -1,6 +1,13 @@
 require("./keyboard-key.scss");
 
 import React, {PropTypes} from 'react';
+import KeyboardKeyShift from "./KeyboardKeyShift";
+import KeyboardKeyCaps from "./KeyboardKeyCaps";
+import KeyboardKeyCs from "./KeyboardKeyCs";
+import KeyboardKeyAltGr from "./KeyboardKeyAltGr";
+import KeyboardKeyCc from "./KeyboardKeyCc";
+import KeyboardKeyTo from "./KeyboardKeyTo";
+
 
 export default class KeyboardKey extends React.Component {
   render () {
@@ -10,12 +17,12 @@ export default class KeyboardKey extends React.Component {
       <g className={"key " + rowClass + " " + this.props.iso + " " + this.props.state}>
         <rect className="key__bg"/>
         <g className="key__labels" textAnchor="middle">
-          <text className="key__shift" x="30" y="40" dangerouslySetInnerHTML={{__html: this.props.shift}}/>
-          <text className="key__caps" x="50" y="50" dangerouslySetInnerHTML={{__html: this.props.caps}}/>
-          <text className="key__cs" x="50" y="50" dangerouslySetInnerHTML={{__html: this.props.cs}}/>
-          <text className="key__altgr" x="80" y="80" dangerouslySetInnerHTML={{__html: this.props.altgr}}/>
-          <text className="key__cc" x="50" y="50" dangerouslySetInnerHTML={{__html: this.props.cc}}/>
-          <text className="key__to" x="30" y="80">{this.props.to}</text>
+          <KeyboardKeyShift shift={this.props.shift}/>
+          <KeyboardKeyCaps caps={this.props.caps}/>
+          <KeyboardKeyCs cs={this.props.cs}/>
+          <KeyboardKeyAltGr altgr={this.props.altgr}/>
+          <KeyboardKeyCc cc={this.props.cc}/>
+          <KeyboardKeyTo to={this.props.to}/>
         </g>
       </g>
     );
@@ -24,11 +31,11 @@ export default class KeyboardKey extends React.Component {
 
 KeyboardKey.propTypes = {
   iso: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
-  shift: PropTypes.string.isRequired,
-  caps: PropTypes.string.isRequired,
-  cs: PropTypes.string.isRequired,
-  altgr: PropTypes.string.isRequired,
-  cc: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired
+  state: PropTypes.string,
+  shift: PropTypes.string,
+  caps: PropTypes.string,
+  cs: PropTypes.string,
+  altgr: PropTypes.string,
+  cc: PropTypes.string,
+  to: PropTypes.string
 };

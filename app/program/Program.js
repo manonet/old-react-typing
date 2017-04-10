@@ -32,14 +32,6 @@ export default class Program extends React.Component {
   render() {
     return (
       <div class="typewriterApp">
-        <textarea
-          class="userText"
-          value={this.props.userText}
-          onChange={this.handleChange.bind(this)}
-          onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)}
-          ref="userText"
-        ></textarea>
 
         <SampleBoard
           sampleText={this.props.sampleText}
@@ -49,6 +41,10 @@ export default class Program extends React.Component {
           writtenSign={this.props.writtenSign}
           writtenSign={this.props.writtenSign}
           writing={this.props.writing}
+          onChange={this.handleChange.bind(this)}
+          onFocus={this.onFocus.bind(this)}
+          onBlur={this.onBlur.bind(this)}
+          ref="userText"
         />
         <Keyboard
           keyboardName={this.props.keyboardName}

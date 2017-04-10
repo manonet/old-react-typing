@@ -16,19 +16,31 @@ export default class SampleBoard extends React.Component {
     var focus = this.props.writing ? "focus" : "";
 
     return (
-      <div>
+      <div className="sample">
         <SampleBoardHint signToWrite={this.props.signToWrite} writtenSign={this.props.writtenSign} />
-        <kbd className={"sampleBoard " + focus} >
-          {sampleArray.map(function(char, id) {
-            return (<SampleBoardChar
-              key={id}
-              index={id}
-              cursorAt={cursorAt}
-              writtenSign={writtenSign}
-              userText={userText}
-              char={char}/>);
-          })}
-        </kbd>
+
+        <div className="sample__wrapper">
+          <kbd className={"sampleBoard " + focus} >
+            {sampleArray.map(function(char, id) {
+              return (<SampleBoardChar
+                key={id}
+                index={id}
+                cursorAt={cursorAt}
+                writtenSign={writtenSign}
+                userText={userText}
+                char={char}/>);
+            })}
+          </kbd>
+
+          <textarea
+            className="userText"
+            value={this.props.userText}
+            onChange={this.props.onChange}
+            onFocus={this.props.onFocus}
+            onBlur={this.props.onBlur}
+            ref="userText"
+          ></textarea>
+        </div>
       </div>
     )
   }

@@ -335,8 +335,10 @@ $a-row-shift:           20px;
     transform: translate($key-width * 9 + $a-row-shift, $key-height * 4);
     @extend %special-key;
   }
+  // Command / Windows
   .A09 {
     transform: translate($key-width * 10 + $a-row-shift, $key-height * 4);
+    @extend %special-key;
   }
   .A10 {
     transform: translate($key-width * 11 + $a-row-shift, $key-height * 4);
@@ -346,7 +348,7 @@ $a-row-shift:           20px;
     transform: translate($key-width * 12 + $a-row-shift, $key-height * 4);
     @extend %special-key;
   }
-  //Ctrl
+  // Ctrl
   .A12 {
     transform: translate($key-width * 13 + $a-row-shift, $key-height * 4);
     @extend %special-key;

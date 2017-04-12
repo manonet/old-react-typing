@@ -12,7 +12,7 @@ $c-row-shift:           80px;
 $b-row-shift:           20px;
 $a-row-shift:           20px;
 
-%special-key {
+%function-key {
   .key__bg {
     fill: $gray-light;
   }
@@ -86,9 +86,20 @@ $a-row-shift:           20px;
     }
   }
 
+  &.alpha {
+
+    .key__to {
+      display: none;
+    }
+
+    .key__bg {
+      fill: yellow;
+    }
+  }
 }
 
 .keyboard {
+// at least 12 keys in row E (the upmost row) in positions E00 to E15, containing all keys to input the decimal digits,
   .E01 {
     transform: translateX($key-width);
   }
@@ -125,18 +136,23 @@ $a-row-shift:           20px;
   .E12 {
     transform: translateX($key-width * 12);
   }
+
+// A key providing one of the functions Backspace or Backward erase shall be present in row A or (as it is more common) Row E, right of the character input keys.
   // backspace
   .E14 {
     transform: translateX($key-width * 13);
-    @extend %special-key;
+    @extend %function-key;
     .key__bg {
       width: $key-width * 2 - $key-padding * 2;
     }
   }
 
+// at least 12 keys in row D in positions D01 to D15,
+
+//A tabulation key shall be present, occupying position D00 (i. e., the key may be wider, spanning over additional positions like D99 left of D00).
   //tab
   .D00 {
-    @extend %special-key;
+    @extend %function-key;
     transform: translateY($key-height);
     .key__bg {
       width: $key-width + $d-row-shift - $key-padding * 2;
@@ -181,12 +197,20 @@ $a-row-shift:           20px;
   // enter
   .D13 {
     transform: translate($key-width * 13 + $d-row-shift, $key-height);
-    @extend %special-key;
+    @extend %function-key;
   }
 
+  .key__enter {
+    transform: translate($key-width * 13, $key-height);
+    @extend %function-key;
+  }
+
+// at least 11 keys in row C in positions C01 to C15,
+
+// A key providing one of the functions Capitals lock (usually called “Caps Lock”), Level 2 lock (i. e. “Shift lock”), or Generalized lock shall be present, occupying the position C00. (The function “Generalized lock” is not specified in the ISO/IEC 9995 series). It is to be noted that the specific way the Caps Lock or Shift Lock works (i. e. swapping the lock state by hitting the key, as it is usually implemented) is not specified in the ISO/IEC 9995 series. Thus, solutions avoiding the status dependency as well as the problem of inadvertent hitting (e.g., the lock key pressed together with Shift turns Shift lock on, together with AltGr turns Caps Lock on, pressed alone switches off any lock status but has no effect when no lock status is activated) would not prevent compliance to the standard.
   //capsLock
   .C00 {
-    @extend %special-key;
+    @extend %function-key;
     transform: translateY($key-height * 2);
     .key__bg {
       width: $key-width + $c-row-shift - $key-padding * 2;
@@ -228,16 +252,20 @@ $a-row-shift:           20px;
   .C12 {
     transform: translate($key-width * 12 + $c-row-shift, $key-height * 2);
   }
+
+// A Return key has to be present, right of the character input keys in row C. It is recommended that it expands to row D (thus spanning over position D13 when located on position C13 as shown in the figure), as it e. g. does on the German layout.
   // enter
   .C13 {
     transform: translate($key-width * 13 + $c-row-shift, $key-height * 2);
-    @extend %special-key;
+    @extend %function-key;
+    display: none;
   }
 
-
+// at least 10 keys in row B in positions B00 to B11.
+// To select the Level 2 (commonly called “shifted”, see the subsection “Levels and Groups” of the section “ISO/IEC 9995-1” above), two keys shall be present in row B (commonly called Shift keys). The left one shall occupy position B99, while the right one shall be located right of the character input keys of that row.
   //Shift
   .B99 {
-    @extend %special-key;
+    @extend %function-key;
     transform: translateY($key-height * 3);
     .key__bg {
       width: $key-width + $b-row-shift - $key-padding * 2;
@@ -285,32 +313,44 @@ $a-row-shift:           20px;
   // Shift
   .B13 {
     transform: translate($key-width * 13 + $b-row-shift, $key-height * 3);
-    @extend %special-key;
+    @extend %function-key;
+    .key__bg {
+      width: $key-width * 2 - $key-padding * 2 - $b-row-shift;
+    }
   }
 
 
+// If at least one Control key (commonly abbreviated “Ctrl”) is present, it has to be placed leftmost in row A (as it is more common), or row B.
   // Ctrl
   .A99 {
-    @extend %special-key;
+    @extend %function-key;
     transform: translateY($key-height * 4);
     .key__bg {
       width: $key-width + $a-row-shift - $key-padding * 2;
     }
   }
-  // Command / Windows
+
+// If a Function key (commonly abbreviated “Fn”) is present, it is to be positioned left the space bar and left of an “Alternate” key, if such one is present. (It is allowed but explicitly not recommended to place the “Function” key left of the “Control” key.)
+  // Fn
   .A00 {
     transform: translate($key-width + $a-row-shift, $key-height * 4);
-    @extend %special-key;
+    @extend %function-key;
   }
+
+  // Command / Windows
   .A01 {
     transform: translate($key-width * 2 + $a-row-shift, $key-height * 4);
-    @extend %special-key;
+    @extend %function-key;
   }
+
+// If at least one Alternate key (commonly called “Alt key”) is present, it is to be positioned left of the space bar (or, if a function key specific to the writing system supported by the keyboard layout is there, left of that key).
   // Alt
   .A02 {
     transform: translate($key-width * 3 + $a-row-shift, $key-height * 4);
-    @extend %special-key;
+    @extend %function-key;
   }
+
+// The space bar has to expand at least over the positions A03 to A07. This implies that Japanese keyboards containing muhenkan, henkan, and the Katakana/Hiragana switch keys (the first one left, the other two right of the space bar) are not compliant to the standard if taken literally. This, however, is considered neglectable as the space bar has less importance in Japanese writing than in Latin or similar ones, as Japanese words usually are not separated by spaces.
   // Space
   .A03 {
     transform: translate($key-width * 4 + $a-row-shift, $key-height * 4);
@@ -333,12 +373,12 @@ $a-row-shift:           20px;
   // AltGr
   .A08 {
     transform: translate($key-width * 9 + $a-row-shift, $key-height * 4);
-    @extend %special-key;
+    @extend %function-key;
   }
   // Command / Windows
   .A09 {
     transform: translate($key-width * 10 + $a-row-shift, $key-height * 4);
-    @extend %special-key;
+    @extend %function-key;
   }
   .A10 {
     transform: translate($key-width * 11 + $a-row-shift, $key-height * 4);
@@ -346,12 +386,15 @@ $a-row-shift:           20px;
   // Menü
   .A11 {
     transform: translate($key-width * 12 + $a-row-shift, $key-height * 4);
-    @extend %special-key;
+    @extend %function-key;
   }
   // Ctrl
   .A12 {
     transform: translate($key-width * 13 + $a-row-shift, $key-height * 4);
-    @extend %special-key;
+    @extend %function-key;
+    .key__bg {
+      width: $key-width * 2 - $key-padding * 2 - $a-row-shift;
+    }
   }
 
 }

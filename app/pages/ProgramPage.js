@@ -104,8 +104,7 @@ export default class ProgramPage extends React.Component {
       return (
         <div class="container">
           <Keyboard
-            keyboardName={this.state.keyboardName}
-            keyboardKeys={this.state.keyboardKeys}
+            keyboardUrl="http://127.0.0.1:3000/keyboards/windows/es-t-k0-windows.xml"
             onKeyboardLoaded={function(){}}
           />
           <Program

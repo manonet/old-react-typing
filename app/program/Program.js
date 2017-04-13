@@ -47,8 +47,7 @@ export default class Program extends React.Component {
           ref="userText"
         />
         <Keyboard
-          keyboardName={this.props.keyboardName}
-          keyboardKeys={this.props.keyboardKeys}
+          keyboardUrl="http://127.0.0.1:3000/keyboards/windows/hu-t-k0-windows.xml"
           onKeyboardLoaded={this.props.onKeyboardLoaded}
         />
       </div>

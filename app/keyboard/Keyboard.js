@@ -8,19 +8,28 @@ import KeyboardKey from "./KeyboardKey";
 export default class Keyboard extends React.Component {
   constructor() {
     super();
+    this.state = {
+      keyboardName: "",
+      keyboardKeys: []
+    };
   }
 
   componentDidMount() {
-    KeyboardLoadXML(this.props);
+    KeyboardLoadXML(this.props, this.onKeyboardLoaded.bind(this));
+  }
+
+  onKeyboardLoaded (data) {
+    this.setState(data);
+    this.props.onKeyboardLoaded(data);
   }
 
   render() {
     return (
       <div class="keyboard">
-        <h3 class="keyboard__title">{this.props.keyboardName}</h3>
+        <h3 class="keyboard__title">{this.state.keyboardName}</h3>
         <svg className="keyboard__wrapper" version="1.1" viewBox="0 0 1500 500">
         {
-          this.props.keyboardKeys.map(function(item) {
+          this.state.keyboardKeys.map(function(item) {
             return <KeyboardKey
               key={item.iso}
               iso={item.iso}

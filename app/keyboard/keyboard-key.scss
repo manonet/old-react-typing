@@ -66,8 +66,19 @@ $a-row-shift:           20px;
     ry: 5;
   }
 
-  // status
+  // variant
+  &.alpha {
 
+    .key__to {
+      display: none;
+    }
+
+    .key__bg {
+      fill: yellow;
+    }
+  }
+
+  // status
   &.toWrite {
     .key__bg {
       fill: $brand-primary;
@@ -86,16 +97,6 @@ $a-row-shift:           20px;
     }
   }
 
-  &.alpha {
-
-    .key__to {
-      display: none;
-    }
-
-    .key__bg {
-      fill: yellow;
-    }
-  }
 }
 
 .keyboard {

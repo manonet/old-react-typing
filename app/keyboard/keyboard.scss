@@ -2,8 +2,7 @@
 
 .keyboard {
   &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
 	  background: $gray-dark;
+    border-radius: 10px;
   }
 }

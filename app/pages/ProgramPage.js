@@ -1,5 +1,6 @@
 import React from "react";
 import Program from "../program/Program";
+import Keyboard from "../keyboard/Keyboard";
 
 export default class ProgramPage extends React.Component {
   constructor() {
@@ -102,6 +103,10 @@ export default class ProgramPage extends React.Component {
   render() {
       return (
         <div class="container">
+          <Keyboard
+            keyboardUrl="http://127.0.0.1:3000/keyboards/windows/es-t-k0-windows.xml"
+            onKeyboardLoaded={function(){}}
+          />
           <Program
             sampleText={this.state.sampleText}
             userText={this.state.userText}

@@ -1,6 +1,6 @@
-var path = require("path");
-var webpack = require("webpack");
-var debug = process.env.NODE_ENV !== "production";
+const path = require("path");
+const webpack = require("webpack");
+const debug = process.env.NODE_ENV !== "production";
 
 module.exports = {
   context: path.resolve(__dirname + "/app"),
@@ -11,12 +11,7 @@ module.exports = {
     filename: "bundle.js"
   },
   module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: "style!css",
-        exclude: /node_modules/
-      },
+    rules: [
       {
         test: /\.jsx?$/,         // Match both .js and .jsx files
         exclude: /node_modules/,
@@ -29,8 +24,21 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        use: [{
+          loader: "style-loader", // creates style nodes from JS strings
+          query: {
+            modules: true,
+            sourceMaps: true
+          }
+        }, {
+          loader: "css-loader?importLoaders=1" // translates CSS into CommonJS
+        }, {
+          loader: "sass-loader" // compiles Sass to CSS
+        }, {
+          loader: "postcss-loader" // postprocesses your CSS with PostCSS plugins using postcss.config.js
+        }]
       }
+
     ]
   },
   plugins: debug ? [] : [

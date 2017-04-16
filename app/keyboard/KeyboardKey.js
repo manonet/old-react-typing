@@ -4,36 +4,102 @@ import React, {PropTypes} from 'react';
 
 import KeyboardKeyEnter from "./KeyboardKeyEnter";
 
-import KeyboardKeyShift from "./KeyboardKeyShift";
-import KeyboardKeyCaps from "./KeyboardKeyCaps";
-import KeyboardKeyCs from "./KeyboardKeyCs";
-import KeyboardKeyAltGr from "./KeyboardKeyAltGr";
-import KeyboardKeyCc from "./KeyboardKeyCc";
-import KeyboardKeyTo from "./KeyboardKeyTo";
+function KeyboardKeyTo (props) {
+  if (props.to !== undefined) {
+    return (
+      <text className="key__to" x="30" y="80">{props.to}</text>
+    );
+  } else {
+    return null;
+  }
+}
+
+function KeyboardKeyShift (props) {
+  if (props.shift !== undefined) {
+    return (
+      <text className="key__shift" x="30" y="40" dangerouslySetInnerHTML={{__html: props.shift}}/>
+    );
+  } else {
+    return null;
+  }
+}
+
+function KeyboardKeyCaps (props) {
+  if (props.caps !== undefined) {
+    return (
+      <text className="key__caps" x="50" y="50" dangerouslySetInnerHTML={{__html: props.caps}}/>
+    );
+  } else {
+    return null;
+  }
+}
+
+function KeyboardKeyCs (props) {
+  if (props.cs !== undefined) {
+    return (
+      <text className="key__cs" x="80" y="50" dangerouslySetInnerHTML={{__html: props.cs}}/>
+    );
+  } else {
+    return null;
+  }
+}
+
+function KeyboardKeyAltGr (props) {
+  if (props.altgr !== undefined) {
+    return (
+      <text className="key__altgr" x="80" y="80" dangerouslySetInnerHTML={{__html: props.altgr}}/>
+    );
+  } else {
+    return null;
+  }
+}
+
+function KeyboardKeyCc (props) {
+  if (props.cc !== undefined) {
+    return (
+      <text className="key__cc" x="80" y="50" dangerouslySetInnerHTML={{__html: props.cc}}/>
+    );
+  } else {
+    return null;
+  }
+}
+
+function KeyboardKeyTransform (props) {
+  if (props.transform !== undefined) {
+    return (
+      <text className="key__transform" dangerouslySetInnerHTML={{__html: props.transform}}/>
+    );
+  } else {
+    return null;
+  }
+}
 
 
 export default class KeyboardKey extends React.Component {
   render () {
-    let keyClass = "key key--" + this.props.iso.substring(0, 1) + " " + this.props.iso + " " + this.props.state;
+    let keyObj = this.props.keyObj;
+
+    let keyClass = "key key--" + keyObj.iso.substring(0, 1) + " " + keyObj.iso + " " + keyObj.state;
 
     // When letters on a case pair are associated with a key, only the capital character need to be shown on the keytop for the primary group, while the lowercase character only is shown for the secondary group.
-    if (this.props.to.toUpperCase() === this.props.shift) {
+    if (keyObj.to.toUpperCase() === keyObj.shift) {
       keyClass += " alpha";
     }
 
-    if (this.props.iso === "D13") {
+    if (keyObj.iso === "D13") {
       return <KeyboardKeyEnter/>
     } else {
       return (
         <g className={keyClass}>
           <rect className="key__bg"/>
           <g className="key__labels" textAnchor="middle">
-            <KeyboardKeyTo to={this.props.to}/>
-            <KeyboardKeyShift shift={this.props.shift}/>
-            <KeyboardKeyCaps caps={this.props.caps}/>
-            <KeyboardKeyCs cs={this.props.cs}/>
-            <KeyboardKeyAltGr altgr={this.props.altgr}/>
-            <KeyboardKeyCc cc={this.props.cc}/>
+            <KeyboardKeyTo to={keyObj.to}/>
+            <KeyboardKeyShift shift={keyObj.shift}/>
+            <KeyboardKeyCaps caps={keyObj.caps}/>
+            <KeyboardKeyCs cs={keyObj.cs}/>
+            <KeyboardKeyAltGr altgr={keyObj.altgr}/>
+            <KeyboardKeyCc cc={keyObj.cc}/>
+            <KeyboardKeyTransform transform={keyObj.transform}/>
           </g>
         </g>
       );
@@ -42,12 +108,5 @@ export default class KeyboardKey extends React.Component {
 }
 
 KeyboardKey.propTypes = {
-  iso: PropTypes.string.isRequired,
-  state: PropTypes.string,
-  shift: PropTypes.string,
-  caps: PropTypes.string,
-  cs: PropTypes.string,
-  altgr: PropTypes.string,
-  cc: PropTypes.string,
-  to: PropTypes.string
+  keyObj: PropTypes.object.isRequired
 };

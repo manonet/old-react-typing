@@ -6,8 +6,8 @@ export default function KeyboardLoadXML (props, callback) {
   fetch(props.keyboardUrl)
   .then(response => response.text())
   .then(function(response) {
-    var myObj = KeyboardProcessXML(response);
-    callback(myObj);
+    var keyboardObj = KeyboardProcessXML(response);
+    callback(keyboardObj);
   }.bind(this), function(error) {
     // TODO
     alert(error.message);

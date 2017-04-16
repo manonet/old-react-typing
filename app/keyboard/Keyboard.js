@@ -10,12 +10,14 @@ export default class Keyboard extends React.Component {
     super();
     this.state = {
       keyboardName: "",
-      keyboardKeys: []
+      keyboardKeys: [],
+      allKeyboardChars: [],
+      onKeyboardLoaded: this.onKeyboardLoaded.bind(this)
     };
   }
 
   componentDidMount() {
-    KeyboardLoadXML(this.props, this.onKeyboardLoaded.bind(this));
+    KeyboardLoadXML(this.props, this.state.onKeyboardLoaded);
   }
 
   onKeyboardLoaded (data) {
@@ -27,19 +29,13 @@ export default class Keyboard extends React.Component {
     return (
       <div class="keyboard">
         <h3 class="keyboard__title">{this.state.keyboardName}</h3>
+        <p dangerouslySetInnerHTML={{__html: this.state.allKeyboardChars}}></p>
         <svg className="keyboard__wrapper" version="1.1" viewBox="0 0 1500 500">
         {
           this.state.keyboardKeys.map(function(item) {
             return <KeyboardKey
               key={item.iso}
-              iso={item.iso}
-              to={item.to}
-              shift={item.shift}
-              caps={item.caps}
-              cs={item.cs}
-              altgr={item.altgr}
-              cc={item.cc}
-              state={item.state}
+              keyObj={item}
             />
           })
         }

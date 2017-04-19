@@ -1,9 +1,12 @@
 require("./program.scss");
 
+import config from "../../config";
 import React from "react";
 import ReactDOM from "react-dom";
 import SampleBoard from "./SampleBoard";
 import Keyboard from "../keyboard/Keyboard";
+
+let serverUrl = config.serverUrl;
 
 export default class Program extends React.Component {
 
@@ -47,7 +50,7 @@ export default class Program extends React.Component {
           ref="userText"
         />
         <Keyboard
-          keyboardUrl="http://127.0.0.1:3000/keyboards/windows/hu-t-k0-windows.xml"
+          keyboardUrl={serverUrl + "/keyboards/windows/hu-t-k0-windows.xml"}
           onKeyboardLoaded={this.props.onKeyboardLoaded}
         />
       </div>

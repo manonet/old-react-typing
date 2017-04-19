@@ -2,6 +2,10 @@ import React from "react";
 import Program from "../program/Program";
 import Keyboard from "../keyboard/Keyboard";
 
+import config from "../../config";
+
+let serverUrl = config.serverUrl;
+
 export default class ProgramPage extends React.Component {
   constructor() {
     super();
@@ -104,7 +108,7 @@ export default class ProgramPage extends React.Component {
       return (
         <div class="container">
           <Keyboard
-            keyboardUrl="http://127.0.0.1:3000/keyboards/windows/es-t-k0-windows.xml"
+            keyboardUrl={serverUrl + "/keyboards/windows/es-t-k0-windows.xml"}
             onKeyboardLoaded={function(){}}
           />
           <Program

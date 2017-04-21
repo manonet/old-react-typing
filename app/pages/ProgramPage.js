@@ -6,7 +6,7 @@ export default class ProgramPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      sampleText: "Let's type something...",
+      sampleText: "Let's Type Something (@)...",
       userText: "",
       cursorAt: 0,
       signToWrite: "",
@@ -14,7 +14,10 @@ export default class ProgramPage extends React.Component {
       nextSign: "",
       writing: false, // whenever the user types (or not)
       keyboardName: "",
-      keyboardKeys: []
+      keyboardKeys: [],
+      //allKeyboardChars
+      //transforms
+      markFunctionKey: this.markFunctionKey.bind(this)
     };
   }
 
@@ -45,20 +48,61 @@ export default class ProgramPage extends React.Component {
   }
 
   markKeyboardForType (signToWrite,writtenSign,nextSign) {
-    console.log("signToWrite: " + signToWrite, "writtenSign: " + writtenSign, "nextSign: " + nextSign);
+
+    //console.log("transforms: " + this.state.transforms);
+    //console.log("signToWrite: " + signToWrite, "writtenSign: " + writtenSign, "nextSign: " + nextSign);
+    let state = this.state;
+
+    // save the status of searching for characters for performance
+    let nextSignFound = false;
+    let writtenSignFound = false;
+    let signToWriteFound = false;
+    let stillSearching = true;
+
     this.state.keyboardKeys.map(function(item) {
-      if (item.to == nextSign || item.shift == nextSign) {
-        item.state = "toWrite";
-      } else if (item.to == writtenSign || item.shift == writtenSign ) {
-        item.state = "error";
-        if (signToWrite == writtenSign) {
-          item.state = "correct";
+      // loop trough each keyboard key
+
+      // reset the state of each key on each input change
+      item.state = "def";
+
+      if (stillSearching) {
+        // if not all key found, loop trough each character on the key
+        for (let key in item) {
+          //console.log(item, key, item[key]);
+          if(!nextSignFound && item[key] === nextSign) {
+            if (key !== "to") {
+              // key combination, using of function key necessary
+              state.markFunctionKey(key);
+            }
+            item.state = "toWrite";
+            nextSignFound = true;
+          }
+          if (!writtenSignFound && item[key] === writtenSign ) {
+            item.state = "error";
+            if (signToWrite === writtenSign) {
+              item.state = "correct";
+            }
+            writtenSignFound = true;
+          }
+          if (!signToWriteFound && item[key] === signToWrite) {
+            if (signToWrite !== writtenSign) {
+              item.state = "missed";
+            }
+            signToWriteFound = true;
+          }
         }
-      } else {
-        item.state = "def";
+        if (nextSignFound && writtenSignFound && signToWriteFound) {
+          // all character found, no search more necessary
+          stillSearching = false;
+        }
       }
     });
 
+  }
+
+  markFunctionKey (level) {
+    // reset all key status before
+    console.log(level);
   }
 
   componentDidMount () {

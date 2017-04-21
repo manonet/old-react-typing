@@ -10,7 +10,7 @@ export default class ProgramPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      sampleText: "Let's Type Something (@)...",
+      sampleText: "Líć et's Type Something (@)...",
       userText: "",
       cursorAt: 0,
       signToWrite: "",
@@ -19,8 +19,9 @@ export default class ProgramPage extends React.Component {
       writing: false, // whenever the user types (or not)
       keyboardName: "",
       keyboardKeys: [],
+      keyLevels: [],
       //allKeyboardChars
-      //transforms
+      transformArray: [],
       markFunctionKey: this.markFunctionKey.bind(this)
     };
   }
@@ -39,21 +40,23 @@ export default class ProgramPage extends React.Component {
       nextSign
     });
 
-    this.markKeyboardForType (signToWrite,writtenSign,nextSign);
+    this.markKeyboardForType(signToWrite,writtenSign,nextSign);
   }
 
   onWriting (writing) {
     this.setState({writing});
+    //this.userWrite("");
   }
 
   onKeyboardLoaded (data) {
     this.setState(data);
-    this.markKeyboardForType(this.state.signToWrite,this.state.writtenSign,this.state.nextSign);
+    // TODO handle onKeyboardLoaded and markKeyboardForType
+    //this.markKeyboardForType(this.state.signToWrite,this.state.writtenSign,this.state.nextSign);
   }
 
   markKeyboardForType (signToWrite,writtenSign,nextSign) {
 
-    //console.log("transforms: " + this.state.transforms);
+    //console.log("transformArray: " + this.state.transformArray);
     //console.log("signToWrite: " + signToWrite, "writtenSign: " + writtenSign, "nextSign: " + nextSign);
     let state = this.state;
 
@@ -63,45 +66,149 @@ export default class ProgramPage extends React.Component {
     let signToWriteFound = false;
     let stillSearching = true;
 
-    this.state.keyboardKeys.map(function(item) {
-      // loop trough each keyboard key
+    for (let i = 0; i < this.state.keyLevels.length; i++) {
+      // loop trough each level first, then the keys. It is necessary, because the same character can be appear multiple times on the same keyboard, e.g. "í" on hungarian, once "normal" in "to" level, once on the "j" key in "AltGr" level.
 
-      // reset the state of each key on each input change
-      item.state = "def";
+      let level = this.state.keyLevels[i];
 
       if (stillSearching) {
-        // if not all key found, loop trough each character on the key
-        for (let key in item) {
-          //console.log(item, key, item[key]);
-          if(!nextSignFound && item[key] === nextSign) {
-            if (key !== "to") {
-              // key combination, using of function key necessary
-              state.markFunctionKey(key);
-            }
-            item.state = "toWrite";
-            nextSignFound = true;
+        // map only if the characters not found yet. Once need to be map all keys to reset the state.
+        this.state.keyboardKeys.map(function(item) {
+          // loop trough each keyboard key
+
+          // reset the state of each key on each input change (only once in loop)
+          if (level === "to") {
+            item.state = "def";
           }
-          if (!writtenSignFound && item[key] === writtenSign ) {
-            item.state = "error";
-            if (signToWrite === writtenSign) {
-              item.state = "correct";
+
+          if (stillSearching) {
+            // if not all key found, check the character on the key at the specified level
+            if(!nextSignFound && item[level] === nextSign) {
+              if (level !== "to") {
+                // key combination, using of function key necessary
+                state.markFunctionKey(level);
+              }
+              item.state = "toWrite";
+              nextSignFound = true;
             }
-            writtenSignFound = true;
+            if (!writtenSignFound && item[level] === writtenSign) {
+              item.state = "error";
+              if (signToWrite === writtenSign) {
+                item.state = "correct";
+              }
+              writtenSignFound = true;
+            }
+            if (!signToWriteFound && item[level] === signToWrite) {
+              if (signToWrite !== writtenSign) {
+                item.state = "missed";
+              }
+              signToWriteFound = true;
+            }
+
+            if (nextSignFound && writtenSignFound && signToWriteFound) {
+              // all character found, no search more necessary
+              stillSearching = false;
+
+              if (level !== "to") {
+                // all key status resetted to default, no action more necessary, so exit the loop
+                return;
+              }
+            }
           }
-          if (!signToWriteFound && item[key] === signToWrite) {
-            if (signToWrite !== writtenSign) {
-              item.state = "missed";
-            }
-            signToWriteFound = true;
+        });
+      }
+    }
+    if (stillSearching) {
+      //the character not appears on any key, so search for it in the transformArray
+      // console.log("transform"); TODO don't run this function on the first time
+
+      let transformArray = this.state.transformArray
+      for (let i = 0; i < transformArray.length; i++) {
+        let transform = transformArray[i];
+
+        let combo1 = transform.from.substring(0,1);
+        let combo2 = transform.from.substring(1,2);
+
+        if (!nextSignFound && transform.to === nextSign) {
+          // if the character found in the transform array
+
+          for (let i = 0; i < this.state.keyLevels.length; i++) {
+            // loop trough each level again
+            let level = this.state.keyLevels[i];
+            this.state.keyboardKeys.map(function(item) {
+              // and map each keyboard key again
+              if(item[level] === combo1) {
+                if (level !== "to") {
+                  // key combination, using of function key necessary
+                  state.markFunctionKey(level);
+                }
+                item.state = "toWrite";
+                nextSignFound = true; // it is enough to check only one half of the sign in the same loop, because the sign is found anyway
+              }
+              if(item[level] === combo2) {
+                if (level !== "to") {
+                  // key combination, using of function key necessary
+                  state.markFunctionKey(level);
+                }
+                item.state = "toWrite secondary";
+              }
+            });
           }
         }
+        if (!writtenSignFound && transform.to === writtenSign) {
+          // if the character found in the transform array
+
+          for (let i = 0; i < this.state.keyLevels.length; i++) {
+            // loop trough each level again
+            let level = this.state.keyLevels[i];
+            this.state.keyboardKeys.map(function(item) {
+              // and map each keyboard key again
+              if(item[level] === combo1) {
+                item.state = "error";
+                if (signToWrite === writtenSign) {
+                  item.state = "correct";
+                }
+                writtenSignFound = true;
+              }
+              if(item[level] === combo2) {
+                item.state = "error";
+                if (signToWrite === writtenSign) {
+                  item.state = "correct secondary";
+                }
+              }
+            });
+          }
+        }
+        if (!signToWriteFound && transform.to === signToWrite) {
+          // if the character found in the transform array
+
+          for (let i = 0; i < this.state.keyLevels.length; i++) {
+            // loop trough each level again
+            let level = this.state.keyLevels[i];
+            this.state.keyboardKeys.map(function(item) {
+              // and map each keyboard key again
+              if(item[level] === combo1) {
+                if (signToWrite !== writtenSign) {
+                  item.state = "missed";
+                }
+                signToWriteFound = true;
+              }
+              if(item[level] === combo2) {
+                if (signToWrite !== writtenSign) {
+                  item.state = "missed secondary";
+                }
+              }
+            });
+          }
+        }
+
         if (nextSignFound && writtenSignFound && signToWriteFound) {
           // all character found, no search more necessary
           stillSearching = false;
+          return;
         }
       }
-    });
-
+    }
   }
 
   markFunctionKey (level) {
@@ -111,7 +218,7 @@ export default class ProgramPage extends React.Component {
 
   componentDidMount () {
     // Todo ?
-    this.userWrite("");
+    // this.userWrite("");
   }
 
   correction () {

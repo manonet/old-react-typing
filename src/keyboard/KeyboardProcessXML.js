@@ -2,13 +2,15 @@
 const parseString = require("xml2js").parseString;
 
 export default function KeyboardProcessXML (xml) {
-  let keyboardName, keyboardKeys, allKeyboardChars, transforms;
+  let keyboardName, keyboardKeys, keyLevels, allKeyboardChars, transformArray;
 
   parseString(xml, function (err, result) {
     keyboardName = result.keyboard.names[0].name[0].$.value;
     keyboardKeys = [];
+    keyLevels = []; // ["to", "Shift", "altGr", ...]
     let keyMap = result.keyboard.keyMap;
-    transforms = result.keyboard.transforms;
+    let transforms = result.keyboard.transforms;
+    transformArray = [];
     allKeyboardChars = []; // will contains all characters that is possible to write with actual keyboard layout
 
     // https://en.wikipedia.org/wiki/ISO/IEC_9995
@@ -103,7 +105,6 @@ export default function KeyboardProcessXML (xml) {
     };
 
     // creating an array of objects from transformNode
-    let transformArray = [];
     let transformNode = transforms[0].transform;
     for (let i = 0; i < transformNode.length; i++) {
       // transformNode[i] is e.g. <transform from="´a" to="á"/>
@@ -143,6 +144,8 @@ export default function KeyboardProcessXML (xml) {
         }
       }
 
+      keyLevels.push(modifier);
+
       let mapNode = keyMap[i].map;
       for (let map of mapNode) {
         // loop trough each keyMap, e.g. <map iso="E00" to="0"/>
@@ -170,7 +173,6 @@ export default function KeyboardProcessXML (xml) {
           }
           // TODO - pop the item from the array, or make somehow faster
         }
-
 
         if (modifier === "to") {
           // create the necessary attributes once, at the first time
@@ -241,7 +243,8 @@ export default function KeyboardProcessXML (xml) {
   return {
     keyboardName,
     keyboardKeys,
+    keyLevels,
     allKeyboardChars,
-    transforms
+    transformArray
   }
 }

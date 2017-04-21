@@ -84,6 +84,11 @@ $a-row-shift:           20px;
     .key__bg {
       fill: $brand-primary;
     }
+    &.secondary {
+      .key__bg {
+        fill: $brand-info;
+      }
+    }
   }
 
   &.correct {

@@ -19,3 +19,4 @@ typewriter program
 - [ ] Multiple classes for keyboardKey
 - [ ] inline style or something for keyboardKey in order to display hotmap
 - [ ] Fix enter key layout
+- [ ] implement "react-hot-loader"

@@ -9,6 +9,6 @@ export default {
     return `http://${this.host}:${this.port}`;
   },
   get publicFolder() {
-    return `http://${this.host}:${this.port}/public`;
+    return `/public`;
   }
 };

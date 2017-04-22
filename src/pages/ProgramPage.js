@@ -4,7 +4,7 @@ import Keyboard from "../keyboard/Keyboard";
 
 import config from "../../config";
 
-let serverUrl = config.serverUrl;
+let publicFolder = config.publicFolder;
 
 export default class ProgramPage extends React.Component {
   constructor() {
@@ -108,7 +108,7 @@ export default class ProgramPage extends React.Component {
       return (
         <div class="container">
           <Keyboard
-            keyboardUrl={serverUrl + "/keyboards/windows/es-t-k0-windows.xml"}
+            keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}
             onKeyboardLoaded={function(){}}
           />
           <Program

@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import SampleBoard from "./SampleBoard";
 import Keyboard from "../keyboard/Keyboard";
 
-let serverUrl = config.serverUrl;
+let publicFolder = config.publicFolder;
 
 export default class Program extends React.Component {
 
@@ -50,7 +50,7 @@ export default class Program extends React.Component {
           ref="userText"
         />
         <Keyboard
-          keyboardUrl={serverUrl + "/keyboards/windows/hu-t-k0-windows.xml"}
+          keyboardUrl={publicFolder + "/keyboards/windows/hu-t-k0-windows.xml"}
           onKeyboardLoaded={this.props.onKeyboardLoaded}
         />
       </div>

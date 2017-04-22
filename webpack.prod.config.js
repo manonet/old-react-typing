@@ -1,19 +1,33 @@
-const path = require("path");
-const webpack = require("webpack");
-
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-  devtool: "source-map",
+  devtool: 'source-map',
+
   entry: [
-    'babel-polyfill',
-    'react-hot-loader/patch',
     './src/index'
   ],
+
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/public/'
   },
+
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ],
+
   module: {
     rules: [
       {
@@ -41,12 +55,14 @@ module.exports = {
         }, {
           loader: "postcss-loader" // postprocesses your CSS with PostCSS plugins using postcss.config.js
         }]
+      }, {
+        test: /\.png$/,
+        loader: 'file-loader'
+      }, {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader'
       }
 
     ]
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ]
-};
+  }
+}

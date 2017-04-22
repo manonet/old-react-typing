@@ -4,7 +4,7 @@ import {Router, Route, browserHistory, IndexRoute} from "react-router";
 import routes from "./routes";
 
 
-const APP = document.getElementById('app');
+const APP = document.getElementById('main');
 
 render((
   <Router history={browserHistory} routes={routes} />

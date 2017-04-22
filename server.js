@@ -1,25 +1,15 @@
-var express = require('express');
-var path = require('path');
-var serveStatic = require('serve-static');
+const path = require('path')
+const express = require('express')
 
-var app = express();
+module.exports = {
+  app: function () {
+    const app = express()
+    const indexPath = path.join(__dirname, 'index.html')
+    const publicPath = express.static(path.join(__dirname, 'public'))
 
-app.use(serveStatic(path.join(__dirname, 'public'), {
-  maxAge: '1d',
-  setHeaders: setCustomCacheControl
-}));
+    app.use('/public', publicPath)
+    app.get('/', function (_, res) { res.sendFile(indexPath) })
 
-
-app.listen(3000, "127.0.0.1", function () {
-  console.log('Example app listening on port 3000!');
-});
-
-function setCustomCacheControl (res, path) {
-  if (serveStatic.mime.lookup(path) === 'text/html') {
-    // Custom Cache-Control for HTML files
-    res.setHeader('Cache-Control', 'public, max-age=0');
-  }
-  if (serveStatic.mime.lookup(path) === 'application/xml') {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    return app
   }
 }

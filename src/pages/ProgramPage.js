@@ -10,7 +10,7 @@ export default class ProgramPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      sampleText: "Líć et's Type Something (@)...",
+      sampleText: "LíćČ et's Type Something (@)...",
       userText: "",
       cursorAt: 0,
       signToWrite: "",
@@ -22,6 +22,7 @@ export default class ProgramPage extends React.Component {
       keyLevels: [],
       //allKeyboardChars
       transformArray: [],
+      functionKeys: {},
       markFunctionKey: this.markFunctionKey.bind(this)
     };
   }
@@ -52,6 +53,19 @@ export default class ProgramPage extends React.Component {
     this.setState(data);
     // TODO handle onKeyboardLoaded and markKeyboardForType
     //this.markKeyboardForType(this.state.signToWrite,this.state.writtenSign,this.state.nextSign);
+
+    let functionKeys = this.state.functionKeys;
+    this.state.keyboardKeys.map(function(item) {
+      if (item.iso === "D00") {
+        functionKeys.tab = item;
+      }
+      if (item.iso === "B99") {
+        functionKeys.shift = item;
+      }
+      if (item.iso === "A08") {
+        functionKeys.altgr = item;
+      }
+    })
   }
 
   markKeyboardForType (signToWrite,writtenSign,nextSign) {
@@ -86,7 +100,7 @@ export default class ProgramPage extends React.Component {
             if(!nextSignFound && item[level] === nextSign) {
               if (level !== "to") {
                 // key combination, using of function key necessary
-                state.markFunctionKey(level);
+                state.markFunctionKey(level, "toWrite");
               }
               item.state = "toWrite";
               nextSignFound = true;
@@ -126,37 +140,52 @@ export default class ProgramPage extends React.Component {
       for (let i = 0; i < transformArray.length; i++) {
         let transform = transformArray[i];
 
-        let combo1 = transform.from.substring(0,1);
-        let combo2 = transform.from.substring(1,2);
-
         if (!nextSignFound && transform.to === nextSign) {
           // if the character found in the transform array
+          let combo1 = transform.from.substring(0,1);
+          let combo2 = transform.from.substring(1,2);
+          let combo1Found = false;
+          let combo2Found = false;
 
           for (let i = 0; i < this.state.keyLevels.length; i++) {
             // loop trough each level again
             let level = this.state.keyLevels[i];
-            this.state.keyboardKeys.map(function(item) {
-              // and map each keyboard key again
-              if(item[level] === combo1) {
-                if (level !== "to") {
-                  // key combination, using of function key necessary
-                  state.markFunctionKey(level);
+
+            console.log("test",combo1Found,combo2Found);
+            if(!(combo1Found && combo2Found)) {
+              // map only if still necessary
+              this.state.keyboardKeys.map(function(item) {
+                // and map each keyboard key again
+                if(!combo1Found && item[level] === combo1) {
+                  if (level !== "to") {
+                    // key combination, using of function key necessary
+                    console.log(item[level]);
+                    state.markFunctionKey(level, "toWrite");
+                  }
+                  item.state = "toWrite";
+                  nextSignFound = true; // it is enough to check only one half of the sign in the same loop, because the sign is found anyway
+                  combo1Found = true;
+                  console.log("combo1Found ",combo1);
                 }
-                item.state = "toWrite";
-                nextSignFound = true; // it is enough to check only one half of the sign in the same loop, because the sign is found anyway
-              }
-              if(item[level] === combo2) {
-                if (level !== "to") {
-                  // key combination, using of function key necessary
-                  state.markFunctionKey(level);
+                if(!combo2Found && item[level] === combo2) {
+                  if (level !== "to") {
+                    // key combination, using of function key necessary
+                    console.log(item[level]);
+                    state.markFunctionKey(level, "toWrite secondary");
+                  }
+                  item.state = "toWrite secondary";
+                  combo2Found = true;
+                  console.log("combo2Found ",combo2);
                 }
-                item.state = "toWrite secondary";
-              }
-            });
+              });
+
+            }
           }
         }
         if (!writtenSignFound && transform.to === writtenSign) {
           // if the character found in the transform array
+          let combo1 = transform.from.substring(0,1);
+          let combo2 = transform.from.substring(1,2);
 
           for (let i = 0; i < this.state.keyLevels.length; i++) {
             // loop trough each level again
@@ -181,6 +210,8 @@ export default class ProgramPage extends React.Component {
         }
         if (!signToWriteFound && transform.to === signToWrite) {
           // if the character found in the transform array
+          let combo1 = transform.from.substring(0,1);
+          let combo2 = transform.from.substring(1,2);
 
           for (let i = 0; i < this.state.keyLevels.length; i++) {
             // loop trough each level again
@@ -211,14 +242,16 @@ export default class ProgramPage extends React.Component {
     }
   }
 
-  markFunctionKey (level) {
+  markFunctionKey (name, state) {
     // reset all key status before
-    console.log(level);
+    console.log(name, state);
+    this.state.functionKeys[name].state = state;
   }
 
   componentDidMount () {
     // Todo ?
     // this.userWrite("");
+    // use onKeyboardLoaded instead
   }
 
   correction () {
@@ -258,10 +291,6 @@ export default class ProgramPage extends React.Component {
   render() {
       return (
         <div class="container">
-          <Keyboard
-            keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}
-            onKeyboardLoaded={function(){}}
-          />
           <Program
             sampleText={this.state.sampleText}
             userText={this.state.userText}
@@ -274,6 +303,10 @@ export default class ProgramPage extends React.Component {
             keyboardName={this.state.keyboardName}
             keyboardKeys={this.state.keyboardKeys}
             onKeyboardLoaded={this.onKeyboardLoaded.bind(this)}
+          />
+          <Keyboard
+            keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}
+            onKeyboardLoaded={function(){}}
           />
         </div>
       )

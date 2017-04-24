@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
+import vars from "../variables";
 
-export default function KeyboardKeyEnter (props) {
-  let keyWidth = 100;
-  let keyHeight = 100;
-  let keyboardWidth = 15 * keyWidth;
-  let keyboardHeight = 5 * keyHeight;
-  let keyPaddingX = 10;
-  let keyPaddingY = 10;
-  let keyBgWidth = keyWidth - keyPaddingX * 2;
-  let keyBgHeight = keyHeight - keyPaddingY * 2;
-  let dRowShift = 50;
-  let cRowShift = 80;
-  let bRowShift = 20;
-  let aRowShift = 20;
-  let rX = 10;
-  let rY = 10;
+export default function KeyEnter (props) {
+  let keyWidth = vars.keyWidth;
+  let keyHeight = vars.keyHeight;
+  let keyboardWidth = vars.keyboardWidth;
+  let keyboardHeight = vars.keyboardHeight;
+  let keyPaddingX = vars.keyPaddingX;
+  let keyPaddingY = vars.keyPaddingY;
+  let dRowShift = vars.dRowShift;
+  let cRowShift = vars.cRowShift;
+  let bRowShift = vars.bRowShift;
+  let aRowShift = vars.aRowShift;
+  let rX = vars.rX;
+  let rY = vars.rY;
 
   // for Enter
   let leftD = dRowShift;

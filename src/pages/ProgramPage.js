@@ -56,16 +56,31 @@ export default class ProgramPage extends React.Component {
 
     let functionKeys = this.state.functionKeys;
     this.state.keyboardKeys.map(function(item) {
-      if (item.iso === "D00") {
-        functionKeys.tab = item;
+      switch (item.iso) {
+        case "E14":
+          functionKeys.backspace = item;
+          break;
+
+        case "C00":
+          functionKeys.capsLock = item;
+          break;
+
+        case "D00":
+          functionKeys.tab = item;
+          break;
+
+        case "B99":
+          functionKeys.shift = item;
+          break;
+
+        case "A08":
+          functionKeys.altgr = item;
+          break;
+
+        default:
+          break;
       }
-      if (item.iso === "B99") {
-        functionKeys.shift = item;
-      }
-      if (item.iso === "A08") {
-        functionKeys.altgr = item;
-      }
-    })
+    });
   }
 
   markKeyboardForType (signToWrite,writtenSign,nextSign) {
@@ -115,6 +130,8 @@ export default class ProgramPage extends React.Component {
             if (!signToWriteFound && item[level] === signToWrite) {
               if (signToWrite !== writtenSign) {
                 item.state = "missed";
+                // TODO enable/disable backspace
+                state.markFunctionKey("backspace", "toWrite");
               }
               signToWriteFound = true;
             }

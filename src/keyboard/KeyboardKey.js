@@ -10,13 +10,60 @@ import KeyEnter from "./KeyEnter";
 // ================================================================================================
 // FUNCTION KEYS
 
-function FunctionKeyTab (props) {
-  // Tab
-  let tabWidth = vars.keyWidth + vars.dRowShift - 2 * vars.keyPaddingX;
+function KeyBackground (props) {
+  // Background "image", the visible key
+  let x = props.x || vars.keyPaddingX;
+  let y = props.x || vars.keyPaddingY;
+  let width = props.width || vars.keyWidth - vars.keyPaddingX * 2;
+  let height = props.height || vars.keyHeight - vars.keyPaddingY * 2;
+  let rx = vars.rX;
+  let ry = vars.rY;
 
   return (
-    <g className="key key__tab D00" x={vars.keyPaddingX} y={vars.keyHeight + vars.keyPaddingY}>
-      <rect className="key__bg" width={tabWidth} height={vars.keyBgHeight} rx={vars.rX} ry={vars.rY}/>
+    <rect className="key__bg" x={x} y={y} width={width} height={height} rx={rx} ry={ry}/>
+  );
+}
+
+function FunctionKeyBackspace (props) {
+  // Backspace
+  let keyObj = props.keyObj;
+  let backspaceWidth = vars.keyWidth * 2 - vars.keyPaddingX * 2;
+  let translate = keyObj.translate || "translate(" + vars.keyWidth * 13 + ", 0)";
+  return (
+    <g className={"key key__backspace " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground width={backspaceWidth}/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">⟵</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyCapsLock (props) {
+  // CapsLock
+  let keyObj = props.keyObj;
+  let capsLockWidth = vars.keyWidth + vars.cRowShift - 2 * vars.keyPaddingX;
+  let translate = keyObj.translate || "translate(0, " + vars.keyHeight * 2 + ")";
+
+  return (
+    <g className={"key key__capslock " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground width={capsLockWidth}/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">Caps Lock</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyTab (props) {
+  // Tab
+  let keyObj = props.keyObj;
+  let tabWidth = vars.keyWidth + vars.dRowShift - 2 * vars.keyPaddingX;
+  let translate = keyObj.translate || "translate(0, " + vars.keyHeight + ")";
+
+  return (
+    <g className={"key key__tab " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground width={tabWidth}/>
       <g className="key__labels" textAnchor="middle">
         <text className="key__to" x="30" y="80">↹</text>
       </g>
@@ -29,10 +76,11 @@ function FunctionKeyLeftShift (props) {
   // Left Shift
   let keyObj = props.keyObj;
   let leftShiftWidth = vars.keyWidth + vars.bRowShift - 2 * vars.keyPaddingX;
+  let translate = keyObj.translate || "translate(0, " + vars.keyHeight * 3 + ")";
 
   return (
-    <g className={"key key__left-shift " + keyObj.iso + " " + keyObj.state} x={vars.keyPaddingX} y={vars.keyHeight + vars.keyPaddingY}>
-      <rect className="key__bg" width={leftShiftWidth} height={vars.keyBgHeight} rx={vars.rX} ry={vars.rY}/>
+    <g className={"key key__left-shift " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground width={leftShiftWidth}/>
       <g className="key__labels" textAnchor="middle">
         <text className="key__to" x="30" y="80">⇧</text>
       </g>
@@ -59,7 +107,7 @@ function FunctionKeyAltGr (props) {
 // ================================================================================================
 // KEY COMPONENTS
 
-function KeyTo (props) {
+function LabelTo (props) {
   if (props.to !== undefined) {
     return (
       <text className="key__to" x="30" y="80">{props.to}</text>
@@ -69,7 +117,7 @@ function KeyTo (props) {
   }
 }
 
-function KeyShift (props) {
+function LabelShift (props) {
   if (props.shift !== undefined) {
     return (
       <text className="key__shift" x="30" y="40" dangerouslySetInnerHTML={{__html: props.shift}}/>
@@ -79,7 +127,7 @@ function KeyShift (props) {
   }
 }
 
-function KeyCaps (props) {
+function LabelCaps (props) {
   if (props.caps !== undefined) {
     return (
       <text className="key__caps" x="50" y="50" dangerouslySetInnerHTML={{__html: props.caps}}/>
@@ -89,7 +137,7 @@ function KeyCaps (props) {
   }
 }
 
-function KeyCs (props) {
+function LabelCs (props) {
   if (props.cs !== undefined) {
     return (
       <text className="key__cs" x="80" y="50" dangerouslySetInnerHTML={{__html: props.cs}}/>
@@ -99,7 +147,7 @@ function KeyCs (props) {
   }
 }
 
-function KeyAltGr (props) {
+function LabelAltGr (props) {
   if (props.altgr !== undefined) {
     return (
       <text className="key__altgr" x="80" y="80" dangerouslySetInnerHTML={{__html: props.altgr}}/>
@@ -109,7 +157,7 @@ function KeyAltGr (props) {
   }
 }
 
-function KeyCc (props) {
+function LabelCc (props) {
   if (props.cc !== undefined) {
     return (
       <text className="key__cc" x="80" y="50" dangerouslySetInnerHTML={{__html: props.cc}}/>
@@ -119,7 +167,7 @@ function KeyCc (props) {
   }
 }
 
-function KeyTransform (props) {
+function LabelTransform (props) {
   if (props.transform !== undefined) {
     return (
       <text className="key__transform" dangerouslySetInnerHTML={{__html: props.transform}}/>
@@ -141,26 +189,30 @@ export default class KeyboardKey extends React.Component {
       keyClass += " alpha";
     }
 
-    if (keyObj.iso === "D13") {
-      return <KeyEnter/>
+    if (keyObj.iso === "E14") {
+      return <FunctionKeyBackspace keyObj={keyObj}/>
+    } else if (keyObj.iso === "C00") {
+      return <FunctionKeyCapsLock keyObj={keyObj}/>
+    } else if (keyObj.iso === "D13") {
+      return <KeyEnter keyObj={keyObj}/>
     } else if (keyObj.iso === "D00") {
-      return <FunctionKeyTab/>
+      return <FunctionKeyTab keyObj={keyObj}/>
     } else if (keyObj.iso === "B99") {
       return <FunctionKeyLeftShift keyObj={keyObj}/>
     } else if (keyObj.iso === "A08") {
       return <FunctionKeyAltGr keyObj={keyObj}/>
     } else {
       return (
-        <g className={keyClass}>
-          <rect className="key__bg"/>
+        <g className={keyClass} transform={keyObj.translate}>
+          <KeyBackground/>
           <g className="key__labels" textAnchor="middle">
-            <KeyTo to={keyObj.to}/>
-            <KeyShift shift={keyObj.shift}/>
-            <KeyCaps caps={keyObj.caps}/>
-            <KeyCs cs={keyObj.cs}/>
-            <KeyAltGr altgr={keyObj.altgr}/>
-            <KeyCc cc={keyObj.cc}/>
-            <KeyTransform transform={keyObj.transform}/>
+            <LabelTo to={keyObj.to}/>
+            <LabelShift shift={keyObj.shift}/>
+            <LabelCaps caps={keyObj.caps}/>
+            <LabelCs cs={keyObj.cs}/>
+            <LabelAltGr altgr={keyObj.altgr}/>
+            <LabelCc cc={keyObj.cc}/>
+            <LabelTransform transform={keyObj.transform}/>
           </g>
         </g>
       );

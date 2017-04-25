@@ -1,6 +1,8 @@
 
 const parseString = require("xml2js").parseString;
 
+import vars from "../variables";
+
 export default function KeyboardProcessXML (xml) {
   let keyboardName, keyboardKeys, keyLevels, allKeyboardChars, transformArray;
 
@@ -180,6 +182,36 @@ export default function KeyboardProcessXML (xml) {
           myObj[modifier] = to;
           myObj.iso = iso;
           myObj.state = "def";
+
+          let rowLetter = iso.substring(0,1);
+          let row = 0;
+          let column = parseInt(iso.substring(1,3));
+          let translateX = vars.keyWidth * column;
+          let translateY = 0;
+
+          switch (rowLetter) {
+            case "D":
+              row = 1;
+              translateX = vars.dRowShift + vars.keyWidth * column;
+              translateY = vars.keyHeight;
+              break;
+            case "C":
+              translateX = vars.cRowShift + vars.keyWidth * column;
+              translateY = vars.keyHeight * 2;
+              break;
+            case "B":
+              translateX = vars.bRowShift + vars.keyWidth * column;
+              translateY = vars.keyHeight * 3;
+              break;
+            case "A":
+              translateX = vars.aRowShift + vars.keyWidth * column;
+              translateY = vars.keyHeight * 4;
+              break;
+            default:
+              break;
+          }
+
+          myObj.translate = "translate(" + translateX + ", " + translateY + ")";
 
           if (transformChars.length && transformChars !== " ") {
             // add transform only if not empty or not a space

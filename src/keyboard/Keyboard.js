@@ -30,7 +30,7 @@ export default class Keyboard extends React.Component {
       <div class="keyboard">
         <h3 class="keyboard__title">{this.state.keyboardName}</h3>
         <p dangerouslySetInnerHTML={{__html: this.state.allKeyboardChars}}></p>
-        <svg className="keyboard__wrapper" version="1.1" viewBox="0 0 1500 500">
+        <svg className="keyboard__svg" version="1.1" viewBox="0 0 1500 500">
         {
           this.state.keyboardKeys.map(function(item) {
             return <KeyboardKey

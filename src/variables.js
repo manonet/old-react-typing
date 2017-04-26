@@ -18,8 +18,8 @@ export default {
   },
   dRowShift: 50,
   cRowShift: 80,
-  bRowShift: 20,
-  aRowShift: 20,
+  bRowShift: 130,
+  aRowShift: 130,
   rX: 10,
   rY: 10
 };

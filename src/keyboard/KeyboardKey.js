@@ -4,9 +4,6 @@ import React, {PropTypes} from "react";
 
 import vars from "../variables";
 
-import KeyEnter from "./KeyEnter";
-
-
 // ================================================================================================
 // FUNCTION KEYS
 
@@ -42,7 +39,7 @@ function FunctionKeyBackspace (props) {
 function FunctionKeyCapsLock (props) {
   // CapsLock
   let keyObj = props.keyObj;
-  let capsLockWidth = vars.keyWidth + vars.cRowShift - 2 * vars.keyPaddingX;
+  let capsLockWidth = vars.keyWidth + vars.cRowShift - vars.keyPaddingX * 2;
   let translate = keyObj.translate || "translate(0, " + vars.keyHeight * 2 + ")";
 
   return (
@@ -58,7 +55,7 @@ function FunctionKeyCapsLock (props) {
 function FunctionKeyTab (props) {
   // Tab
   let keyObj = props.keyObj;
-  let tabWidth = vars.keyWidth + vars.dRowShift - 2 * vars.keyPaddingX;
+  let tabWidth = vars.keyWidth + vars.dRowShift - vars.keyPaddingX * 2;
   let translate = keyObj.translate || "translate(0, " + vars.keyHeight + ")";
 
   return (
@@ -75,7 +72,7 @@ function FunctionKeyTab (props) {
 function FunctionKeyLeftShift (props) {
   // Left Shift
   let keyObj = props.keyObj;
-  let leftShiftWidth = vars.keyWidth + vars.bRowShift - 2 * vars.keyPaddingX;
+  let leftShiftWidth = vars.bRowShift - vars.keyPaddingX * 2;
   let translate = keyObj.translate || "translate(0, " + vars.keyHeight * 3 + ")";
 
   return (
@@ -88,14 +85,91 @@ function FunctionKeyLeftShift (props) {
   );
 }
 
+function FunctionKeyRightShift (props) {
+  // Right Shift
+  let keyObj = props.keyObj;
+  let rightShiftWidth = (vars.keyWidth * 3 - vars.bRowShift) - vars.keyPaddingX * 2;
+  let translate = keyObj.translate || "translate(" + (vars.bRowShift + vars.keyWidth * 12) + ", " + vars.keyHeight * 3 + ")";
+
+  return (
+    <g className={"key key__right-shift " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground width={rightShiftWidth}/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">⇧</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyLeftCtrl (props) {
+  // Left Ctrl
+  let keyObj = props.keyObj;
+  let leftCtrlWidth = vars.bRowShift - vars.keyPaddingX * 2;
+  let translate = keyObj.translate || "translate(0, " + vars.keyHeight * 4 + ")";
+
+  return (
+    <g className={"key key__left-ctrl " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground width={leftCtrlWidth}/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">Ctrl</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyFn (props) {
+  // fn
+  let keyObj = props.keyObj;
+  let translate = keyObj.translate || "translate(" + vars.aRowShift + ", " + vars.keyHeight * 4 + ")";
+
+  return (
+    <g className={"key key__fn " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">Fn</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyLeftCommand (props) {
+  // left Command
+  let keyObj = props.keyObj;
+  let translate = keyObj.translate || "translate(" + (vars.aRowShift + vars.keyWidth) + ", " + vars.keyHeight * 4 + ")";
+
+  return (
+    <g className={"key key__left-command " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">⌘</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyAlt (props) {
+  // Alt
+  let keyObj = props.keyObj;
+  let translate = keyObj.translate || "translate(" + (vars.aRowShift + vars.keyWidth * 2) + ", " + vars.keyHeight * 4 + ")";
+
+  return (
+    <g className={"key key__alt " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">Alt</text>
+      </g>
+    </g>
+  );
+}
+
 function FunctionKeyAltGr (props) {
   // AltGr
   let keyObj = props.keyObj;
-  let altGrLeft = vars.keyWidth * 9 + vars.aRowShift + vars.keyPaddingX;
+  let translate = keyObj.translate || "translate(" + (vars.aRowShift + vars.keyWidth * 8) + ", " + vars.keyHeight * 4 + ")";
 
   return (
-    <g className={"key key__altgr " + keyObj.iso + " " + keyObj.state} x={altGrLeft} y={vars.keyHeight * 4 + vars.keyPaddingY}>
-      <rect className="key__bg" width={vars.keyBgWidth} height={vars.keyBgHeight} rx={vars.rX} ry={vars.rY}/>
+    <g className={"key key__altgr " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground/>
       <g className="key__labels" textAnchor="middle">
         <text className="key__to" x="30" y="80">Alt Gr</text>
       </g>
@@ -103,6 +177,96 @@ function FunctionKeyAltGr (props) {
   );
 }
 
+function FunctionKeyRightCommand (props) {
+  // right Command
+  let keyObj = props.keyObj;
+  let translate = keyObj.translate || "translate(" + (vars.aRowShift + vars.keyWidth * 9) + ", " + vars.keyHeight * 4 + ")";
+
+  return (
+    <g className={"key key__right-command " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">⌘</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyMenu (props) {
+  // Menu
+  let keyObj = props.keyObj;
+  let translate = keyObj.translate || "translate(" + (vars.aRowShift + vars.keyWidth * 11) + ", " + vars.keyHeight * 4 + ")";
+
+  return (
+    <g className={"key key__menu " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">Menu</text>
+      </g>
+    </g>
+  );
+}
+
+function FunctionKeyRightCtrl (props) {
+  // Right Ctrl
+  let keyObj = props.keyObj;
+  let rightCtrlWidth = (vars.keyWidth * 3 - vars.bRowShift) - vars.keyPaddingX * 2;
+  let translate = keyObj.translate || "translate(" + (vars.bRowShift + vars.keyWidth * 12) + ", " + vars.keyHeight * 4 + ")";
+
+  return (
+    <g className={"key key__right-shift " + keyObj.iso + " " + keyObj.state} transform={translate}>
+      <KeyBackground width={rightCtrlWidth}/>
+      <g className="key__labels" textAnchor="middle">
+        <text className="key__to" x="30" y="80">Ctrl</text>
+      </g>
+    </g>
+  );
+}
+
+
+function KeyEnter (props) {
+  // Enter
+  let keyObj = props.keyObj;
+  let keyWidth = vars.keyWidth;
+  let keyHeight = vars.keyHeight;
+  let keyboardWidth = vars.keyboardWidth;
+  let keyboardHeight = vars.keyboardHeight;
+  let keyPaddingX = vars.keyPaddingX;
+  let keyPaddingY = vars.keyPaddingY;
+  let dRowShift = vars.dRowShift;
+  let cRowShift = vars.cRowShift;
+  let bRowShift = vars.bRowShift;
+  let aRowShift = vars.aRowShift;
+  let rX = vars.rX;
+  let rY = vars.rY;
+
+  // for Enter
+  let leftD = dRowShift;
+  let leftC = cRowShift;
+  let right = keyWidth * 2;
+  let bottom = keyHeight * 2;
+  let translate = keyObj.translate || "translate(" + vars.keyWidth * 13 + ", " + vars.keyHeight + ")";
+
+  let enterPath = "M" + (leftD + keyPaddingX) + " " + (rY + keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (leftD + rX + keyPaddingX) + " " + keyPaddingY + "\
+            L " + (right - rX - keyPaddingX) + " " + keyPaddingY + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (right - keyPaddingX) + " " + (rY + keyPaddingY) + "\
+            L " + (right - keyPaddingX) + " " + (bottom - rY - keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (right - rX - keyPaddingX) + " " + (bottom - keyPaddingY) + "\
+            L " + (leftC + rX + keyPaddingX) + " " + (bottom - keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (leftC + keyPaddingX) + " " + (bottom - rY - keyPaddingY) + "\
+            L " + (leftC + keyPaddingX) + " " + (keyHeight + rY - keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 0, " + (leftC - rX + keyPaddingX) + " " + (keyHeight - keyPaddingY) + "\
+            L " + (leftD + rX + keyPaddingX) + " " + (keyHeight - keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (leftD + keyPaddingX) + " " + (keyHeight - rY - keyPaddingY) + "\
+            L " + (leftD + keyPaddingX) + " " + (rY + keyPaddingY) + " Z"
+
+  return (
+    <g className="key key__enter" transform={translate}>
+      <path className="key__bg" d={enterPath} fill="#0f0"/>
+    </g>
+  );
+}
 
 // ================================================================================================
 // KEY COMPONENTS
@@ -199,8 +363,31 @@ export default class KeyboardKey extends React.Component {
       return <FunctionKeyTab keyObj={keyObj}/>
     } else if (keyObj.iso === "B99") {
       return <FunctionKeyLeftShift keyObj={keyObj}/>
+    }  else if (keyObj.iso === "B13") {
+      return <FunctionKeyRightShift keyObj={keyObj}/>
+    } else if (keyObj.iso === "A99") {
+      return <FunctionKeyLeftCtrl keyObj={keyObj}/>
+    } else if (keyObj.iso === "A00") {
+      return <FunctionKeyFn keyObj={keyObj}/>
+    } else if (keyObj.iso === "A01") {
+      return <FunctionKeyLeftCommand keyObj={keyObj}/>
+    } else if (keyObj.iso === "A02") {
+      return <FunctionKeyAlt keyObj={keyObj}/>
     } else if (keyObj.iso === "A08") {
       return <FunctionKeyAltGr keyObj={keyObj}/>
+    } else if (keyObj.iso === "A09") {
+      return <FunctionKeyRightCommand keyObj={keyObj}/>
+    } else if (keyObj.iso === "A11") {
+      return <FunctionKeyMenu keyObj={keyObj}/>
+    } else if (keyObj.iso === "A12") {
+      return <FunctionKeyRightCtrl keyObj={keyObj}/>
+    } else if (keyObj.iso === "A03") {
+      // Space
+      return (
+        <g className={keyClass} transform={keyObj.translate}>
+          <KeyBackground width={vars.keyWidth * 5 - vars.keyPaddingX * 2}/>
+        </g>
+      );
     } else {
       return (
         <g className={keyClass} transform={keyObj.translate}>

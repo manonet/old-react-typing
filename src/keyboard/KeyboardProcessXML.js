@@ -34,12 +34,6 @@ export default function KeyboardProcessXML (xml) {
       "state": "def"
     };
 
-    let enter = {
-      "to": "↵", // ⤶
-      "iso": "C13",
-      "state": "def"
-    };
-
     let capsLock = {
       "to": "Caps Lock",
       "iso": "C00",
@@ -224,7 +218,6 @@ export default function KeyboardProcessXML (xml) {
             keyboardKeys.push(capsLock);
           }
           if (iso === "B00") {
-            keyboardKeys.push(enter);
             keyboardKeys.push(leftShift);
           }
           if (iso === "A03") {

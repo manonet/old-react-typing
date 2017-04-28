@@ -122,25 +122,18 @@ export default function KeyboardProcessXML (xml) {
       let modifier = "to";
       // we assume that the first item ([0]) is always without transform - TypeError: Cannot read property 'modifiers' of undefined issue
       if(i !== 0) {
-        switch (keyMap[i].$.modifiers) {
-          case "shift":
-            modifier = "shift";
-            break;
-          case "caps":
-            modifier = "caps";
-            break;
-          case "caps+shift":
-            modifier = "cs";
-            break;
-          case "altR+caps? ctrl+alt+caps?":
-            modifier = "altGr";
-            break;
-          case "ctrl+caps?":
-            modifier = "cc";
-            break;
-
-          default:
-            break;
+        if (keyMap[i].$.modifiers === "shift") {
+          modifier = "shift";
+        } else if (keyMap[i].$.modifiers === "caps") {
+          modifier = "caps";
+        } else if (keyMap[i].$.modifiers === "caps+shift") {
+          modifier = "cs";
+        } else if (keyMap[i].$.modifiers === "cs") {
+          modifier = "caps";
+        } else if (keyMap[i].$.modifiers.lastIndexOf("altR+caps") !== -1) {
+          modifier = "altGr";
+        } else if (keyMap[i].$.modifiers === "ctrl+caps?") {
+          modifier = "cc";
         }
       }
 

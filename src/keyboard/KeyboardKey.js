@@ -312,9 +312,9 @@ function LabelCs (props) {
 }
 
 function LabelAltGr (props) {
-  if (props.altgr !== undefined) {
+  if (props.altGr !== undefined) {
     return (
-      <text className="key__altgr" x="80" y="80" dangerouslySetInnerHTML={{__html: props.altgr}}/>
+      <text className="key__altgr" x="80" y="80" dangerouslySetInnerHTML={{__html: props.altGr}}/>
     );
   } else {
     return null;
@@ -397,7 +397,7 @@ export default class KeyboardKey extends React.Component {
             <LabelShift shift={keyObj.shift}/>
             <LabelCaps caps={keyObj.caps}/>
             <LabelCs cs={keyObj.cs}/>
-            <LabelAltGr altgr={keyObj.altgr}/>
+            <LabelAltGr altGr={keyObj.altGr}/>
             <LabelCc cc={keyObj.cc}/>
             <LabelTransform transform={keyObj.transform}/>
           </g>

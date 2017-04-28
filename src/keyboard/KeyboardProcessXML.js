@@ -4,7 +4,7 @@ const parseString = require("xml2js").parseString;
 import vars from "../variables";
 
 export default function KeyboardProcessXML (xml) {
-  let keyboardName, keyboardKeys, keyLevels, allKeyboardChars, transformArray;
+  let keyboardName, keyboardKeys, keyLevels, allKeyboardChars, deadKeys;
 
   parseString(xml, function (err, result) {
     keyboardName = result.keyboard.names[0].name[0].$.value;
@@ -12,7 +12,7 @@ export default function KeyboardProcessXML (xml) {
     keyLevels = []; // ["to", "Shift", "altGr", ...]
     let keyMap = result.keyboard.keyMap;
     let transforms = result.keyboard.transforms;
-    transformArray = [];
+    deadKeys = [];
     allKeyboardChars = []; // will contains all characters that is possible to write with actual keyboard layout
 
     // https://en.wikipedia.org/wiki/ISO/IEC_9995
@@ -100,17 +100,19 @@ export default function KeyboardProcessXML (xml) {
       "state": "def"
     };
 
-    // creating an array of objects from transformNode
-    let transformNode = transforms[0].transform;
-    for (let i = 0; i < transformNode.length; i++) {
-      // transformNode[i] is e.g. <transform from="´a" to="á"/>
-      let myObj = {};
-          myObj.from = transformNode[i].$.from; // e.g. "´a"
-          myObj.to = transformNode[i].$.to; // e.g. "á"
-      transformArray.push(myObj);
+    if (transforms) {
+      // creating an array of objects from transformNode
+      let transformNode = transforms[0].transform;
+      for (let i = 0; i < transformNode.length; i++) {
+        // transformNode[i] is e.g. <transform from="´a" to="á"/>
+        let myObj = {};
+            myObj.from = transformNode[i].$.from; // e.g. "´a"
+            myObj.to = transformNode[i].$.to; // e.g. "á"
+        deadKeys.push(myObj);
 
-      // extend the allKeyboardChars array with the characters that only can write with key combinations:
-      allKeyboardChars.push(myObj.to);
+        // extend the allKeyboardChars array with the characters that only can write with key combinations:
+        allKeyboardChars.push(myObj.to);
+      }
     }
 
     for (let i = 0; i < keyMap.length; i++) {
@@ -158,14 +160,14 @@ export default function KeyboardProcessXML (xml) {
         allKeyboardChars.push(to);
 
         let transformChars = "";
-        for (let i = 0; i < transformArray.length; i++) {
+        for (let i = 0; i < deadKeys.length; i++) {
           // check only the first character e.g from="´a"
-          let transform = transformArray[i].from.substring(0,1);
+          let transform = deadKeys[i].from.substring(0,1);
           let char = to; // e.g. to="á"
 
           if (transform.indexOf(char) !== -1) {
             // if the actual character of the key match with the first character of the transform combination, put it to transformChars
-            transformChars += transformArray[i].to;
+            transformChars += deadKeys[i].to;
           }
           // TODO - pop the item from the array, or make somehow faster
         }
@@ -266,10 +268,13 @@ export default function KeyboardProcessXML (xml) {
   });
 
   return {
-    keyboardName,
-    keyboardKeys,
-    keyLevels,
-    allKeyboardChars,
-    transformArray
-  }
+    keyboard: {
+      "name": keyboardName,
+      "keys": keyboardKeys,
+      "levels": keyLevels,
+      "allChars": allKeyboardChars,
+      deadKeys,
+      "functionKeys": {}
+    }
+  };
 }

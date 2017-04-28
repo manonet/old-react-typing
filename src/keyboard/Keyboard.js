@@ -1,17 +1,22 @@
 require("./keyboard.scss");
 
 import React from "react";
+import vars from "../variables";
 import KeyboardLoadXML from "./KeyboardLoadXML";
-
 import KeyboardKey from "./KeyboardKey";
 
 export default class Keyboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      keyboardName: "",
-      keyboardKeys: [],
-      allKeyboardChars: [],
+      keyboard: {
+        name: "",
+        keys: [],
+        keyLevels: [],
+        allChars: [],
+        deadKeys: [],
+        functionKeys: {},
+      },
       onKeyboardLoaded: this.onKeyboardLoaded.bind(this)
     };
   }
@@ -28,11 +33,11 @@ export default class Keyboard extends React.Component {
   render() {
     return (
       <div class="keyboard">
-        <h3 class="keyboard__title">{this.state.keyboardName}</h3>
-        <p dangerouslySetInnerHTML={{__html: this.state.allKeyboardChars}}></p>
-        <svg className="keyboard__svg" version="1.1" viewBox="0 0 1500 500">
+        <h3 class="keyboard__title">{this.state.keyboard.name}</h3>
+        <p dangerouslySetInnerHTML={{__html: this.state.keyboard.allChars}}></p>
+        <svg className="keyboard__svg" version="1.1" viewBox={"0 0 " + vars.keyboardWidth + " " + vars.keyboardHeight}>
         {
-          this.state.keyboardKeys.map(function(item) {
+          this.state.keyboard.keys.map(function(item) {
             return <KeyboardKey
               key={item.iso}
               keyObj={item}

@@ -1,7 +1,6 @@
 import React from "react";
 import Program from "../program/Program";
 import Keyboard from "../keyboard/Keyboard";
-
 import config from "../../config";
 
 let publicFolder = config.publicFolder;
@@ -17,12 +16,14 @@ export default class ProgramPage extends React.Component {
       writtenSign: "",
       nextSign: "",
       writing: false, // whenever the user types (or not)
-      keyboardName: "",
-      keyboardKeys: [],
-      keyLevels: [],
-      //allKeyboardChars
-      transformArray: [],
-      functionKeys: {},
+      keyboard: {
+        name: "",
+        keys: [],
+        levels: [],
+        allChars: [],
+        deadKeys: [],
+        functionKeys: {}
+      },
       markFunctionKey: this.markFunctionKey.bind(this)
     };
   }
@@ -54,8 +55,8 @@ export default class ProgramPage extends React.Component {
     // TODO handle onKeyboardLoaded and markKeyboardForType
     //this.markKeyboardForType(this.state.signToWrite,this.state.writtenSign,this.state.nextSign);
 
-    let functionKeys = this.state.functionKeys;
-    this.state.keyboardKeys.map(function(item) {
+    let functionKeys = this.state.keyboard.functionKeys;
+    this.state.keyboard.keys.map(function(item) {
       switch (item.iso) {
         case "E14":
           functionKeys.backspace = item;
@@ -85,9 +86,12 @@ export default class ProgramPage extends React.Component {
 
   markKeyboardForType (signToWrite,writtenSign,nextSign) {
 
-    //console.log("transformArray: " + this.state.transformArray);
+    //console.log("keyboard.deadKeys: " + this.state.keyboard.deadKeys);
     //console.log("signToWrite: " + signToWrite, "writtenSign: " + writtenSign, "nextSign: " + nextSign);
     let state = this.state;
+    let keyboard = this.state.keyboard;
+    let levels = keyboard.levels;
+    let keys = keyboard.keys;
 
     // save the status of searching for characters for performance
     let nextSignFound = false;
@@ -95,14 +99,14 @@ export default class ProgramPage extends React.Component {
     let signToWriteFound = false;
     let stillSearching = true;
 
-    for (let i = 0; i < this.state.keyLevels.length; i++) {
+    for (let i = 0; i < levels.length; i++) {
       // loop trough each level first, then the keys. It is necessary, because the same character can be appear multiple times on the same keyboard, e.g. "í" on hungarian, once "normal" in "to" level, once on the "j" key in "AltGr" level.
 
-      let level = this.state.keyLevels[i];
+      let level = levels[i];
 
       if (stillSearching) {
         // map only if the characters not found yet. Once need to be map all keys to reset the state.
-        this.state.keyboardKeys.map(function(item) {
+        keys.map(function(item) {
           // loop trough each keyboard key
 
           // reset the state of each key on each input change (only once in loop)
@@ -150,12 +154,12 @@ export default class ProgramPage extends React.Component {
       }
     }
     if (stillSearching) {
-      //the character not appears on any key, so search for it in the transformArray
+      //the character not appears on any key, so search for it in the keyboard.deadKeys
       // console.log("transform"); TODO don't run this function on the first time
 
-      let transformArray = this.state.transformArray
-      for (let i = 0; i < transformArray.length; i++) {
-        let transform = transformArray[i];
+      let deadKeys = keyboard.deadKeys;
+      for (let i = 0; i < deadKeys.length; i++) {
+        let transform = deadKeys[i];
 
         if (!nextSignFound && transform.to === nextSign) {
           // if the character found in the transform array
@@ -164,14 +168,14 @@ export default class ProgramPage extends React.Component {
           let combo1Found = false;
           let combo2Found = false;
 
-          for (let i = 0; i < this.state.keyLevels.length; i++) {
+          for (let i = 0; i < levels.length; i++) {
             // loop trough each level again
-            let level = this.state.keyLevels[i];
+            let level = levels[i];
 
             console.log("test",combo1Found,combo2Found);
             if(!(combo1Found && combo2Found)) {
               // map only if still necessary
-              this.state.keyboardKeys.map(function(item) {
+              keys.map(function(item) {
                 // and map each keyboard key again
                 if(!combo1Found && item[level] === combo1) {
                   if (level !== "to") {
@@ -204,10 +208,10 @@ export default class ProgramPage extends React.Component {
           let combo1 = transform.from.substring(0,1);
           let combo2 = transform.from.substring(1,2);
 
-          for (let i = 0; i < this.state.keyLevels.length; i++) {
+          for (let i = 0; i < levels.length; i++) {
             // loop trough each level again
-            let level = this.state.keyLevels[i];
-            this.state.keyboardKeys.map(function(item) {
+            let level = levels[i];
+            keys.map(function(item) {
               // and map each keyboard key again
               if(item[level] === combo1) {
                 item.state = "error";
@@ -230,10 +234,10 @@ export default class ProgramPage extends React.Component {
           let combo1 = transform.from.substring(0,1);
           let combo2 = transform.from.substring(1,2);
 
-          for (let i = 0; i < this.state.keyLevels.length; i++) {
+          for (let i = 0; i < levels.length; i++) {
             // loop trough each level again
-            let level = this.state.keyLevels[i];
-            this.state.keyboardKeys.map(function(item) {
+            let level = levels[i];
+            keys.map(function(item) {
               // and map each keyboard key again
               if(item[level] === combo1) {
                 if (signToWrite !== writtenSign) {
@@ -262,7 +266,7 @@ export default class ProgramPage extends React.Component {
   markFunctionKey (name, state) {
     // reset all key status before
     console.log(name, state);
-    this.state.functionKeys[name].state = state;
+    this.state.keyboard.functionKeys[name].state = state;
   }
 
   componentDidMount () {
@@ -317,8 +321,8 @@ export default class ProgramPage extends React.Component {
             userWrite={this.userWrite.bind(this)}
             onWriting={this.onWriting.bind(this)}
             writing={this.state.writing}
-            keyboardName={this.state.keyboardName}
-            keyboardKeys={this.state.keyboardKeys}
+            keyboardName={this.state.keyboard.name}
+            keyboardKeys={this.state.keyboard.keys}
             onKeyboardLoaded={this.onKeyboardLoaded.bind(this)}
           />
           <Keyboard

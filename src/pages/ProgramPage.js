@@ -55,33 +55,6 @@ export default class ProgramPage extends React.Component {
     // TODO handle onKeyboardLoaded and markKeyboardForType
     //this.markKeyboardForType(this.state.signToWrite,this.state.writtenSign,this.state.nextSign);
 
-    let functionKeys = this.state.keyboard.functionKeys;
-    this.state.keyboard.keys.map(function(item) {
-      switch (item.iso) {
-        case "E14":
-          functionKeys.backspace = item;
-          break;
-
-        case "C00":
-          functionKeys.capsLock = item;
-          break;
-
-        case "D00":
-          functionKeys.tab = item;
-          break;
-
-        case "B99":
-          functionKeys.shift = item;
-          break;
-
-        case "A08":
-          functionKeys.altgr = item;
-          break;
-
-        default:
-          break;
-      }
-    });
   }
 
   markKeyboardForType (signToWrite,writtenSign,nextSign) {
@@ -266,6 +239,10 @@ export default class ProgramPage extends React.Component {
   markFunctionKey (name, state) {
     // reset all key status before
     console.log(name, state);
+    if (name === "shift") {
+      // TOTO - assign hands both way: same side or opposit size
+      name = "leftShift";
+    }
     this.state.keyboard.functionKeys[name].state = state;
   }
 

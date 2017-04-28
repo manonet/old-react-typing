@@ -4,7 +4,7 @@ const parseString = require("xml2js").parseString;
 import vars from "../variables";
 
 export default function KeyboardProcessXML (xml) {
-  let keyboardName, keyboardKeys, keyLevels, allKeyboardChars, deadKeys;
+  let keyboardName, keyboardKeys, keyLevels, allKeyboardChars, deadKeys, functionKeys;
 
   parseString(xml, function (err, result) {
     keyboardName = result.keyboard.names[0].name[0].$.value;
@@ -16,89 +16,91 @@ export default function KeyboardProcessXML (xml) {
     allKeyboardChars = []; // will contains all characters that is possible to write with actual keyboard layout
 
     // https://en.wikipedia.org/wiki/ISO/IEC_9995
-    let backspace = {
-      "to": "⟵",
-      "iso": "E14",
-      "state": "def"
-    };
+    functionKeys = {
+        backspace: {
+          "to": "⟵",
+          "iso": "E14",
+          "state": "def"
+        },
 
-    let tab = {
-      "to": "↹",
-      "iso": "D00",
-      "state": "def"
-    };
+        tab: {
+          "to": "↹",
+          "iso": "D00",
+          "state": "def"
+        },
 
-    let enterTop = {
-      "to": "↵",
-      "iso": "D13",
-      "state": "def"
-    };
+        enterTop: {
+          "to": "↵",
+          "iso": "D13",
+          "state": "def"
+        },
 
-    let capsLock = {
-      "to": "Caps Lock",
-      "iso": "C00",
-      "state": "def"
-    };
+        capsLock: {
+          "to": "Caps Lock",
+          "iso": "C00",
+          "state": "def"
+        },
 
-    let leftShift = {
-      "to": "⇧",
-      "iso": "B99",
-      "state": "def"
-    };
+        leftShift: {
+          "to": "⇧",
+          "iso": "B99",
+          "state": "def"
+        },
 
-    let rightShift = {
-      "to": "⇧",
-      "iso": "B13",
-      "state": "def"
-    };
+        rightShift: {
+          "to": "⇧",
+          "iso": "B13",
+          "state": "def"
+        },
 
-    let leftCtrl = {
-      "to": "Ctrl",
-      "iso": "A99",
-      "state": "def"
-    };
+        leftCtrl: {
+          "to": "Ctrl",
+          "iso": "A99",
+          "state": "def"
+        },
 
-    let fn = {
-      "to": "Fn",
-      "iso": "A00",
-      "state": "def"
-    };
+        fn: {
+          "to": "Fn",
+          "iso": "A00",
+          "state": "def"
+        },
 
-    let leftCommand = {
-      "to": "⌘",
-      "iso": "A01",
-      "state": "def"
-    };
+        leftCommand: {
+          "to": "⌘",
+          "iso": "A01",
+          "state": "def"
+        },
 
-    let alt = {
-      "to": "Alt",
-      "iso": "A02",
-      "state": "def"
-    };
+        alt: {
+          "to": "Alt",
+          "iso": "A02",
+          "state": "def"
+        },
 
-    let altGr = {
-      "to": "Alt Gr",
-      "iso": "A08",
-      "state": "def"
-    };
+        altGr: {
+          "to": "Alt Gr",
+          "iso": "A08",
+          "state": "def"
+        },
 
-    let rightCommand = {
-      "to": "⌘",
-      "iso": "A09",
-      "state": "def"
-    };
+        rightCommand: {
+          "to": "⌘",
+          "iso": "A09",
+          "state": "def"
+        },
 
-    let menu = {
-      "to": "Menu",
-      "iso": "A11",
-      "state": "def"
-    };
+        menu: {
+          "to": "Menu",
+          "iso": "A11",
+          "state": "def"
+        },
 
-    let rightCtrl = {
-      "to": "Ctrl",
-      "iso": "A12",
-      "state": "def"
-    };
+        rightCtrl: {
+          "to": "Ctrl",
+          "iso": "A12",
+          "state": "def"
+        },
+      };
 
     if (transforms) {
       // creating an array of objects from transformNode
@@ -131,7 +133,7 @@ export default function KeyboardProcessXML (xml) {
             modifier = "cs";
             break;
           case "altR+caps? ctrl+alt+caps?":
-            modifier = "altgr";
+            modifier = "altGr";
             break;
           case "ctrl+caps?":
             modifier = "cc";
@@ -216,33 +218,33 @@ export default function KeyboardProcessXML (xml) {
 
           // add modifier keys before:
           if (iso === "C01") {
-            keyboardKeys.push(enterTop);
-            keyboardKeys.push(capsLock);
+            keyboardKeys.push(functionKeys.enterTop);
+            keyboardKeys.push(functionKeys.capsLock);
           }
           if (iso === "B00") {
-            keyboardKeys.push(leftShift);
+            keyboardKeys.push(functionKeys.leftShift);
           }
           if (iso === "A03") {
-            keyboardKeys.push(rightShift);
-            keyboardKeys.push(leftCtrl);
-            keyboardKeys.push(fn);
-            keyboardKeys.push(leftCommand);
-            keyboardKeys.push(alt);
+            keyboardKeys.push(functionKeys.rightShift);
+            keyboardKeys.push(functionKeys.leftCtrl);
+            keyboardKeys.push(functionKeys.fn);
+            keyboardKeys.push(functionKeys.leftCommand);
+            keyboardKeys.push(functionKeys.alt);
           }
 
           keyboardKeys.push(myObj);
 
           // add modifier keys after:
           if (iso === "E12") {
-            keyboardKeys.push(backspace);
-            keyboardKeys.push(tab);
+            keyboardKeys.push(functionKeys.backspace);
+            keyboardKeys.push(functionKeys.tab);
           }
 
           if (iso === "A03") {
-            keyboardKeys.push(altGr);
-            keyboardKeys.push(rightCommand);
-            keyboardKeys.push(menu);
-            keyboardKeys.push(rightCtrl);
+            keyboardKeys.push(functionKeys.altGr);
+            keyboardKeys.push(functionKeys.rightCommand);
+            keyboardKeys.push(functionKeys.menu);
+            keyboardKeys.push(functionKeys.rightCtrl);
           }
 
         } else {
@@ -274,7 +276,7 @@ export default function KeyboardProcessXML (xml) {
       "levels": keyLevels,
       "allChars": allKeyboardChars,
       deadKeys,
-      "functionKeys": {}
+      functionKeys
     }
   };
 }

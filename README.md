@@ -4,19 +4,6 @@
 
 typewriter program
 
+[wiki](/manonet/typing/docs/index.md)
 
-## Good to know
-
-* https://docs.travis-ci.com/user/encrypting-files/
-* https://docs.travis-ci.com/user/encryption-keys/
-* http://lint.travis-ci.org
-* https://en.wikipedia.org/wiki/ISO/IEC_9995
-
-
-## Todo
-
-- [ ] Mark initial key to hit. (partially done, not rendered on pageload...)
-- [ ] Multiple classes for keyboardKey
-- [ ] inline style or something for keyboardKey in order to display hotmap
-- [ ] Fix enter key layout
-- [ ] implement "react-hot-loader"
+* [keyboard standard](https://en.wikipedia.org/wiki/ISO/IEC_9995)

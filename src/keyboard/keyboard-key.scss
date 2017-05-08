@@ -19,10 +19,6 @@ $a-row-shift:           20px;
 }
 
 .key {
-  width: 50;
-  height: 50;
-
-
   text {
 	  cursor: default;
   }
@@ -59,12 +55,6 @@ $a-row-shift:           20px;
     stroke-width: 5px;
     fill: $white;
     //box-shadow: 0 .3em 0 $gray;
-    x: 10;
-    y: 10;
-    width: 80;
-    height: 80;
-    rx: 5;
-    ry: 5;
   }
 
   // variant
@@ -110,7 +100,7 @@ $a-row-shift:           20px;
   }
 
 }
-
+/*
 .keyboard {
 // at least 12 keys in row E (the upmost row) in positions E00 to E15, containing all keys to input the decimal digits,
   .E01 {
@@ -411,3 +401,4 @@ $a-row-shift:           20px;
   }
 
 }
+*/

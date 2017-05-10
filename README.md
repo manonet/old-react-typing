@@ -4,6 +4,6 @@
 
 typewriter program
 
-[wiki](/manonet/typing/docs/index.md)
+[wiki](https://github.com/manonet/typing/blob/master/docs/wiki.md)
 
 * [keyboard standard](https://en.wikipedia.org/wiki/ISO/IEC_9995)

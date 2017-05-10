@@ -2,8 +2,8 @@
 
 ## Tartalom
 
-* [A program története](/manonet/typing/blob/master/docs/hu/history.md)
-* [Közreműködés](/manonet/typing/blob/master/docs/hu/contribute.md)
+* [A program története](https://github.com/manonet/typing/blob/master/docs/hu/history.md)
+* [Közreműködés](https://github.com/manonet/typing/blob/master/docs/hu/contribute.md)
 
 ---
 

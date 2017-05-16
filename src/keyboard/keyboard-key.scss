@@ -1,4 +1,4 @@
-@import "../layout/variables";
+@import "../scss/variables";
 
 $key-width:             100px;
 $key-height:            100px;
@@ -100,6 +100,11 @@ $a-row-shift:           20px;
   }
 
 }
+
+.key__svg {
+  width: $key-width;
+}
+
 /*
 .keyboard {
 // at least 12 keys in row E (the upmost row) in positions E00 to E15, containing all keys to input the decimal digits,

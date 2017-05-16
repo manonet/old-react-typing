@@ -305,6 +305,14 @@ export default class ProgramPage extends React.Component {
           <Keyboard
             keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}
             onKeyboardLoaded={function(){}}
+            showTitle={true}
+            showDeadKeys={true}
+          />
+          <Keyboard
+            keyboardUrl={publicFolder + "/keyboards/osx/hu-t-k0-osx.xml"}
+            onKeyboardLoaded={function(){}}
+            showTitle={true}
+            showDeadKeys={true}
           />
         </div>
       )

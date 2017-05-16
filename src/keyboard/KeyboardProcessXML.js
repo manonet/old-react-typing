@@ -134,6 +134,9 @@ export default function KeyboardProcessXML (xml) {
           modifier = "altGr";
         } else if (keyMap[i].$.modifiers === "ctrl+caps?") {
           modifier = "cc";
+        } else {
+          // prevent double ISO key in map
+          modifier = "";
         }
       }
 

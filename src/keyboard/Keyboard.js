@@ -30,11 +30,28 @@ export default class Keyboard extends React.Component {
     this.props.onKeyboardLoaded(data);
   }
 
+  KeyboardTitle () {
+    if (this.props.showTitle === true) {
+      return(
+        <h3 class="keyboard__title">{this.state.keyboard.name}</h3>
+      )
+    }
+  }
+
+  KeyboardDeadKeys () {
+    if (this.props.showDeadKeys === true) {
+      return(
+        <p dangerouslySetInnerHTML={{__html: this.state.keyboard.allChars}}></p>
+      )
+    }
+  }
+
+
   render() {
     return (
       <div class="keyboard">
-        <h3 class="keyboard__title">{this.state.keyboard.name}</h3>
-        <p dangerouslySetInnerHTML={{__html: this.state.keyboard.allChars}}></p>
+        {this.KeyboardTitle()}
+        {this.KeyboardDeadKeys()}
         <svg className="keyboard__svg" version="1.1" viewBox={"0 0 " + vars.keyboardWidth + " " + vars.keyboardHeight}>
         {
           this.state.keyboard.keys.map(function(item) {

@@ -15,7 +15,7 @@ export default class Header extends React.Component {
             <ul role="nav" class="list-inline">
               <NavLink to="/" >Home</NavLink>
               <NavLink to="/program" >Program</NavLink>
-              <NavLink to="/about" >About</NavLink>
+              <NavLink to="/styleguide" >Styleguide</NavLink>
             </ul>
           </nav>
 

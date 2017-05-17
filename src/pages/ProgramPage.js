@@ -65,12 +65,25 @@ export default class ProgramPage extends React.Component {
     let keyboard = this.state.keyboard;
     let levels = keyboard.levels;
     let keys = keyboard.keys;
+    let functionKeys = keyboard.functionKeys;
 
     // save the status of searching for characters for performance
     let nextSignFound = false;
     let writtenSignFound = false;
     let signToWriteFound = false;
     let stillSearching = true;
+
+    // TODO - move this function to a shared place (make it global accessible)
+    function mapObject(object, callback) {
+      return Object.keys(object).map(function (key) {
+        return callback(key, object[key]);
+      });
+    }
+
+    mapObject(functionKeys, function (key, value) {
+      // reset function keys
+      functionKeys[key].state = "def";
+    })
 
     for (let i = 0; i < levels.length; i++) {
       // loop trough each level first, then the keys. It is necessary, because the same character can be appear multiple times on the same keyboard, e.g. "í" on hungarian, once "normal" in "to" level, once on the "j" key in "AltGr" level.
@@ -305,6 +318,14 @@ export default class ProgramPage extends React.Component {
           <Keyboard
             keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}
             onKeyboardLoaded={function(){}}
+            showTitle={true}
+            showDeadKeys={true}
+          />
+          <Keyboard
+            keyboardUrl={publicFolder + "/keyboards/osx/hu-t-k0-osx.xml"}
+            onKeyboardLoaded={function(){}}
+            showTitle={true}
+            showDeadKeys={true}
           />
         </div>
       )

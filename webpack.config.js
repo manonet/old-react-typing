@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: "source-map",
@@ -28,24 +28,17 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [{
-          loader: "style-loader", // creates style nodes from JS strings
-          query: {
-            modules: true,
-            sourceMaps: true
-          }
-        }, {
-          loader: "css-loader?importLoaders=1" // translates CSS into CommonJS
-        }, {
-          loader: "sass-loader" // compiles Sass to CSS
-        }, {
-          loader: "postcss-loader" // postprocesses your CSS with PostCSS plugins using postcss.config.js
-        }]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          //resolve-url-loader may be chained before sass-loader if necessary
+          use: ['css-loader', 'sass-loader']
+        })
       }
 
     ]
   },
   plugins: [
+    new ExtractTextPlugin("style.css"),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ]

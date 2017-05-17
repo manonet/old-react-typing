@@ -15,6 +15,10 @@ export default function KeyboardProcessXML (xml) {
     deadKeys = [];
     allKeyboardChars = []; // will contains all characters that is possible to write with actual keyboard layout
 
+    let d13Empty = true;
+    let c12Empty = true;
+    let c13Empty = true;
+
     // https://en.wikipedia.org/wiki/ISO/IEC_9995
     functionKeys = {
         backspace: {
@@ -29,7 +33,8 @@ export default function KeyboardProcessXML (xml) {
           "state": "def"
         },
 
-        enterTop: {
+        enter: {
+          "name": "enter",
           "to": "↵",
           "iso": "D13",
           "state": "def"
@@ -134,6 +139,9 @@ export default function KeyboardProcessXML (xml) {
           modifier = "altGr";
         } else if (keyMap[i].$.modifiers === "ctrl+caps?") {
           modifier = "cc";
+        } else {
+          // prevent double ISO key in map
+          modifier = "";
         }
       }
 
@@ -165,6 +173,14 @@ export default function KeyboardProcessXML (xml) {
             transformChars += deadKeys[i].to;
           }
           // TODO - pop the item from the array, or make somehow faster
+        }
+
+        if (iso === "D13") {
+          d13Empty = false;
+        } else if (iso === "C12") {
+          c12Empty = false;
+        } else if (iso === "C13") {
+          c13Empty = false;
         }
 
         if (modifier === "to") {
@@ -209,36 +225,7 @@ export default function KeyboardProcessXML (xml) {
             myObj.transform = transformChars;
           }
 
-          // add modifier keys before:
-          if (iso === "C01") {
-            keyboardKeys.push(functionKeys.enterTop);
-            keyboardKeys.push(functionKeys.capsLock);
-          }
-          if (iso === "B00") {
-            keyboardKeys.push(functionKeys.leftShift);
-          }
-          if (iso === "A03") {
-            keyboardKeys.push(functionKeys.rightShift);
-            keyboardKeys.push(functionKeys.leftCtrl);
-            keyboardKeys.push(functionKeys.fn);
-            keyboardKeys.push(functionKeys.leftCommand);
-            keyboardKeys.push(functionKeys.alt);
-          }
-
           keyboardKeys.push(myObj);
-
-          // add modifier keys after:
-          if (iso === "E12") {
-            keyboardKeys.push(functionKeys.backspace);
-            keyboardKeys.push(functionKeys.tab);
-          }
-
-          if (iso === "A03") {
-            keyboardKeys.push(functionKeys.altGr);
-            keyboardKeys.push(functionKeys.rightCommand);
-            keyboardKeys.push(functionKeys.menu);
-            keyboardKeys.push(functionKeys.rightCtrl);
-          }
 
         } else {
           let result = keyboardKeys.filter(function( obj ) {
@@ -252,6 +239,18 @@ export default function KeyboardProcessXML (xml) {
         }
       }
     }
+
+    // determinate shape of enter key
+    // TODO
+    functionKeys.enter.variant = 1;
+    if (!d13Empty) {
+      functionKeys.enter.iso = "C14";
+      functionKeys.enter.variant = 2;
+    } else if (!c13Empty) {
+      functionKeys.enter.iso = "D14";
+      functionKeys.enter.variant = 3;
+    }
+
   });
 
   // Unique values in an array

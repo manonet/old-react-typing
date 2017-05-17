@@ -10,6 +10,17 @@ export default class Keyboard extends React.Component {
     super();
     this.state = {
       keyboard: {
+        /*
+        alphanumeric section
+          alphanumeric zone
+          function zones
+        numeric section
+          numeric zone
+          function zone
+        editing and function section (in fact covering all parts of the keyboard which do not belong to the alphanumeric or numeric section)
+          cursor key zone
+          editing function zone
+        */
         name: "",
         keys: [],
         keyLevels: [],
@@ -30,17 +41,49 @@ export default class Keyboard extends React.Component {
     this.props.onKeyboardLoaded(data);
   }
 
+  KeyboardTitle () {
+    if (this.props.showTitle === true) {
+      return(
+        <h3 class="keyboard__title">{this.state.keyboard.name}</h3>
+      )
+    }
+  }
+
+  KeyboardDeadKeys () {
+    if (this.props.showDeadKeys === true) {
+      return(
+        <p dangerouslySetInnerHTML={{__html: this.state.keyboard.allChars}}></p>
+      )
+    }
+  }
+
+
   render() {
+    let functionKeys = this.state.keyboard.functionKeys;
+    function mapObject(object, callback) {
+      return Object.keys(object).map(function (key) {
+        return callback(key, object[key]);
+      });
+    }
+
     return (
       <div class="keyboard">
-        <h3 class="keyboard__title">{this.state.keyboard.name}</h3>
-        <p dangerouslySetInnerHTML={{__html: this.state.keyboard.allChars}}></p>
+        {this.KeyboardTitle()}
+        {this.KeyboardDeadKeys()}
         <svg className="keyboard__svg" version="1.1" viewBox={"0 0 " + vars.keyboardWidth + " " + vars.keyboardHeight}>
         {
           this.state.keyboard.keys.map(function(item) {
             return <KeyboardKey
               key={item.iso}
               keyObj={item}
+            />
+          })
+        };
+        {
+          mapObject(this.state.keyboard.functionKeys, function (key, value) {
+            return <KeyboardKey
+              key={value.iso}
+              keyObj={value}
             />
           })
         }

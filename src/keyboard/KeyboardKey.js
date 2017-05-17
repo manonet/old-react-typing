@@ -261,11 +261,72 @@ function KeyEnter (props) {
             A " + rX + " " + rY + ", 0, 0, 1, " + (leftD + keyPaddingX) + " " + (keyHeight - rY - keyPaddingY) + "\
             L " + (leftD + keyPaddingX) + " " + (rY + keyPaddingY) + " Z"
 
-  return (
-    <g className="key key__enter" transform={translate}>
-      <path className="key__bg" d={enterPath} fill="#0f0"/>
-    </g>
-  );
+  leftC = cRowShift - vars.keyWidth;
+  let enterPath2 = "M" + (leftD + keyPaddingX) + " " + (rY + keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (leftD + rX + keyPaddingX) + " " + keyPaddingY + "\
+            L " + (right - rX - keyPaddingX) + " " + keyPaddingY + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (right - keyPaddingX) + " " + (rY + keyPaddingY) + "\
+            L " + (right - keyPaddingX) + " " + (bottom - rY - keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (right - rX - keyPaddingX) + " " + (bottom - keyPaddingY) + "\
+            L " + (leftC + rX + keyPaddingX) + " " + (bottom - keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (leftC + keyPaddingX) + " " + (bottom - rY - keyPaddingY) + "\
+            L " + (leftC + keyPaddingX) + " " + (keyHeight + rY + keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 1, " + (leftC + rX + keyPaddingX) + " " + (keyHeight + keyPaddingY) + "\
+            L " + (leftD - rX + keyPaddingX) + " " + (keyHeight + keyPaddingY) + "\
+            A " + rX + " " + rY + ", 0, 0, 0, " + (leftD + keyPaddingX) + " " + (keyHeight - rY + keyPaddingY) + "\
+            L " + (leftD + keyPaddingX) + " " + (rY + keyPaddingY) + " Z"
+
+  if (keyObj.variant === 1) {
+    /* shape:
+       xx
+       -x
+    */
+    return (
+      <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={translate}>
+        <path className="key__bg" d={enterPath}/>
+      </g>
+    );
+  } else if (keyObj.variant === 2) {
+    /* shape:
+       --
+       xx
+    */
+    return (
+      <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={"translate(" + (vars.cRowShift + vars.keyWidth * 12) + ", " + vars.keyHeight * 2 + ")"}>
+        <KeyBackground width={(vars.keyWidth * 3 - vars.cRowShift) - vars.keyPaddingX * 2}/>
+        <g className="key__labels" textAnchor="middle">
+          <text className="key__to" x="30" y="80">↵</text>
+        </g>
+      </g>
+    );
+  } else if (keyObj.variant === 3) {
+    /* shape:
+       xx
+       --
+    */
+    return (
+      <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={"translate(" + (vars.dRowShift + vars.keyWidth * 12) + ", " + vars.keyHeight + ")"}>
+        <KeyBackground width={(vars.keyWidth * 3 - vars.dRowShift) - vars.keyPaddingX * 2}/>
+        <g className="key__labels" textAnchor="middle">
+          <text className="key__to" x="30" y="80">↵</text>
+        </g>
+      </g>
+    );
+  } else if (keyObj.variant === 4) {
+    /* shape:
+       -x
+       xx
+    */
+    return (
+      <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={translate}>
+        <path className="key__bg" d={enterPath2}/>
+        <text className="key__to" x="120" y="140">↵</text>
+      </g>
+    );
+  } else {
+    // TODO
+    return null;
+  }
 }
 
 // ================================================================================================
@@ -357,7 +418,7 @@ export default class KeyboardKey extends React.Component {
       return <FunctionKeyBackspace keyObj={keyObj}/>
     } else if (keyObj.iso === "C00") {
       return <FunctionKeyCapsLock keyObj={keyObj}/>
-    } else if (keyObj.iso === "D13") {
+    } else if (keyObj.name === "enter") {
       return <KeyEnter keyObj={keyObj}/>
     } else if (keyObj.iso === "D00") {
       return <FunctionKeyTab keyObj={keyObj}/>
@@ -382,7 +443,7 @@ export default class KeyboardKey extends React.Component {
     } else if (keyObj.iso === "A12") {
       return <FunctionKeyRightCtrl keyObj={keyObj}/>
     } else if (keyObj.iso === "A03") {
-      // Space
+      // Space (A03 to A07)
       return (
         <g className={keyClass} transform={keyObj.translate}>
           <KeyBackground width={vars.keyWidth * 5 - vars.keyPaddingX * 2}/>

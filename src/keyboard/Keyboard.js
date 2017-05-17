@@ -10,6 +10,17 @@ export default class Keyboard extends React.Component {
     super();
     this.state = {
       keyboard: {
+        /*
+        alphanumeric section
+          alphanumeric zone
+          function zones
+        numeric section
+          numeric zone
+          function zone
+        editing and function section (in fact covering all parts of the keyboard which do not belong to the alphanumeric or numeric section)
+          cursor key zone
+          editing function zone
+        */
         name: "",
         keys: [],
         keyLevels: [],
@@ -48,6 +59,13 @@ export default class Keyboard extends React.Component {
 
 
   render() {
+    let functionKeys = this.state.keyboard.functionKeys;
+    function mapObject(object, callback) {
+      return Object.keys(object).map(function (key) {
+        return callback(key, object[key]);
+      });
+    }
+
     return (
       <div class="keyboard">
         {this.KeyboardTitle()}
@@ -58,6 +76,14 @@ export default class Keyboard extends React.Component {
             return <KeyboardKey
               key={item.iso}
               keyObj={item}
+            />
+          })
+        };
+        {
+          mapObject(this.state.keyboard.functionKeys, function (key, value) {
+            return <KeyboardKey
+              key={value.iso}
+              keyObj={value}
             />
           })
         }

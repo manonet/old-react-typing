@@ -4,13 +4,19 @@ import React, {PropTypes} from "react";
 
 import vars from "../variables";
 
+function mapObject(object, callback) {
+  return Object.keys(object).map(function (key) {
+    return callback(key, object[key]);
+  });
+}
+
 // ================================================================================================
 // FUNCTION KEYS
 
 function KeyBackground (props) {
   // Background "image", the visible key
-  let x = props.x || vars.keyPaddingX;
-  let y = props.x || vars.keyPaddingY;
+  let x = props.x + vars.keyPaddingX || vars.keyPaddingX;
+  let y = props.y + vars.keyPaddingY || vars.keyPaddingY;
   let width = props.width || vars.keyWidth - vars.keyPaddingX * 2;
   let height = props.height || vars.keyHeight - vars.keyPaddingY * 2;
   let rx = vars.rX;
@@ -29,8 +35,8 @@ function FunctionKeyBackspace (props) {
   return (
     <g className={"key key__backspace " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground width={backspaceWidth}/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">⟵</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -45,8 +51,8 @@ function FunctionKeyCapsLock (props) {
   return (
     <g className={"key key__capslock " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground width={capsLockWidth}/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">Caps Lock</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -61,8 +67,8 @@ function FunctionKeyTab (props) {
   return (
     <g className={"key key__tab " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground width={tabWidth}/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">↹</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -78,8 +84,8 @@ function FunctionKeyLeftShift (props) {
   return (
     <g className={"key key__left-shift " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground width={leftShiftWidth}/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">⇧</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -94,8 +100,8 @@ function FunctionKeyRightShift (props) {
   return (
     <g className={"key key__right-shift " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground width={rightShiftWidth}/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">⇧</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -110,8 +116,8 @@ function FunctionKeyLeftCtrl (props) {
   return (
     <g className={"key key__left-ctrl " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground width={leftCtrlWidth}/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">Ctrl</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -125,8 +131,8 @@ function FunctionKeyFn (props) {
   return (
     <g className={"key key__fn " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">Fn</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -140,8 +146,8 @@ function FunctionKeyLeftCommand (props) {
   return (
     <g className={"key key__left-command " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">⌘</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -155,8 +161,8 @@ function FunctionKeyAlt (props) {
   return (
     <g className={"key key__alt " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">Alt</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -170,8 +176,8 @@ function FunctionKeyAltGr (props) {
   return (
     <g className={"key key__altgr " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">Alt Gr</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -185,8 +191,8 @@ function FunctionKeyRightCommand (props) {
   return (
     <g className={"key key__right-command " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">⌘</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -200,8 +206,8 @@ function FunctionKeyMenu (props) {
   return (
     <g className={"key key__menu " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">Menu</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -216,8 +222,8 @@ function FunctionKeyRightCtrl (props) {
   return (
     <g className={"key key__right-shift " + keyObj.iso + " " + keyObj.state} transform={translate}>
       <KeyBackground width={rightCtrlWidth}/>
-      <g className="key__labels" textAnchor="middle">
-        <text className="key__to" x="30" y="80">Ctrl</text>
+      <g className="key__labels">
+        <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
       </g>
     </g>
   );
@@ -284,6 +290,9 @@ function KeyEnter (props) {
     return (
       <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={translate}>
         <path className="key__bg" d={enterPath}/>
+        <g className="key__labels">
+          <text className="key__to" x="160" y="140">{keyObj.labels.to}</text>
+        </g>
       </g>
     );
   } else if (keyObj.variant === 2) {
@@ -294,8 +303,8 @@ function KeyEnter (props) {
     return (
       <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={"translate(" + (vars.cRowShift + vars.keyWidth * 12) + ", " + vars.keyHeight * 2 + ")"}>
         <KeyBackground width={(vars.keyWidth * 3 - vars.cRowShift) - vars.keyPaddingX * 2}/>
-        <g className="key__labels" textAnchor="middle">
-          <text className="key__to" x="30" y="80">↵</text>
+        <g className="key__labels">
+          <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
         </g>
       </g>
     );
@@ -307,8 +316,8 @@ function KeyEnter (props) {
     return (
       <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={"translate(" + (vars.dRowShift + vars.keyWidth * 12) + ", " + vars.keyHeight + ")"}>
         <KeyBackground width={(vars.keyWidth * 3 - vars.dRowShift) - vars.keyPaddingX * 2}/>
-        <g className="key__labels" textAnchor="middle">
-          <text className="key__to" x="30" y="80">↵</text>
+        <g className="key__labels">
+          <text className="key__to" x="30" y="80">{keyObj.labels.to}</text>
         </g>
       </g>
     );
@@ -320,7 +329,9 @@ function KeyEnter (props) {
     return (
       <g className={"key key__enter " + keyObj.iso + " " + keyObj.state} transform={translate}>
         <path className="key__bg" d={enterPath2}/>
-        <text className="key__to" x="120" y="140">↵</text>
+        <g className="key__labels">
+          <text className="key__to" x="120" y="140">{keyObj.labels.to}</text>
+        </g>
       </g>
     );
   } else {
@@ -332,70 +343,70 @@ function KeyEnter (props) {
 // ================================================================================================
 // KEY COMPONENTS
 
-function LabelTo (props) {
-  if (props.to !== undefined) {
-    return (
-      <text className="key__to" x="30" y="80">{props.to}</text>
-    );
-  } else {
-    return null;
+function Text (props) {
+  let x = props.x + vars.keyLabelX;
+  let y = props.y + vars.keyLabelY + 10;
+  let name = props.name;
+  let visibility = "hidden";
+
+  switch (name) {
+    case "":
+      x = props.x;
+      y = props.y;
+      break;
+
+    default:
+      break;
   }
+
+  if (name === "to") {
+    visibility = "visible";
+  }
+
+  return (
+    <text
+      className={"key__label " + props.name}
+      dangerouslySetInnerHTML={{__html: props.value}}
+      x={x}
+      y={y}
+      visibility={visibility}
+    />
+  )
 }
 
-function LabelShift (props) {
-  if (props.shift !== undefined) {
-    return (
-      <text className="key__shift" x="30" y="40" dangerouslySetInnerHTML={{__html: props.shift}}/>
-    );
-  } else {
-    return null;
-  }
-}
+function Labels (props) {
+  let x = props.keyObj.x;
+  let y = props.keyObj.y;
+  let labels = props.keyObj.labels;
+  let iso = props.keyObj.iso;
 
-function LabelCaps (props) {
-  if (props.caps !== undefined) {
-    return (
-      <text className="key__caps" x="50" y="50" dangerouslySetInnerHTML={{__html: props.caps}}/>
-    );
-  } else {
+  // chech if labels is empty
+  if (Object.keys(labels).length === 0) {
     return null;
+  } else {
+    return (
+      <g className="key__labels">
+      {
+        mapObject(labels, function (key, value) {
+          return <Text
+            key={key}
+            name={key}
+            value={value}
+            x={x}
+            y={y}
+          />
+        })
+      }
+      </g>
+    );
   }
-}
 
-function LabelCs (props) {
-  if (props.cs !== undefined) {
-    return (
-      <text className="key__cs" x="80" y="50" dangerouslySetInnerHTML={{__html: props.cs}}/>
-    );
-  } else {
-    return null;
-  }
-}
-
-function LabelAltGr (props) {
-  if (props.altGr !== undefined) {
-    return (
-      <text className="key__altgr" x="80" y="80" dangerouslySetInnerHTML={{__html: props.altGr}}/>
-    );
-  } else {
-    return null;
-  }
-}
-
-function LabelCc (props) {
-  if (props.cc !== undefined) {
-    return (
-      <text className="key__cc" x="80" y="50" dangerouslySetInnerHTML={{__html: props.cc}}/>
-    );
-  } else {
-    return null;
-  }
 }
 
 function LabelTransform (props) {
   if (props.transform !== undefined) {
     return (
-      <text className="key__transform" dangerouslySetInnerHTML={{__html: props.transform}}/>
+      <text className="key__transform" dangerouslySetInnerHTML={{__html: props.transform}} display="none"/>
     );
   } else {
     return null;
@@ -410,7 +421,7 @@ export default class KeyboardKey extends React.Component {
     let keyClass = "key key--" + keyObj.iso.substring(0, 1) + " " + keyObj.iso + " " + keyObj.state;
 
     // When letters on a case pair are associated with a key, only the capital character need to be shown on the keytop for the primary group, while the lowercase character only is shown for the secondary group.
-    if (keyObj.to.toUpperCase() === keyObj.shift) {
+    if (keyObj.labels.to.toString().toUpperCase() === keyObj.labels.shift) {
       keyClass += " alpha";
     }
 
@@ -445,23 +456,16 @@ export default class KeyboardKey extends React.Component {
     } else if (keyObj.iso === "A03") {
       // Space (A03 to A07)
       return (
-        <g className={keyClass} transform={keyObj.translate}>
-          <KeyBackground width={vars.keyWidth * 5 - vars.keyPaddingX * 2}/>
+        <g className={keyClass}>
+          <KeyBackground width={vars.keyWidth * 5 - vars.keyPaddingX * 2} x={keyObj.x} y={keyObj.y}/>
         </g>
       );
     } else {
       return (
-        <g className={keyClass} transform={keyObj.translate}>
-          <KeyBackground/>
-          <g className="key__labels" textAnchor="middle">
-            <LabelTo to={keyObj.to}/>
-            <LabelShift shift={keyObj.shift}/>
-            <LabelCaps caps={keyObj.caps}/>
-            <LabelCs cs={keyObj.cs}/>
-            <LabelAltGr altGr={keyObj.altGr}/>
-            <LabelCc cc={keyObj.cc}/>
-            <LabelTransform transform={keyObj.transform}/>
-          </g>
+        <g className={keyClass}>
+          <KeyBackground x={keyObj.x} y={keyObj.y}/>
+          <Labels keyObj={keyObj}/>
+          <LabelTransform transform={keyObj.transform}/>
         </g>
       );
     }

@@ -70,7 +70,7 @@ export default class Keyboard extends React.Component {
       <div class="keyboard">
         {this.KeyboardTitle()}
         {this.KeyboardDeadKeys()}
-        <svg className="keyboard__svg" version="1.1" viewBox={"0 0 " + vars.keyboardWidth + " " + vars.keyboardHeight}>
+        <svg className="keyboard__svg" version="1.1" viewBox={"0 0 " + vars.keyboardWidth + " " + vars.keyboardHeight} textAnchor="middle">
         {
           this.state.keyboard.keys.map(function(item) {
             return <KeyboardKey

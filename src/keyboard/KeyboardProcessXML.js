@@ -22,86 +22,114 @@ export default function KeyboardProcessXML (xml) {
     // https://en.wikipedia.org/wiki/ISO/IEC_9995
     functionKeys = {
         backspace: {
-          "to": "⟵",
+          "labels": {
+            "to": "⟵",
+          },
           "iso": "E14",
           "state": "def"
         },
 
         tab: {
-          "to": "↹",
+          "labels": {
+            "to": "↹",
+          },
           "iso": "D00",
           "state": "def"
         },
 
         enter: {
           "name": "enter",
-          "to": "↵",
+          "labels": {
+            "to": "↵",
+          },
           "iso": "D13",
           "state": "def"
         },
 
         capsLock: {
-          "to": "Caps Lock",
+          "labels": {
+            "to": "Caps Lock",
+          },
           "iso": "C00",
           "state": "def"
         },
 
         leftShift: {
-          "to": "⇧",
+          "labels": {
+            "to": "⇧",
+          },
           "iso": "B99",
           "state": "def"
         },
 
         rightShift: {
-          "to": "⇧",
+          "labels": {
+            "to": "⇧",
+          },
           "iso": "B13",
           "state": "def"
         },
 
         leftCtrl: {
-          "to": "Ctrl",
+          "labels": {
+            "to": "Ctrl",
+          },
           "iso": "A99",
           "state": "def"
         },
 
         fn: {
-          "to": "Fn",
+          "labels": {
+            "to": "Fn",
+          },
           "iso": "A00",
           "state": "def"
         },
 
         leftCommand: {
-          "to": "⌘",
+          "labels": {
+            "to": "⌘",
+          },
           "iso": "A01",
           "state": "def"
         },
 
         alt: {
-          "to": "Alt",
+          "labels": {
+            "to": "Alt",
+          },
           "iso": "A02",
           "state": "def"
         },
 
         altGr: {
-          "to": "Alt Gr",
+          "labels": {
+            "to": "Alt Gr",
+          },
           "iso": "A08",
           "state": "def"
         },
 
         rightCommand: {
-          "to": "⌘",
+          "labels": {
+            "to": "⌘",
+          },
           "iso": "A09",
           "state": "def"
         },
 
         menu: {
-          "to": "Menu",
+          "labels": {
+            "to": "Menu",
+          },
           "iso": "A11",
           "state": "def"
         },
 
         rightCtrl: {
-          "to": "Ctrl",
+          "labels": {
+            "to": "Ctrl",
+          },
           "iso": "A12",
           "state": "def"
         },
@@ -127,6 +155,8 @@ export default function KeyboardProcessXML (xml) {
       let modifier = "to";
       // we assume that the first item ([0]) is always without transform - TypeError: Cannot read property 'modifiers' of undefined issue
       if(i !== 0) {
+        modifier = keyMap[i].$.modifiers;
+        /*
         if (keyMap[i].$.modifiers === "shift") {
           modifier = "shift";
         } else if (keyMap[i].$.modifiers === "caps") {
@@ -143,6 +173,7 @@ export default function KeyboardProcessXML (xml) {
           // prevent double ISO key in map
           modifier = "";
         }
+        */
       }
 
       keyLevels.push(modifier);
@@ -186,7 +217,8 @@ export default function KeyboardProcessXML (xml) {
         if (modifier === "to") {
           // create the necessary attributes once, at the first time
           let myObj = {};
-          myObj[modifier] = to;
+          myObj.labels = {};
+          myObj.labels[modifier] = to;
           myObj.iso = iso;
           myObj.state = "def";
 
@@ -219,6 +251,8 @@ export default function KeyboardProcessXML (xml) {
           }
 
           myObj.translate = "translate(" + translateX + ", " + translateY + ")";
+          myObj.x = translateX;
+          myObj.y = translateY;
 
           if (transformChars.length && transformChars !== " ") {
             // add transform only if not empty or not a space
@@ -231,7 +265,7 @@ export default function KeyboardProcessXML (xml) {
           let result = keyboardKeys.filter(function( obj ) {
             return obj.iso == iso;
           });
-          result[0][modifier] = to;
+          result[0].labels[modifier] = to;
 
           if (transformChars.length && transformChars !== " ") {
             result[0].transform = transformChars;

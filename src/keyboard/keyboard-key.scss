@@ -30,26 +30,12 @@ $a-row-shift:           20px;
     //transform: scale(($key-width - 2 * $key-padding) / 100) translate($key-padding);
   }
 
-  &__to {
-    x: 50;
-    y: 50;
+  &__label {
+    &.transform {
+      display: none;
+    }
   }
 
-  &__shift {
-    x: 10;
-    y: 50;
-  }
-
-  &__cc {
-    x: 50;
-    y: 50;
-  }
-
-  &__caps,
-  &__cs,
-  &__transform {
-    display: none;
-  }
 
   &__bg {
     stroke: $gray-lighter;

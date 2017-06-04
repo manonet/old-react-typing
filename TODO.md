@@ -25,6 +25,7 @@
 * [ ] draw signs for control keys
 * [ ] fetch polyfill / ajax library
 * [ ] display error if can not load xml data
+* [ ] hotmap for statistic
 
 ## User input
 

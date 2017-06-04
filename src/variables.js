@@ -21,5 +21,7 @@ export default {
   bRowShift: 130,
   aRowShift: 130,
   rX: 10,
-  rY: 10
+  rY: 10,
+  keyLabelX: 50,
+  keyLabelY: 50
 };

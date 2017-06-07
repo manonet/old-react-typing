@@ -348,6 +348,9 @@ function Text (props) {
   let y = props.y + vars.keyLabelY + 10;
   let name = props.name;
   let visibility = "hidden";
+  let keyEvent = props.keyEvent;
+  let checkKeyEvents = props.checkKeyEvents;
+
 
   switch (name) {
     case "":
@@ -363,27 +366,66 @@ function Text (props) {
     visibility = "visible";
   }
 
+  if (checkKeyEvents) {
+    //console.log("inLabel checkKeyEvents");
+
+
+    if (keyEvent.shiftKey && keyEvent.CapsLock) {
+      //console.log("shift");
+      if (name === "caps+shift") {
+        visibility = "visible";
+      } else if (name === "to") {
+        visibility = "hidden";
+      }
+    } else if (keyEvent.CapsLock && !(keyEvent.altKey && keyEvent.ctrlKey)) {
+      //console.log("caps");
+      if (name === "caps") {
+        visibility = "visible";
+      } else if (name === "to") {
+        visibility = "hidden";
+      }
+    } else if (keyEvent.shiftKey) {
+      //console.log("shift");
+      if (name === "shift") {
+        visibility = "visible";
+      } else if (name === "to") {
+        visibility = "hidden";
+      }
+    } else if (keyEvent.altKey && keyEvent.ctrlKey) {
+      //console.log("AltGr");
+      if (name === "altR+caps? ctrl+alt+caps?") {
+        visibility = "visible";
+      } else if (name === "to") {
+        visibility = "hidden";
+      }
+    }
+
+  }
+
   return (
     <text
-      className={"key__label " + props.name}
+      className={"key__label " + props.name + " " + visibility}
       dangerouslySetInnerHTML={{__html: props.value}}
       x={x}
       y={y}
-      visibility={visibility}
     />
   )
 }
 
 function Labels (props) {
-  let x = props.keyObj.x;
-  let y = props.keyObj.y;
+
+  let keyObj = props.keyObj;
+  let x = props.keyObj.x || 0;
+  let y = props.keyObj.y || 0;
   let labels = props.keyObj.labels;
   let iso = props.keyObj.iso;
+  let displayedLevel = props.displayedLevel;
 
   // chech if labels is empty
   if (Object.keys(labels).length === 0) {
     return null;
   } else {
+    // display all characters within own text on keytop
     return (
       <g className="key__labels">
       {
@@ -392,6 +434,8 @@ function Labels (props) {
             key={key}
             name={key}
             value={value}
+            keyEvent={props.keyEvent}
+            checkKeyEvents={props.checkKeyEvents}
             x={x}
             y={y}
           />
@@ -417,6 +461,11 @@ function LabelTransform (props) {
 export default class KeyboardKey extends React.Component {
   render () {
     let keyObj = this.props.keyObj;
+    let keyEvent = this.props.keyEvent;
+    let checkKeyEvents = (Object.keys(keyEvent).length !== 0) ? true : false;
+
+    let x = keyObj.x || 0;
+    let y = keyObj.y || 0;
 
     let keyClass = "key key--" + keyObj.iso.substring(0, 1) + " " + keyObj.iso + " " + keyObj.state;
 
@@ -457,14 +506,14 @@ export default class KeyboardKey extends React.Component {
       // Space (A03 to A07)
       return (
         <g className={keyClass}>
-          <KeyBackground width={vars.keyWidth * 5 - vars.keyPaddingX * 2} x={keyObj.x} y={keyObj.y}/>
+          <KeyBackground width={vars.keyWidth * 5 - vars.keyPaddingX * 2} x={x} y={y}/>
         </g>
       );
     } else {
       return (
-        <g className={keyClass}>
-          <KeyBackground x={keyObj.x} y={keyObj.y}/>
-          <Labels keyObj={keyObj}/>
+        <g className={keyClass} textAnchor="middle">
+          <KeyBackground x={x} y={y}/>
+          <Labels keyObj={keyObj} checkKeyEvents={checkKeyEvents} keyEvent={keyEvent} displayedLevel={this.props.displayedLevel}/>
           <LabelTransform transform={keyObj.transform}/>
         </g>
       );

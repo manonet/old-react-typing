@@ -52,6 +52,8 @@ export default class Program extends React.Component {
         <Keyboard
           keyboardUrl={publicFolder + "/keyboards/windows/hu-t-k0-windows.xml"}
           onKeyboardLoaded={this.props.onKeyboardLoaded}
+          displayedLevel={this.props.displayedLevel}
+          keyEvent={this.props.keyEvent}
         />
       </div>
     )

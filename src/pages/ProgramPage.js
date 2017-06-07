@@ -24,7 +24,46 @@ export default class ProgramPage extends React.Component {
         deadKeys: [],
         functionKeys: {}
       },
-      markFunctionKey: this.markFunctionKey.bind(this)
+      keyEvent: {
+        altKey: false,
+        bubbles: true,
+        cancelBubble: false,
+        cancelable: true,
+        charCode: 0,
+        code: "", // e.g. "F12"
+        composed: true,
+        ctrlKey: false,
+        currentTarget: null,
+        defaultPrevented: false,
+        detail: 0,
+        eventPhase: 0,
+        isComposing: false,
+        isTrusted: true,
+        key: "", // e.g. "F12"
+        keyCode: 0, // e.g. 123
+        location: 0,
+        metaKey: false,
+        path: [],
+        repeat: false,
+        returnValue: true,
+        shiftKey: false,
+        sourceCapabilities: null, // e.g. InputDeviceCapabilities
+        srcElement: null, // e.g. body
+        target: null, // e.g. body
+        timeStamp: 0, // e.g. 6372.995000000001
+        type: "", // e.g. keydown
+        view: null, // e.g. Window
+        which: 0, // e.g. 123
+
+        CapsLock: false
+      },
+
+      displayedLevel: "to",
+
+      markFunctionKey: this.markFunctionKey.bind(this),
+      handleKeydown: this.handleKeydown.bind(this),
+      handleKeypress: this.handleKeypress.bind(this),
+      handleKeyup: this.handleKeyup.bind(this)
     };
   }
 
@@ -263,6 +302,96 @@ export default class ProgramPage extends React.Component {
     // Todo ?
     // this.userWrite("");
     // use onKeyboardLoaded instead
+    document.addEventListener("keydown", this.state.handleKeydown, false);
+    //document.addEventListener("keypress", this.state.handleKeypress, false);
+    document.addEventListener("keyup", this.state.handleKeyup, false);
+  }
+
+  handleKeys (event, source) {
+      let keyEvent = Object.assign({}, this.state.keyEvent);
+    //console.log(source, event);
+    if (event.altKey !== keyEvent.altKey) {
+      //console.log("altKey");
+      keyEvent.altKey = event.altKey;
+      this.setState({
+        keyEvent
+      });
+    }
+
+    if (event.ctrlKey !== keyEvent.ctrlKey) {
+      //console.log("ctrlKey");
+      keyEvent.ctrlKey = event.ctrlKey;
+      this.setState({
+        keyEvent
+      });
+    }
+    if (event.metaKey !== keyEvent.metaKey) {
+      //console.log("metaKey");
+      keyEvent.metaKey = event.metaKey;
+      this.setState({
+        keyEvent
+      });
+    }
+    if (!event.shiftKey !== !keyEvent.shiftKey) {
+      //console.log("shiftKey");
+      keyEvent.shiftKey = event.shiftKey;
+      this.setState({
+        keyEvent
+      });
+    }
+
+
+    if (event.getModifierState) {
+      //console.log(event.getModifierState("CapsLock"));
+      if (event.getModifierState("CapsLock") !== keyEvent.CapsLock) {
+        //console.log("CapsLock");
+        keyEvent.CapsLock = event.getModifierState("CapsLock");
+        this.setState({
+          keyEvent
+        });
+      }
+      /*else if (event.getModifierState("CapsLock") && event.getModifierState("shift")) {
+        if (name === "caps+shift") {
+          visibility = "visible";
+        } else if (name === "to") {
+          visibility = "hidden";
+        }
+      } else if (event.getModifierState("AltGraph")) {
+        if (name === "altR+caps? ctrl+alt+caps?") {
+          visibility = "visible";
+        } else if (name === "to") {
+          visibility = "hidden";
+        }
+      } else if (name === "to") {
+        visibility = "visible";
+      }*/
+
+      /*
+      console.log(event.key);
+      // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
+      let Alt = event.getModifierState && event.getModifierState("Alt");
+      let AltGraph = event.getModifierState && event.getModifierState("AltGraph");
+      let CapsLock = event.getModifierState && event.getModifierState("CapsLock");
+      let Control = event.getModifierState && event.getModifierState("Control");
+      let Meta = event.getModifierState && event.getModifierState("Meta"); // ⌘ Command key
+      let NumLock = event.getModifierState && event.getModifierState("NumLock");
+      let OS = event.getModifierState && event.getModifierState("OS");
+      let ScrollLock = event.getModifierState && event.getModifierState("ScrollLock");
+      let Shift = event.getModifierState && event.getModifierState("Shift");
+      */
+    }
+  }
+
+  handleKeydown (event) {
+    this.handleKeys (event, "Keydown")
+  }
+
+  handleKeypress (event) {
+    this.handleKeys (event, "Keypress")
+  }
+
+  handleKeyup (event) {
+    this.handleKeys (event, "Keyup")
   }
 
   correction () {
@@ -314,6 +443,8 @@ export default class ProgramPage extends React.Component {
             keyboardName={this.state.keyboard.name}
             keyboardKeys={this.state.keyboard.keys}
             onKeyboardLoaded={this.onKeyboardLoaded.bind(this)}
+            displayedLevel={this.state.displayedLevel}
+            keyEvent={this.state.keyEvent}
           />
           <Keyboard
             keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}

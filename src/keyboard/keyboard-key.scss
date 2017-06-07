@@ -34,6 +34,10 @@ $a-row-shift:           20px;
     &.transform {
       display: none;
     }
+
+    &.hidden {
+      display: none;
+    }
   }
 
 

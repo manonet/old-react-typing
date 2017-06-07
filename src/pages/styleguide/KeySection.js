@@ -12,11 +12,14 @@ function StyleguideKey (props) {
         key="D12"
         keyObj={{
           "iso": "D12",
-          "to": "a",
-          "shift": "%",
-          "altGr": "°",
+          "labels": {
+            "to": "a",
+            "shift": "%",
+            "altGr": "°"
+          },
           "state": state
         }}
+        keyEvent={{}}
       />
     </svg>
   );
@@ -29,6 +32,8 @@ export default class KeySection extends React.Component {
         <section class="section section--key">
 
           <h2>Key</h2>
+
+          <h3>States</h3>
 
           <table class="table table-bordered">
             <thead>
@@ -82,6 +87,33 @@ export default class KeySection extends React.Component {
                 </td>
                 <td>
                   <StyleguideKey state="missed secondary"/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Hotmap</h3>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>class</th>
+                <th>0%</th>
+                <th>50%</th>
+                <th>100%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">def</th>
+                <td>
+                  <StyleguideKey/>
+                </td>
+                <td>
+                  <StyleguideKey/>
+                </td>
+                <td>
+                  <StyleguideKey/>
                 </td>
               </tr>
             </tbody>

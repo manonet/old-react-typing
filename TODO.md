@@ -34,3 +34,7 @@
 * [ ] mark invisible characters like space, newline
 * [ ] popup on hover for each character on sample text with more information about letter, like how to write it
 
+Anomáliák:
+
+* AltGr - key: "AltGraph", code: "AltRight". Double key event, key: "Control" is also pressed in background, probably because of historical reasons
+

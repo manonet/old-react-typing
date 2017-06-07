@@ -26,8 +26,9 @@ export default class Keyboard extends React.Component {
         keyLevels: [],
         allChars: [],
         deadKeys: [],
-        functionKeys: {},
+        functionKeys: {}
       },
+
       onKeyboardLoaded: this.onKeyboardLoaded.bind(this)
     };
   }
@@ -57,9 +58,11 @@ export default class Keyboard extends React.Component {
     }
   }
 
-
   render() {
     let functionKeys = this.state.keyboard.functionKeys;
+    let keyEvent = this.props.keyEvent || {};
+    let displayedLevel = this.props.displayedLevel || "to";
+
     function mapObject(object, callback) {
       return Object.keys(object).map(function (key) {
         return callback(key, object[key]);
@@ -76,6 +79,8 @@ export default class Keyboard extends React.Component {
             return <KeyboardKey
               key={item.iso}
               keyObj={item}
+              keyEvent={keyEvent}
+              displayedLevel={displayedLevel}
             />
           })
         };
@@ -84,6 +89,7 @@ export default class Keyboard extends React.Component {
             return <KeyboardKey
               key={value.iso}
               keyObj={value}
+              keyEvent={keyEvent}
             />
           })
         }

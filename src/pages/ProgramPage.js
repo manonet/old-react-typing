@@ -141,7 +141,7 @@ export default class ProgramPage extends React.Component {
 
           if (stillSearching) {
             // if not all key found, check the character on the key at the specified level
-            if(!nextSignFound && item[level] === nextSign) {
+            if(!nextSignFound && item.labels[level] === nextSign) {
               if (level !== "to") {
                 // key combination, using of function key necessary
                 state.markFunctionKey(level, "toWrite");
@@ -149,14 +149,14 @@ export default class ProgramPage extends React.Component {
               item.state = "toWrite";
               nextSignFound = true;
             }
-            if (!writtenSignFound && item[level] === writtenSign) {
+            if (!writtenSignFound && item.labels[level] === writtenSign) {
               item.state = "error";
               if (signToWrite === writtenSign) {
                 item.state = "correct";
               }
               writtenSignFound = true;
             }
-            if (!signToWriteFound && item[level] === signToWrite) {
+            if (!signToWriteFound && item.labels[level] === signToWrite) {
               if (signToWrite !== writtenSign) {
                 item.state = "missed";
                 // TODO enable/disable backspace
@@ -202,10 +202,10 @@ export default class ProgramPage extends React.Component {
               // map only if still necessary
               keys.map(function(item) {
                 // and map each keyboard key again
-                if(!combo1Found && item[level] === combo1) {
+                if(!combo1Found && item.labels[level] === combo1) {
                   if (level !== "to") {
                     // key combination, using of function key necessary
-                    console.log(item[level]);
+                    console.log(item.labels[level]);
                     state.markFunctionKey(level, "toWrite");
                   }
                   item.state = "toWrite";
@@ -213,10 +213,10 @@ export default class ProgramPage extends React.Component {
                   combo1Found = true;
                   console.log("combo1Found ",combo1);
                 }
-                if(!combo2Found && item[level] === combo2) {
+                if(!combo2Found && item.labels[level] === combo2) {
                   if (level !== "to") {
                     // key combination, using of function key necessary
-                    console.log(item[level]);
+                    console.log(item.labels[level]);
                     state.markFunctionKey(level, "toWrite secondary");
                   }
                   item.state = "toWrite secondary";
@@ -238,14 +238,14 @@ export default class ProgramPage extends React.Component {
             let level = levels[i];
             keys.map(function(item) {
               // and map each keyboard key again
-              if(item[level] === combo1) {
+              if(item.labels[level] === combo1) {
                 item.state = "error";
                 if (signToWrite === writtenSign) {
                   item.state = "correct";
                 }
                 writtenSignFound = true;
               }
-              if(item[level] === combo2) {
+              if(item.labels[level] === combo2) {
                 item.state = "error";
                 if (signToWrite === writtenSign) {
                   item.state = "correct secondary";
@@ -264,13 +264,13 @@ export default class ProgramPage extends React.Component {
             let level = levels[i];
             keys.map(function(item) {
               // and map each keyboard key again
-              if(item[level] === combo1) {
+              if(item.labels[level] === combo1) {
                 if (signToWrite !== writtenSign) {
                   item.state = "missed";
                 }
                 signToWriteFound = true;
               }
-              if(item[level] === combo2) {
+              if(item.labels[level] === combo2) {
                 if (signToWrite !== writtenSign) {
                   item.state = "missed secondary";
                 }
@@ -294,8 +294,16 @@ export default class ProgramPage extends React.Component {
     if (name === "shift") {
       // TOTO - assign hands both way: same side or opposit size
       name = "leftShift";
+    } else if (name === "altR+caps? ctrl+alt+caps?") {
+      name = "altGr";
     }
-    this.state.keyboard.functionKeys[name].state = state;
+    // TODO - synch all function keys
+
+    let keyboard = Object.assign({}, this.state.keyboard);
+    keyboard.functionKeys[name].state = state;
+    this.setState({
+      keyboard
+    });
   }
 
   componentDidMount () {

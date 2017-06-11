@@ -14,21 +14,37 @@ function toRadians (angle) {
 function PieChartDeco1 (props) {
   if (props.decorated) {
     return (
-      <circle cx={props.cx}
-              cy={props.cy}
-              r={props.r}
-              stroke={props.stroke}
-              fill={props.fill}
-              strokeWidth={props.strokeWidth}
-              strokeDasharray={props.strokeDasharray}
-              strokeDashoffset={props.strokeDashoffset || 0}
-              transform={props.transform}
+      <circle
+        className="pie-decor"
+        cx={props.cx}
+        cy={props.cy}
+        r={props.r}
+        stroke={props.stroke}
+        fill={props.fill}
+        strokeWidth={props.strokeWidth}
+        strokeDasharray={props.strokeDasharray}
+        strokeDashoffset={props.strokeDashoffset || 0}
+        transform={props.transform}
       />
     );
   } else {
     return null;
   }
+}
 
+function PieChartLabel (props) {
+  if (props.labeled) {
+    return (
+      <text
+        className="pie-label"
+        x={props.x}
+        y={props.y}
+        textAnchor="middle"
+      >{props.label}</text>
+    );
+  } else {
+    return null;
+  }
 }
 
 function PieChart (props) {
@@ -95,15 +111,18 @@ function PieChart (props) {
         <feComposite operator="atop" in2="SourceGraphic"/>
       </filter>
 
-      <circle cx={cx}
-              cy={cy}
-              r={rArch}
-              stroke={bgcolor}
-              fill={circleFill}
-              strokeWidth={archWidth}
-              strokeDasharray={strokeDasharray}
-              strokeDashoffset={-decoStrokeDashWidth}
-              transform={"rotate(" + (rotation + 180) + " " + cx + " " + cy + ")"}/>
+      <circle
+        className="pie-bg"
+        cx={cx}
+        cy={cy}
+        r={rArch}
+        stroke={bgcolor}
+        fill={circleFill}
+        strokeWidth={archWidth}
+        strokeDasharray={strokeDasharray}
+        strokeDashoffset={-decoStrokeDashWidth}
+        transform={"rotate(" + (rotation + 180) + " " + cx + " " + cy + ")"}
+      />
 
       <PieChartDeco1
         decorated={decorated}
@@ -117,20 +136,27 @@ function PieChart (props) {
         transform={"rotate(" + (rotation + 180) + " " + cx + " " + cy + ")"}
       />
 
-      <path className="path" d={"M" + arcStartX + " " + arcStartY +
-              "A " + rArch + " " + rArch + " 0 " + largeArcFlag + " 1 " + arcEndX + " " + arcEndY
-              }
-              stroke={color}
-              fill="none"
-              strokeLinecap={strokeLinecap}
-              strokeWidth={archWidth}
-              strokeDasharray={s}
-              strokeDashoffset={s}
-              filter={filter}
+      <path
+        className="pie-path"
+        d={"M" + arcStartX + " " + arcStartY +
+        "A " + rArch + " " + rArch + " 0 " + largeArcFlag + " 1 " + arcEndX + " " + arcEndY
+        }
+        stroke={color}
+        fill="none"
+        strokeLinecap={strokeLinecap}
+        strokeWidth={archWidth}
+        strokeDasharray={s}
+        strokeDashoffset={s}
+        filter={filter}
       >
-
         <animate attributeType="XML" attributeName="stroke-dashoffset" from={s} to="0" dur={dur} repeatCount={repeatCount} fill="freeze"/>
       </path>
+      <PieChartLabel
+        labeled={true}
+        label={parseFloat(Math.round(percent * 10) / 10).toFixed(1) + "%"}
+        x={cx}
+        y={cy}
+      />
     </svg>
   );
 }
@@ -193,7 +219,7 @@ export default class ChartsSection extends React.Component {
           />
           <PieChart2
             unitAll={150}
-            unitPart={41}
+            unitPart={49}
           />
           <PieChart
             r={60}

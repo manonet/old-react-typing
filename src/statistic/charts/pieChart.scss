@@ -1,0 +1,102 @@
+@import "../../scss/variables";
+
+.pie-chart {
+  .pie-chart__bg {
+    stroke: $gray-lighter;
+  }
+
+  .pie-chart__path {
+    stroke: $brand-info;
+    transition: fill .2s, stroke .2s;
+  }
+
+  &:hover {
+    .pie-chart__path {
+      stroke: $brand-primary;
+    }
+  }
+
+  .pie-chart__decor {
+    stroke: $gray-light;
+    fill: $gray-lighter;
+  }
+
+  .pie-chart__label {
+    fill: $gray-light;
+    font-size: 30px;
+    font-weight: 900;
+    cursor: default;
+  }
+}
+
+.pie-chart--thin {
+  .pie-chart__bg {
+    stroke: $gray-lighter;
+  }
+
+  .pie-chart__path {
+    stroke: $brand-info;
+  }
+
+  .pie-chart__label {
+    fill: $gray-lighter;
+    font-weight: 100;
+  }
+}
+
+.pie-chart--arc {
+  .pie-chart__bg {
+    stroke: $gray-lighter;
+  }
+
+  .pie-chart__path {
+    stroke: $brand-info;
+  }
+
+  .pie-chart__decor {
+    stroke: $gray-light;
+    fill: $gray-lighter;
+  }
+}
+
+.pie-chart--marked {
+  .pie-chart__bg {
+    stroke: $gray-light;
+    fill: $gray-lighter;
+  }
+
+  .pie-chart__path {
+    stroke: $brand-info;
+  }
+
+  .pie-chart__decor {
+    stroke: $gray-lighter;
+    fill: none;
+  }
+}
+
+.pie-chart--inset {
+  .pie-chart__path {
+    stroke: $brand-info;
+  }
+
+  .pie-chart__label {
+    fill: $brand-info;
+  }
+}
+
+.pie-chart--outher {
+  .pie-chart__bg {
+    stroke: white;
+    fill: $gray-light;
+  }
+
+  .pie-chart__path {
+    stroke: $brand-info;
+  }
+
+  .pie-chart__label {
+    fill: $brand-info;
+  }
+}
+

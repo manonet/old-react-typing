@@ -1,7 +1,9 @@
 import React from "react";
 
+import LineChart from "../../statistic/charts/LineChart";
 import PieChart from "../../statistic/charts/PieChart";
 
+// examples: http://canvasjs.com/docs/charts/integration/jquery/chart-types/jquery-line-chart/
 
 function PieChartThin (props) {
   return (
@@ -94,6 +96,10 @@ export default class ChartsSection extends React.Component {
         <section class="section section--charts">
 
           <h2>Charts</h2>
+
+          <h3>LineCharts</h3>
+
+          <LineChart/>
 
           <h3>Pie</h3>
 

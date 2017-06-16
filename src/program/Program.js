@@ -1,4 +1,4 @@
-require("./program.scss");
+import styles from "./program.css";
 
 import config from "../../config";
 import React from "react";

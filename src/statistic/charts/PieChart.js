@@ -1,4 +1,4 @@
-import styles from "./pieChart.scss";
+import styles from "./pieChart.css";
 
 import React from "react";
 

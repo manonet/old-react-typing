@@ -1,4 +1,4 @@
-require("./keyboard-key.scss");
+import styles from "./keyboardKey.css";
 
 import React, {PropTypes} from "react";
 

@@ -1,4 +1,4 @@
-require("./keyboard.scss");
+import styles from "./keyboard.css";
 
 import React from "react";
 import vars from "../variables";

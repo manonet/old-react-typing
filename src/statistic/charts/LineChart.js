@@ -1,6 +1,6 @@
 // TODO - cleanup props, beautify function calculations, use props as attribute
 
-require("./lineChart.scss");
+import styles from "./lineChart.css";
 
 import React from "react";
 import vars from "../../variables";

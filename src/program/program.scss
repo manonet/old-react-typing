@@ -1,7 +1,7 @@
 
 .typewriterApp {
   position: relative;
-  background: thistle;
+  background: var(--grayLighter);
 }
 
 .userText {
@@ -14,19 +14,23 @@
   max-width: none;
   opacity: .01;
 }
+
 .char {
 	display: inline;
   font-style: normal;
 }
+
 .char.done {
-	color: gray;
+	color: var(--grayDark);
 }
+
 .char.toWrite {
-	color: black;
+	color: var(--black);
 }
+
 .char.error {
-	color: #f00;
-	background: #fcc;
+	color: var(--red);
+	background: var(--grayLightest);
 }
 
 .sample__wrapper {
@@ -35,15 +39,15 @@
 
 .sampleBoard {
   display: block;
-  background: white;
-  border:  2px solid lightgray;
+  background: var(--white);
+  border:  2px solid var(--grayLighter);
   padding: 10px;
-	color: lightgrey;
+	color: var(--grayLighter);
 	font-family: 'Inconsolata', monospace;
 	font-size: 18px;
 
   &.focus {
-    border:  2px solid blue;
+    border:  2px solid var(--blue);
   }
 }
 

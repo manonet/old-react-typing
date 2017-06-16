@@ -1,4 +1,4 @@
-require("./pieChart.scss");
+import styles from "./pieChart.scss";
 
 import React from "react";
 
@@ -63,17 +63,17 @@ export default class PieChart extends React.Component {
     let r = this.props.r || 80 // radius
     let rArch = r - archWidth / 2;
     let padding = this.props.padding || 20;
-    let color = this.props.color || "hotpink";
-    let bgcolor = this.props.bgcolor || "#ddd";
+    let color = this.props.color || vars.teal;
+    let bgcolor = this.props.bgcolor || vars.grayLighter;
     let strokeLinecap = this.props.strokeLinecap || "butt";
     let rotation = this.props.rotation || 0; // 0 - default left
     let circleFill = this.props.circleFill || "none";
     // filter
     let filter = this.props.filter || "none";
-    let floodColor = this.props.floodColor || "black";
+    let floodColor = this.props.floodColor || vars.black;
     // label
     let labeled = this.props.labeled || false;
-    let textColor = this.props.textColor || "#000";
+    let textColor = this.props.textColor || vars.gray;
 
     // animation
     let repeatCount = this.props.repeatCount || 1; // 0, 1, ... indefinite
@@ -82,7 +82,7 @@ export default class PieChart extends React.Component {
     let decorated = this.props.decorated || false;
     let decoStrokeWidth = this.props.decoStrokeWidth || 5;
     let decoR = this.props.decoR - decoStrokeWidth / 2 || rArch + archWidth / 2 + 5;
-    let decoStroke = this.props.decoStroke || "#000";
+    let decoStroke = this.props.decoStroke || vars.gray;
     let decoFill = this.props.decoFill || "none";
     let decoStrokeDashWidth = this.props.decoStrokeDashWidth || 2;
     let decoC = 2 * decoR * Math.PI; // circumference of deco circle

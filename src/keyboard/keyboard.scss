@@ -1,8 +1,7 @@
-@import "../scss/variables";
 
 .keyboard {
   &__wrapper {
-	  background: $gray-dark;
+	  background: var(--grayDark);
     border-radius: 10px;
   }
 }

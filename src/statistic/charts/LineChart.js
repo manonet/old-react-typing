@@ -1,6 +1,5 @@
 // TODO - cleanup props, beautify function calculations, use props as attribute
 
-
 require("./lineChart.scss");
 
 import React from "react";
@@ -31,12 +30,12 @@ function Column (props) {
 }
 
 
-export default class AreaChart extends React.Component {
+export default class LineChart extends React.Component {
 
   render() {
     // props
     let data = this.props.data || {
-			type: "area",
+			type: "line",
 			toolTipContent: "{label}: {y} billion USD",
 			dataPoints: [
 				{ label: "2001", y: 6   },
@@ -66,7 +65,7 @@ export default class AreaChart extends React.Component {
     let width = this.props.width || 500;
     let height = this.props.height || 250;
     // styling
-    let areaClassModifier = this.props.areaClassModifier || "default";
+    let lineClassModifier = this.props.lineClassModifier || "default";
     let stroke = this.props.stroke || "white";
     let strokeWallHeight = this.props.strokeWallHeight || 10;
     let strokeWallColor = this.props.strokeWallColor || "#71bbf1";
@@ -136,7 +135,7 @@ export default class AreaChart extends React.Component {
 
 
     return (
-      <svg className={"area-chart area-chart--" + areaClassModifier} width={width} height={height} xmlns="http://www.w3.org/2000/svg">
+      <svg className={"line-chart line-chart--" + lineClassModifier} width={width} height={height} xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="dropShadowGradient" x1={0} y1={0} x2={0} y2={1} >
             <stop offset="0%" stopOpacity=".8" stopColor="#4984af"/>
@@ -170,7 +169,7 @@ export default class AreaChart extends React.Component {
         }
 
         <path
-          className="area-chart__drop-shadow"
+          className="line-chart__drop-shadow"
           d={dropShadowGraph}
           stroke="none"
           fill={`url(#dropShadowGradient)`}
@@ -182,7 +181,7 @@ export default class AreaChart extends React.Component {
         />
 
         <path
-          className="area-chart__blur"
+          className="line-chart__blur"
           d={blurGraph}
           stroke={stroke}
           fill="none"
@@ -195,7 +194,7 @@ export default class AreaChart extends React.Component {
         />
 
         <path
-          className="area-chart__wall"
+          className="line-chart__wall"
           d={wallGraph}
           stroke={strokeWallColor}
           fill={strokeWallColor}
@@ -206,7 +205,7 @@ export default class AreaChart extends React.Component {
           strokeDashoffset={strokeDashoffset}
         />
         <path
-          className="area-chart__stroke"
+          className="line-chart__stroke"
           d={graph}
           stroke={stroke}
           fill="none"

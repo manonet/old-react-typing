@@ -43,11 +43,17 @@ module.exports = {
           }
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           //resolve-url-loader may be chained before sass-loader if necessary
-          use: ['css-loader', 'sass-loader']
+          use: [
+            { loader: 'css-loader', options: {
+              sourceMap: true,
+              importLoaders: 1 // https://github.com/webpack-contrib/css-loader#importloaders
+            } },
+            { loader: 'postcss-loader', options: { sourceMap: true } }
+          ]
         })
       }, {
         test: /\.png$/,

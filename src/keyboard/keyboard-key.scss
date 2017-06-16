@@ -1,33 +1,14 @@
-@import "../scss/variables";
 
-$key-width:             100px;
-$key-height:            100px;
-$keyboard-width:        15 * $key-width;
-$keyboard-height:       5 * $key-height;
-$key-padding:           10px;
-$key-bg-width:          $key-width - $key-padding * 2;
-$key-bg-height:         $key-height - $key-padding * 2;
-$d-row-shift:           50px;
-$c-row-shift:           80px;
-$b-row-shift:           20px;
-$a-row-shift:           20px;
-
-%function-key {
-  .key__bg {
-    fill: $gray-light;
-  }
-}
 
 .key {
-  text {
+  & text {
 	  cursor: default;
   }
 
-  // also called keytop
+  /* also called keytop */
   &__labels {
-    fill: $gray-dark;
+    fill: var(--grayDark);
     font-size: 36;
-    //transform: scale(($key-width - 2 * $key-padding) / 100) translate($key-padding);
   }
 
   &__label {
@@ -42,51 +23,52 @@ $a-row-shift:           20px;
 
 
   &__bg {
-    stroke: $gray-lighter;
+    stroke: var(--grayLighter);
     stroke-width: 5px;
-    fill: $white;
-    //box-shadow: 0 .3em 0 $gray;
+    fill: var(--white);
   }
 
-  // variant
+  /* variant */
   &.alpha {
 
-    .key__to {
+    & .key__to {
       display: none;
     }
 
-    .key__bg {
-      fill: yellow;
+    & .key__bg {
+      fill: var(--yellow);
     }
   }
 
-  // status
+  /* status */
   &.toWrite {
-    .key__bg {
-      fill: $brand-primary;
+
+    & .key__bg {
+      fill: var(--blue);
     }
+
     &.secondary {
-      .key__bg {
-        fill: $brand-info;
+      & .key__bg {
+        fill: var(--teal);
       }
     }
   }
 
   &.correct {
-    .key__bg {
-      stroke: $brand-success;
+    & .key__bg {
+      stroke: var(--green);
     }
   }
 
   &.error {
-    .key__bg {
-      stroke: $brand-danger;
+    & .key__bg {
+      stroke: var(--red);
     }
   }
 
   &.missed {
-    .key__bg {
-      stroke: $brand-warning;
+    & .key__bg {
+      stroke: var(--orange);
     }
   }
 
@@ -95,306 +77,3 @@ $a-row-shift:           20px;
 .key__svg {
   width: $key-width;
 }
-
-/*
-.keyboard {
-// at least 12 keys in row E (the upmost row) in positions E00 to E15, containing all keys to input the decimal digits,
-  .E01 {
-    transform: translateX($key-width);
-  }
-  .E02 {
-    transform: translateX($key-width * 2);
-  }
-  .E03 {
-    transform: translateX($key-width * 3);
-  }
-  .E04 {
-    transform: translateX($key-width * 4);
-  }
-  .E05 {
-    transform: translateX($key-width * 5);
-  }
-  .E06 {
-    transform: translateX($key-width * 6);
-  }
-  .E07 {
-    transform: translateX($key-width * 7);
-  }
-  .E08 {
-    transform: translateX($key-width * 8);
-  }
-  .E09 {
-    transform: translateX($key-width * 9);
-  }
-  .E10 {
-    transform: translateX($key-width * 10);
-  }
-  .E11 {
-    transform: translateX($key-width * 11);
-  }
-  .E12 {
-    transform: translateX($key-width * 12);
-  }
-
-// A key providing one of the functions Backspace or Backward erase shall be present in row A or (as it is more common) Row E, right of the character input keys.
-  // backspace
-  .E14 {
-    transform: translateX($key-width * 13);
-    @extend %function-key;
-    .key__bg {
-      width: $key-width * 2 - $key-padding * 2;
-    }
-  }
-
-// at least 12 keys in row D in positions D01 to D15,
-
-//A tabulation key shall be present, occupying position D00 (i. e., the key may be wider, spanning over additional positions like D99 left of D00).
-  //tab
-  .D00 {
-    @extend %function-key;
-    transform: translateY($key-height);
-    .key__bg {
-      width: $key-width + $d-row-shift - $key-padding * 2;
-    }
-  }
-  .D01 {
-    transform: translate($key-width + $d-row-shift, $key-height);
-  }
-  .D02 {
-    transform: translate($key-width * 2 + $d-row-shift, $key-height);
-  }
-  .D03 {
-    transform: translate($key-width * 3 + $d-row-shift, $key-height);
-  }
-  .D04 {
-    transform: translate($key-width * 4 + $d-row-shift, $key-height);
-  }
-  .D05 {
-    transform: translate($key-width * 5 + $d-row-shift, $key-height);
-  }
-  .D06 {
-    transform: translate($key-width * 6 + $d-row-shift, $key-height);
-  }
-  .D07 {
-    transform: translate($key-width * 7 + $d-row-shift, $key-height);
-  }
-  .D08 {
-    transform: translate($key-width * 8 + $d-row-shift, $key-height);
-  }
-  .D09 {
-    transform: translate($key-width * 9 + $d-row-shift, $key-height);
-  }
-  .D10 {
-    transform: translate($key-width * 10 + $d-row-shift, $key-height);
-  }
-  .D11 {
-    transform: translate($key-width * 11 + $d-row-shift, $key-height);
-  }
-  .D12 {
-    transform: translate($key-width * 12 + $d-row-shift, $key-height);
-  }
-  // enter
-  .D13 {
-    transform: translate($key-width * 13 + $d-row-shift, $key-height);
-    @extend %function-key;
-  }
-
-  .key__enter {
-    transform: translate($key-width * 13, $key-height);
-    @extend %function-key;
-  }
-
-// at least 11 keys in row C in positions C01 to C15,
-
-// A key providing one of the functions Capitals lock (usually called “Caps Lock”), Level 2 lock (i. e. “Shift lock”), or Generalized lock shall be present, occupying the position C00. (The function “Generalized lock” is not specified in the ISO/IEC 9995 series). It is to be noted that the specific way the Caps Lock or Shift Lock works (i. e. swapping the lock state by hitting the key, as it is usually implemented) is not specified in the ISO/IEC 9995 series. Thus, solutions avoiding the status dependency as well as the problem of inadvertent hitting (e.g., the lock key pressed together with Shift turns Shift lock on, together with AltGr turns Caps Lock on, pressed alone switches off any lock status but has no effect when no lock status is activated) would not prevent compliance to the standard.
-  //capsLock
-  .C00 {
-    @extend %function-key;
-    transform: translateY($key-height * 2);
-    .key__bg {
-      width: $key-width + $c-row-shift - $key-padding * 2;
-    }
-  }
-  .C01 {
-    transform: translate($key-width + $c-row-shift, $key-height * 2);
-  }
-  .C02 {
-    transform: translate($key-width * 2 + $c-row-shift, $key-height * 2);
-  }
-  .C03 {
-    transform: translate($key-width * 3 + $c-row-shift, $key-height * 2);
-  }
-  .C04 {
-    transform: translate($key-width * 4 + $c-row-shift, $key-height * 2);
-  }
-  .C05 {
-    transform: translate($key-width * 5 + $c-row-shift, $key-height * 2);
-  }
-  .C06 {
-    transform: translate($key-width * 6 + $c-row-shift, $key-height * 2);
-  }
-  .C07 {
-    transform: translate($key-width * 7 + $c-row-shift, $key-height * 2);
-  }
-  .C08 {
-    transform: translate($key-width * 8 + $c-row-shift, $key-height * 2);
-  }
-  .C09 {
-    transform: translate($key-width * 9 + $c-row-shift, $key-height * 2);
-  }
-  .C10 {
-    transform: translate($key-width * 10 + $c-row-shift, $key-height * 2);
-  }
-  .C11 {
-    transform: translate($key-width * 11 + $c-row-shift, $key-height * 2);
-  }
-  .C12 {
-    transform: translate($key-width * 12 + $c-row-shift, $key-height * 2);
-  }
-
-// A Return key has to be present, right of the character input keys in row C. It is recommended that it expands to row D (thus spanning over position D13 when located on position C13 as shown in the figure), as it e. g. does on the German layout.
-  // enter
-  .C13 {
-    transform: translate($key-width * 13 + $c-row-shift, $key-height * 2);
-    @extend %function-key;
-    display: none;
-  }
-
-// at least 10 keys in row B in positions B00 to B11.
-// To select the Level 2 (commonly called “shifted”, see the subsection “Levels and Groups” of the section “ISO/IEC 9995-1” above), two keys shall be present in row B (commonly called Shift keys). The left one shall occupy position B99, while the right one shall be located right of the character input keys of that row.
-  //Shift
-  .B99 {
-    @extend %function-key;
-    transform: translateY($key-height * 3);
-    .key__bg {
-      width: $key-width + $b-row-shift - $key-padding * 2;
-    }
-  }
-  .B00 {
-    transform: translate($key-width + $b-row-shift, $key-height * 3);
-  }
-  .B01 {
-    transform: translate($key-width * 2 + $b-row-shift, $key-height * 3);
-  }
-  .B02 {
-    transform: translate($key-width * 3 + $b-row-shift, $key-height * 3);
-  }
-  .B03 {
-    transform: translate($key-width * 4 + $b-row-shift, $key-height * 3);
-  }
-  .B04 {
-    transform: translate($key-width * 5 + $b-row-shift, $key-height * 3);
-  }
-  .B05 {
-    transform: translate($key-width * 6 + $b-row-shift, $key-height * 3);
-  }
-  .B06 {
-    transform: translate($key-width * 7 + $b-row-shift, $key-height * 3);
-  }
-  .B07 {
-    transform: translate($key-width * 8 + $b-row-shift, $key-height * 3);
-  }
-  .B08 {
-    transform: translate($key-width * 9 + $b-row-shift, $key-height * 3);
-  }
-  .B09 {
-    transform: translate($key-width * 10 + $b-row-shift, $key-height * 3);
-  }
-  .B10 {
-    transform: translate($key-width * 11 + $b-row-shift, $key-height * 3);
-  }
-  .B11 {
-    transform: translate($key-width * 12 + $b-row-shift, $key-height * 3);
-  }
-  .B12 {
-    transform: translate($key-width * 13 + $b-row-shift, $key-height * 3);
-  }
-  // Shift
-  .B13 {
-    transform: translate($key-width * 13 + $b-row-shift, $key-height * 3);
-    @extend %function-key;
-    .key__bg {
-      width: $key-width * 2 - $key-padding * 2 - $b-row-shift;
-    }
-  }
-
-
-// If at least one Control key (commonly abbreviated “Ctrl”) is present, it has to be placed leftmost in row A (as it is more common), or row B.
-  // Ctrl
-  .A99 {
-    @extend %function-key;
-    transform: translateY($key-height * 4);
-    .key__bg {
-      width: $key-width + $a-row-shift - $key-padding * 2;
-    }
-  }
-
-// If a Function key (commonly abbreviated “Fn”) is present, it is to be positioned left the space bar and left of an “Alternate” key, if such one is present. (It is allowed but explicitly not recommended to place the “Function” key left of the “Control” key.)
-  // Fn
-  .A00 {
-    transform: translate($key-width + $a-row-shift, $key-height * 4);
-    @extend %function-key;
-  }
-
-  // Command / Windows
-  .A01 {
-    transform: translate($key-width * 2 + $a-row-shift, $key-height * 4);
-    @extend %function-key;
-  }
-
-// If at least one Alternate key (commonly called “Alt key”) is present, it is to be positioned left of the space bar (or, if a function key specific to the writing system supported by the keyboard layout is there, left of that key).
-  // Alt
-  .A02 {
-    transform: translate($key-width * 3 + $a-row-shift, $key-height * 4);
-    @extend %function-key;
-  }
-
-// The space bar has to expand at least over the positions A03 to A07. This implies that Japanese keyboards containing muhenkan, henkan, and the Katakana/Hiragana switch keys (the first one left, the other two right of the space bar) are not compliant to the standard if taken literally. This, however, is considered neglectable as the space bar has less importance in Japanese writing than in Latin or similar ones, as Japanese words usually are not separated by spaces.
-  // Space
-  .A03 {
-    transform: translate($key-width * 4 + $a-row-shift, $key-height * 4);
-    .key__bg {
-      width: $key-bg-width + $key-width * 4;
-    }
-  }
-  .A04 {
-    transform: translate($key-width * 5 + $a-row-shift, $key-height * 4);
-  }
-  .A05 {
-    transform: translate($key-width * 6 + $a-row-shift, $key-height * 4);
-  }
-  .A06 {
-    transform: translate($key-width * 7 + $a-row-shift, $key-height * 4);
-  }
-  .A07 {
-    transform: translate($key-width * 8 + $a-row-shift, $key-height * 4);
-  }
-  // AltGr
-  .A08 {
-    transform: translate($key-width * 9 + $a-row-shift, $key-height * 4);
-    @extend %function-key;
-  }
-  // Command / Windows
-  .A09 {
-    transform: translate($key-width * 10 + $a-row-shift, $key-height * 4);
-    @extend %function-key;
-  }
-  .A10 {
-    transform: translate($key-width * 11 + $a-row-shift, $key-height * 4);
-  }
-  // Menü
-  .A11 {
-    transform: translate($key-width * 12 + $a-row-shift, $key-height * 4);
-    @extend %function-key;
-  }
-  // Ctrl
-  .A12 {
-    transform: translate($key-width * 13 + $a-row-shift, $key-height * 4);
-    @extend %function-key;
-    .key__bg {
-      width: $key-width * 2 - $key-padding * 2 - $a-row-shift;
-    }
-  }
-
-}
-*/

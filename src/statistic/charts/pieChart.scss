@@ -1,28 +1,27 @@
-@import "../../scss/variables";
 
 .pie-chart {
-  .pie-chart__bg {
-    stroke: $gray-lighter;
+  & .pie-chart__bg {
+    stroke: var(--grayLighter);
   }
 
-  .pie-chart__path {
-    stroke: $brand-info;
+  & .pie-chart__path {
+    stroke: var(--teal);
     transition: fill .2s, stroke .2s;
   }
 
   &:hover {
-    .pie-chart__path {
-      stroke: $brand-primary;
+    & .pie-chart__path {
+      stroke: var(--blue);
     }
   }
 
-  .pie-chart__decor {
-    stroke: $gray-light;
-    fill: $gray-lighter;
+  & .pie-chart__decor {
+    stroke: var(--grayLight);
+    fill: var(--grayLighter);
   }
 
-  .pie-chart__label {
-    fill: $gray-light;
+  & .pie-chart__label {
+    fill: var(--grayLight);
     font-size: 30px;
     font-weight: 900;
     cursor: default;
@@ -30,73 +29,66 @@
 }
 
 .pie-chart--thin {
-  .pie-chart__bg {
-    stroke: $gray-lighter;
+
+  & .pie-chart__path {
+    stroke: var(--teal);
   }
 
-  .pie-chart__path {
-    stroke: $brand-info;
-  }
-
-  .pie-chart__label {
-    fill: $gray-lighter;
+  & .pie-chart__label {
+    fill: var(--grayLighter);
     font-weight: 100;
   }
 }
 
 .pie-chart--arc {
-  .pie-chart__bg {
-    stroke: $gray-lighter;
+
+  & .pie-chart__path {
+    stroke: var(--teal);
   }
 
-  .pie-chart__path {
-    stroke: $brand-info;
-  }
-
-  .pie-chart__decor {
-    stroke: $gray-light;
-    fill: $gray-lighter;
+  & .pie-chart__decor {
+    stroke: var(--grayLight);
+    fill: var(--grayLighter);
   }
 }
 
 .pie-chart--marked {
-  .pie-chart__bg {
-    stroke: $gray-light;
-    fill: $gray-lighter;
+  & .pie-chart__bg {
+    stroke: var(--grayLight);
+    fill: var(--grayLighter);
   }
 
-  .pie-chart__path {
-    stroke: $brand-info;
+  & .pie-chart__path {
+    stroke: var(--teal);
   }
 
-  .pie-chart__decor {
-    stroke: $gray-lighter;
+  & .pie-chart__decor {
+    stroke: var(--grayLighter);
     fill: none;
   }
 }
 
 .pie-chart--inset {
-  .pie-chart__path {
-    stroke: $brand-info;
+  & .pie-chart__path {
+    stroke: var(--teal);
   }
 
-  .pie-chart__label {
-    fill: $brand-info;
+  & .pie-chart__label {
+    fill: var(--teal);
   }
 }
 
 .pie-chart--outher {
-  .pie-chart__bg {
-    stroke: white;
-    fill: $gray-light;
+  & .pie-chart__bg {
+    stroke: var(--white);
+    fill: var(--grayLight);
   }
 
-  .pie-chart__path {
-    stroke: $brand-info;
+  & .pie-chart__path {
+    stroke: var(--teal);
   }
 
-  .pie-chart__label {
-    fill: $brand-info;
+  & .pie-chart__label {
+    fill: var(--teal);
   }
 }
-

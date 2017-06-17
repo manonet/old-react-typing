@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,400,400i,700,700i&subset=latin-ext');
+
+:root {
+  --fontFamily: 'Roboto', sans-serif;
+  --headingsMarginBottom: 1rem;
+  --headingsFontWeight: 100;
+  --headingsLineHeight: 1.25;
+
+  --fontSize: 1rem;
+  --fontSizeH1: 2rem;
+  --fontSizeH2: 1.75rem;
+  --fontSizeH3: 1.5rem;
+  --fontSizeH4: 1.25rem;
+  --fontSizeH5: 1.125rem;
+  --fontSizeH6: 1rem;
+  --fontSizeSmall: 80%;
+  --fontSizeBlockquote: 1.125rem;
+
+  --fontWeightDt: 700;
+
+  --borderWidth: 1px;
+  --borderWidthBlockquote: 4px;
+  --spacer: 1rem;
+
+}
+
+
+body {
+  font-family: var(--fontFamily);
+  font-size: var(--fontSize);
+  font-weight: normal;
+  line-height: 1.5em;
+  color: var(--grayDark);
+  background-color: var(--white);
+}
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin: 0 0 var(--headingsMarginBottom);
+  font-family: var(--fontFamily);
+  font-weight: var(--headingsFontWeight);
+  line-height: var(--headingsLineHeight);
+  color: var(--grayDark);
+}
+
+h1, .h1 { font-size: var(--fontSizeH1); }
+h2, .h2 { font-size: var(--fontSizeH2); }
+h3, .h3 { font-size: var(--fontSizeH3); }
+h4, .h4 { font-size: var(--fontSizeH4); }
+h5, .h5 { font-size: var(--fontSizeH5); }
+h6, .h6 { font-size: var(--fontSizeH6); }
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacer);
+}
+
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: var(--spacer);
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+dt {
+  font-weight: var(--fontWeightDt);
+}
+
+dd {
+  margin-bottom: calc(var(--spacer) / 2);
+  margin-left: 0;
+}
+
+hr {
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+  border: 0;
+  border-top: var(--borderWidth) solid var(--grayLighter);
+}
+
+b,
+strong {
+  font-weight: 900;
+}
+
+small,
+.small {
+  font-size: var(--fontSizeSmall);
+}
+
+blockquote
+.blockquote {
+  padding: calc(var(--spacer) / 2) var(--spacer);
+  margin: 0 0 var(--spacer);
+  font-size: var(--fontSizeBlockquote);
+  border-left: var(--borderWidthBlockquote) solid var(--grayLighter);
+}
+
+/* links */
+
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+
+  &:hover {
+    color: color(var(--blue ) blackness(20%));
+    text-decoration: underline;
+  }
+}
+
+a:not([href]):not([tabindex]) {
+  color: inherit;
+  text-decoration: none;
+
+  @media (hover: hover) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}

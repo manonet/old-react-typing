@@ -114,7 +114,8 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 
-  &:hover {
+  &:hover,
+  &.hover {
     color: color(var(--blue ) blackness(20%));
     text-decoration: underline;
   }

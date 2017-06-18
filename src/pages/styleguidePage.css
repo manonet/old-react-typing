@@ -1,0 +1,20 @@
+.styleguide-nav__container {
+  background: var(--grayLighter);
+}
+
+.nav {
+  &__link--styleguide {
+
+    &.is-active {
+      background: var(--white);
+      color: var(--black);
+
+      &:hover {
+        color: var(--black);
+        text-decoration: none;
+        cursor: default;
+      }
+    }
+  }
+
+}

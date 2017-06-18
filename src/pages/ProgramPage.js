@@ -438,35 +438,37 @@ export default class ProgramPage extends React.Component {
 }
   render() {
       return (
-        <div class="container">
-          <Program
-            sampleText={this.state.sampleText}
-            userText={this.state.userText}
-            cursorAt={this.state.cursorAt}
-            signToWrite={this.state.signToWrite}
-            writtenSign={this.state.writtenSign}
-            userWrite={this.userWrite.bind(this)}
-            onWriting={this.onWriting.bind(this)}
-            writing={this.state.writing}
-            keyboardName={this.state.keyboard.name}
-            keyboardKeys={this.state.keyboard.keys}
-            onKeyboardLoaded={this.onKeyboardLoaded.bind(this)}
-            displayedLevel={this.state.displayedLevel}
-            keyEvent={this.state.keyEvent}
-          />
-          <Keyboard
-            keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}
-            onKeyboardLoaded={function(){}}
-            showTitle={true}
-            showDeadKeys={true}
-          />
-          <Keyboard
-            keyboardUrl={publicFolder + "/keyboards/osx/hu-t-k0-osx.xml"}
-            onKeyboardLoaded={function(){}}
-            showTitle={true}
-            showDeadKeys={true}
-          />
-        </div>
+        <main class="main">
+          <div class="container">
+            <Program
+              sampleText={this.state.sampleText}
+              userText={this.state.userText}
+              cursorAt={this.state.cursorAt}
+              signToWrite={this.state.signToWrite}
+              writtenSign={this.state.writtenSign}
+              userWrite={this.userWrite.bind(this)}
+              onWriting={this.onWriting.bind(this)}
+              writing={this.state.writing}
+              keyboardName={this.state.keyboard.name}
+              keyboardKeys={this.state.keyboard.keys}
+              onKeyboardLoaded={this.onKeyboardLoaded.bind(this)}
+              displayedLevel={this.state.displayedLevel}
+              keyEvent={this.state.keyEvent}
+            />
+            <Keyboard
+              keyboardUrl={publicFolder + "/keyboards/windows/es-t-k0-windows.xml"}
+              onKeyboardLoaded={function(){}}
+              showTitle={true}
+              showDeadKeys={true}
+            />
+            <Keyboard
+              keyboardUrl={publicFolder + "/keyboards/osx/hu-t-k0-osx.xml"}
+              onKeyboardLoaded={function(){}}
+              showTitle={true}
+              showDeadKeys={true}
+            />
+          </div>
+        </main>
       )
   }
 }

@@ -1,3 +1,5 @@
+import styles from "./navLink.css";
+
 import React from "react"
 import { Link } from "react-router"
 
@@ -5,13 +7,24 @@ export default React.createClass({
   contextTypes: {
     router: React.PropTypes.object
   },
+
   render() {
-    let isActive = this.context.router.isActive(this.props.to, true),
-            className = isActive ? "site-nav__item is-active" : "site-nav__item";
+    let className = "nav__item";
+    let classPostfix = this.props.className;
+
+    if (classPostfix) {
+      className += " nav__item--" + classPostfix;
+    }
+
+    let linkClassName = "nav__link";
+
+    if (classPostfix) {
+      linkClassName += " nav__link--" + classPostfix;
+    }
 
     return (
       <li className={className}>
-        <Link {...this.props} className={isActive ? "site-nav__link is-active" : "site-nav__link"}>
+        <Link {...this.props} className={linkClassName}  activeClassName="is-active">
           {this.props.children}
         </Link>
       </li>

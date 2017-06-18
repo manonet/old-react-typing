@@ -71,12 +71,12 @@ export default class TypoSection extends React.Component {
 	<h6 class="h6">Heading Level6 <strong>Strong</strong> <b>bold</b> <span>span</span> <a href="#">link</a> <small>small</small> .h6</h6>
 
 	<div class="chosenClass">
-		<h1>Extra long h1 Lorem ipsum sea ei aperiam oporteat, minim libris graeci nam ne. An eros perfecto temporibus vel.</h1>
-		<h2>Extra long h2 Lorem ipsum sea ei aperiam oporteat, minim libris graeci nam ne. An eros perfecto temporibus vel.</h2>
-		<h3>Extra long h3 Lorem ipsum sea ei aperiam oporteat, minim libris graeci nam ne. An eros perfecto temporibus vel.</h3>
-		<h4>Extra long h4 Lorem ipsum sea ei aperiam oporteat, minim libris graeci nam ne. An eros perfecto temporibus vel.</h4>
-		<h5>Extra long h5 Lorem ipsum sea ei aperiam oporteat, minim libris graeci nam ne. An eros perfecto temporibus vel.</h5>
-		<h6>Extra long h6 Lorem ipsum sea ei aperiam oporteat, minim libris graeci nam ne. An eros perfecto temporibus vel.</h6>
+		<h1>Extra long h1 Lorem ipsum sea ei aperiam oporteat,<br/>minim libris graeci nam ne.<br/>An eros perfecto temporibus vel.</h1>
+		<h2>Extra long h2 Lorem ipsum sea ei aperiam oporteat,<br/>minim libris graeci nam ne.<br/>An eros perfecto temporibus vel.</h2>
+		<h3>Extra long h3 Lorem ipsum sea ei aperiam oporteat,<br/>minim libris graeci nam ne.<br/>An eros perfecto temporibus vel.</h3>
+		<h4>Extra long h4 Lorem ipsum sea ei aperiam oporteat,<br/>minim libris graeci nam ne.<br/>An eros perfecto temporibus vel.</h4>
+		<h5>Extra long h5 Lorem ipsum sea ei aperiam oporteat,<br/>minim libris graeci nam ne.<br/>An eros perfecto temporibus vel.</h5>
+		<h6>Extra long h6 Lorem ipsum sea ei aperiam oporteat,<br/>minim libris graeci nam ne.<br/>An eros perfecto temporibus vel.</h6>
 	</div>
 
 
@@ -188,9 +188,9 @@ export default class TypoSection extends React.Component {
 	<ul>
 		<li><a name="bla">Anchor</a></li>
 		<li><a href="/">Visited link</a></li>
-		<li><a href={Math.random()} id="not_visited">Not visited link</a></li>
-		<li><a href="/" class=".active">Active link</a></li>
-		<li><a href="/" class=".hover">Hovered link</a></li>
+		<li><a href={Math.random()}>Not visited link</a></li>
+		<li><a href="/" class="active">Active link</a></li>
+		<li><a href="/" class="hover">Hovered link</a></li>
 	</ul>
 
 	<hr/>

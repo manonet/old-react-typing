@@ -1,0 +1,19 @@
+
+.nav {
+  display: flex;
+
+  &__branding,
+  &__list,
+  &__item {
+    display: flex;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__link {
+    padding: 10px;
+  }
+}

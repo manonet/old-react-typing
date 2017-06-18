@@ -1,0 +1,39 @@
+
+.header__container {
+  display: flex;
+}
+
+.site-nav {
+  display: flex;
+
+  &__branding,
+  &__list,
+  &__item {
+    display: flex;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__link {
+    padding: 10px;
+    color: var(--white);
+
+    &:hover {
+      color: var(--white);
+    }
+  }
+}
+
+
+.branding__link {
+  font-weight: 900;
+  color: var(--colorPrimary);
+
+  &:hover {
+    color: var(--white);
+    text-decoration: none;
+  }
+}

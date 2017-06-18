@@ -19,6 +19,32 @@ module.exports = {
   grayLighter: "#eceeef",
   grayLightest: "#f7f7f9",
 
+  // Derivative colors
+  get colorPrimary() {
+    return this.blue;
+  },
+  get colorSecondary() {
+    return this.teal;
+  },
+  get colorSuccess() {
+    return this.green;
+  },
+  get colorInfo() {
+    return this.teal;
+  },
+  get colorWarning() {
+    return this.orange;
+  },
+  get colorDanger() {
+    return this.red;
+  },
+  get colorInverse() {
+    return this.grayDark;
+  },
+  get colorLink() {
+    return this.blue;
+  },
+
   keyWidth: 100,
   keyHeight: 100,
   get keyboardWidth() {

@@ -1,6 +1,8 @@
 @import "../style/sanitize.css";
 @import "../style/typo.css";
 
+@import "./header.css";
+
 * {
    box-sizing: border-box;
 }
